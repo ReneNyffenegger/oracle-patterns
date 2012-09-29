@@ -1,62 +1,57 @@
-Database Objects
-----------------
+# Database Objects
 
-# Indexes
+## Indexes
 
-# Sequences
+## Sequences
 
-# Tables
+## Tables
 
-## Alter Table
-## Partitions
+### Alter Table
+### Partitions
 
-# Types
+## Types
 
-# Views
+## Views
 
-Installed
----------
+# Installed
 
-# dbms
+## dbms
 
-## dbms_sql
+### dbms_sql
 
-# utl
+## utl
 
-## utl_file
+### utl_file
 
-PL/SQL
-------
+# PL/SQL
 
-# authid
+## authid
 
-# bulk collect
+## bulk collect
 
-# Collection Types
+## Collection Types
 
-# loop
+## loop
 
-## Nested Tables
+### Nested Tables
 
-SQL
----
+# SQL
 
-# functions
+## functions
 
-## null related
-## regular expressions
+### null related
+### regular expressions
 
-# merge
+## merge
 
-# select
+## select
 
-## analytical functions
+### analytical functions
 
-## group by
+### group by
 
-## order by
+### order by
 
-## pivot
+### pivot
 
-SQL*Plus
---------
+# SQL*Plus
