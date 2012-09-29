@@ -8,6 +8,7 @@ create table tq84_virtual_test (
        division       as (c1/c2)
 );
 
+-- TODO: tq84_virtual_test_pck also used in test_02.sql
 create or replace package tq84_virtual_test_pck as
 
           function f_non_deterministic (c1_ in number) return number;

@@ -8,6 +8,7 @@
 
 ### Alter Table
 ### Partitions
+### Virtual Columns
 
 ## Types
 

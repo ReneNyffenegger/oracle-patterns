@@ -35,5 +35,7 @@ end tq84_virtual_test_pck_4;
 
 alter table tq84_virtual_test_4 add (c2 as (tq84_virtual_test_pck_4.r(c1)));
 
+select * from tq84_virtual_test_4;
+
 drop table tq84_virtual_test_4;
 drop package tq84_virtual_test_pck_4;
