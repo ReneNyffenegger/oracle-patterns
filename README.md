@@ -34,6 +34,8 @@
 
 ## Collection Types
 
+## exception
+
 ## loop
 
 ### Nested Tables
