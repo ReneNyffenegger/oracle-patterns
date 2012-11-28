@@ -67,4 +67,6 @@ If `PLS-00201: identifier 'DBMS_LOCK' must be declared` is thrown, connect `as s
 
 ### pivot
 
+# SQLLoader
+
 # SQL*Plus
