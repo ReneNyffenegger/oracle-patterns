@@ -10,6 +10,8 @@
 ### Partitions
 ### Virtual Columns
 
+## Triggers
+
 ## Types
 
 ## Views
