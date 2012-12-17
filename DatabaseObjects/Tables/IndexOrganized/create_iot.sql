@@ -6,7 +6,7 @@ create table tq84_index_organized_table
         col_2    varchar2(20),
         col_3    date,
      -- }
-     -- { out of line ref constraint 
+     -- { out of line constraint
         constraint tq84_index_organized_table_pk primary key (
           col_1, 
           col_2, 
