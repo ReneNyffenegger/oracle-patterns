@@ -1,6 +1,6 @@
-create table tq84_index_organized_table 
+create table tq84_index_organized_table
 -- { relational properties
-   (  
+   (
      -- { column definitions
         col_1    number,
         col_2    varchar2(20),
@@ -8,8 +8,8 @@ create table tq84_index_organized_table
      -- }
      -- { out of line constraint
         constraint tq84_index_organized_table_pk primary key (
-          col_1, 
-          col_2, 
+          col_1,
+          col_2,
           col_3
         )
      -- }
@@ -65,7 +65,7 @@ create table tq84_index_organized_table
    -- { table partitioning clause
    -- }
 -- nocache ORA-25192: invalid option for an index-organized table
-   -- result cache (mode default|force) 
+   -- result cache (mode default|force)
    -- { parallel clause
    -- }
    -- rowdependencies
