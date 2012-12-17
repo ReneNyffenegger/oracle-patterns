@@ -87,4 +87,4 @@ select object_name, object_type from user_objects where object_name like 'TQ84_I
 select segment_name,  bytes/1024/1024 from user_segments where segment_name like 'TQ84_INDEX_ORGANIZED_TABLE%';
 
 
-drop table tq84_index_organized_table;
+drop table tq84_index_organized_table purge;
