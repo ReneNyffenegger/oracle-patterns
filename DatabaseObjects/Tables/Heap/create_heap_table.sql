@@ -57,7 +57,7 @@ create table tq84_heap_table
    ORGANIZATION HEAP     -- This is the default.
    -- { segment attributes clause
       -- { physical attributes clause
---       pctfree  10 -- ORA-25192: invalid option for an index-organized table
+--       pctfree  10
 --       pctused  40
          initrans  2
          -- { storage clause
@@ -106,7 +106,7 @@ create table tq84_heap_table
    -- }
    -- { table partitioning clause
    -- }
--- nocache ORA-25192: invalid option for an index-organized table
+   -- nocache
    -- result cache (mode default|force)
    -- { parallel clause
    -- }
@@ -114,7 +114,7 @@ create table tq84_heap_table
    -- { enable disable clause
    -- }
    -- { row movement clause
---    enable row movement ORA-14066: illegal option for a non-partitioned index-organized table
+   -- enable row movement ORA-14066: illegal option for a non-partitioned index-organized table
    -- }
    -- { flashback archive clause
 --    no flashback archive
