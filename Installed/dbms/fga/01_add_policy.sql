@@ -43,4 +43,17 @@ from
 where
   policy_name = 'TQ84_FGA_1_POLICY';
 
+
+-- dba_fga_audit_trail accessed sys.fga_log$
+select 
+--policy_name,
+  stmt_type,
+  timestamp#,
+--os_user,
+  dbuid
+from
+  sys.fga_log$
+where
+  policyname = 'TQ84_FGA_1_POLICY';
+
 drop table tq84_fga_1;
