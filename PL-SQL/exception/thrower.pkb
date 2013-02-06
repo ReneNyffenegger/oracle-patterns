@@ -1,28 +1,34 @@
 create or replace package body tq84_thrower as
 
-    another_exc exception;
---  c_another_exc number := 20123;
-    pragma exception_init(another_exc, -20123);
+    --    Not associated with an error code via
+    --    exception_init:
+    exc_i exception;
 
 
-    procedure might_throw(do boolean) is -- {
+    procedure raise_exc_1 is -- {
     begin
+        raise exc_1;
+    end raise_exc_1; -- }
 
-        if do then
-           raise exc;
-        end if;
-
-    end might_throw; -- }
-
-
-    procedure might_throw_another(do boolean) is -- {
+    procedure raise_exc_2 is -- {
     begin
+        raise exc_2;
+    end raise_exc_2; -- }
 
-        if do then
-           raise_application_error(-20123, 'An exception was thrown, because do was true');
-        end if;
+    procedure raise_exc_3 is -- {
+    begin
+        raise exc_3;
+    end raise_exc_3; -- }
 
-    end might_throw_another; -- }
+    procedure raise_exc_i is -- {
+    begin
+        raise exc_i;
+    end raise_exc_i; -- }
+
+    procedure raise_app_error(error_code number) is -- {
+    begin
+        raise_application_error(-error_code, 'Request to raise error ' || error_code);
+    end raise_app_error; -- }
 
 
 end tq84_thrower;
