@@ -1,0 +1,3 @@
+1|This line should be fine
+2|This line contains more than 255 characters and will cause an "Field in data file exceeds maximum length" error message. Of course, I need some more text here in order to reach this 255 character limit. For example, by adding some city names: New York, Los Angeles, Berlin, Berne, Lucerne, Winterthur, Basle, Paris, Tokyo, Cape Town etc.
+3|This line should be fine, too
