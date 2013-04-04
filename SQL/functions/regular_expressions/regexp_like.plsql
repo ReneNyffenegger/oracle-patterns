@@ -7,7 +7,7 @@ declare
 
    begin
 
-       if regexp_like(p_text, '$17\d\d') then
+       if regexp_like(p_text, '^17\d\d$') then
           dbms_output.put_line(p_text || ' is ok');
        else
           dbms_output.put_line(p_text || ' is not ok');
