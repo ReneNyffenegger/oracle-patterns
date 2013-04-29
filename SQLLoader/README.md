@@ -9,3 +9,5 @@
 [ex05](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_05) demonstrates `date "yyyy.mm.dd"` to indicate the *date format*.
 
 [ex06](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_06) specifies `char (4000)` for a field whose data to be loaded is longer than 255 characters in order to prevent **Error Field in data file exceeds maximum length**.
+
+[ex07](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_07) The ctl-file maps a position in the `*.dat` file to a field name in the loaded file.
