@@ -21,6 +21,9 @@ declare
             on    (t.id = u.p_id)
 
       when  matched then update set
+
+        --  Set the new text only if updateable = 0:
+
             t.text = case when t.updateable = 1 then u.p_text else t.text end
 
       when  not matched then insert (
