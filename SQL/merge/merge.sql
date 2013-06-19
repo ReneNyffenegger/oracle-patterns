@@ -7,6 +7,7 @@ create table tq84_merge_destination (
   col1       number,
   col2       varchar2(10)
 );
+
 insert into tq84_merge_source values ( 1, 'one'   ); 
 insert into tq84_merge_source values ( 2, 'two'   ); 
 insert into tq84_merge_source values ( 3, 'three' ); 
