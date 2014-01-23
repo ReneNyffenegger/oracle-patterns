@@ -36,6 +36,8 @@ begin
    p(two_through_four   multiset except           one_two_three   );
 
    p(   set (two_through_four)                                    );
+   
+   p(        non_distinct                                         );
    p(   set (non_distinct    )                                    );
 
    dbms_output.put_line(cardinality(non_distinct));
