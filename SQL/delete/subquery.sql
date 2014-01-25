@@ -1,3 +1,6 @@
+--
+--     Compare /DatabaseObjects/Views/UpdateableJoinViews/test_01.sql
+--
 create table tq84_delete_subquery_p (
    id    number    primary key,
    val   varchar2  (10)
@@ -44,7 +47,16 @@ delete from (
     c.col like '%o%'
 );
 
+prompt
+
+select * from tq84_delete_subquery_p;
+
+prompt
+prompt
+
 select * from tq84_delete_subquery_c;
+
+prompt
 
 ---------------------------------------------------------
 

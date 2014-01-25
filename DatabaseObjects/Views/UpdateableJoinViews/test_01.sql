@@ -1,3 +1,6 @@
+--
+--  Compare /SQL/delete/subquery.sql
+--
 create table tq84_table_1 (
    id    number primary key,  -- Note: without primary key, all columns in the view would become non-updatable.
    txt   varchar2(10)
