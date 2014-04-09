@@ -52,6 +52,18 @@ end tq84_package;
 /
 
 
+begin
+
+     dbms_preprocessor.print_post_processed_source(
+
+        object_type   => 'PACKAGE BODY',
+        schema_name   =>  user,
+        object_name   => 'TQ84_PACKAGE'
+
+     );
+
+end;
+/
 
 
 exec tq84_package.do;
