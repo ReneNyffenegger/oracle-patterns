@@ -66,6 +66,11 @@ end;
 /
 
 
+--   What preprocessor flag was tha package compiled with?
+select type, substr(plsql_ccflags, 1, 50) from user_plsql_object_settings where name = 'TQ84_PACKAGE';
+
+--
+
 exec tq84_package.do;
 exec tq84_package.line;
 exec tq84_package.unit;
