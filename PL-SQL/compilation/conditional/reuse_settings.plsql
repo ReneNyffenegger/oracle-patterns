@@ -21,6 +21,8 @@ end tq84_package;
 
 connect c##user_01/pw
 
+alter package tq84_package compile body reuse settings;
+
 exec tq84_package.do
 
 alter package tq84_package compile reuse settings;
