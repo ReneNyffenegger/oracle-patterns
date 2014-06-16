@@ -11,6 +11,7 @@ column digits   format a30
 column alnums   format a30
 
 select
+  col_1,
   regexp_replace(col_1, 'A(\d*).*','\1') digits,
   regexp_replace(col_1, 'A(\w*).*','\1') alnums
 from
