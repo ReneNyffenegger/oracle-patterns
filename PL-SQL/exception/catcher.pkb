@@ -45,13 +45,13 @@ create or replace package body tq84_catcher as
     procedure go is begin -- {
 
 
-        try('exc'   ,     1);
-        try('exc'   ,     2);
-        try('exc'   ,     3);
-
-        try('raise' , 20000);
-        try('raise' , 20100);
-        try('raise' , 20200);
+        try('exc'   ,     1);  --  Error exc_1 (exc/1) ORA-20000: [-20000]
+        try('exc'   ,     2);  --  Error exc_1 (exc/2) ORA-20000: [-20000]
+        try('exc'   ,     3);  --  Error exc_3 (exc/3) ORA-20100: [-20100]
+                             
+        try('raise' , 20000);  --  Error exc_1 (raise/20000) ORA-20000: Request to raise error 20000[-20000]
+        try('raise' , 20100);  --  Error exc_3 (raise/20100) ORA-20100: Request to raise error 20100[-20100]
+        try('raise' , 20200);  --  Error other (raise/20200) ORA-20200: Request to raise error 20200[-20200]
 
 
     end go; -- }
@@ -59,3 +59,9 @@ create or replace package body tq84_catcher as
 
 end tq84_catcher;
 /
+
+
+
+
+
+
