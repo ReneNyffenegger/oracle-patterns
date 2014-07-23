@@ -1,3 +1,5 @@
+ select regexp_substr('foo3245bar', '\d+') from dual; -- > 3245
+
 create table tq84_regexp_substr (
    col_1  varchar2(30)
 );
