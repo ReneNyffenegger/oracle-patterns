@@ -1,3 +1,14 @@
+--
+--     Using dbms_utility.name_resolve to find out
+--     what object is behind an identifier (such
+--     as  userfoo.objsomethin)
+--
+--     Metalink document 1008700.6 states that
+--     the procedure supports only only for procedures,
+--     functions, and packages, not tables.
+--
+--     Constraints also seem not to work.
+--
 create user schem_01 identified by schem_01;
 create user schem_02 identified by schem_02;
 -- grant create session,
