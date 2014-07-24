@@ -9,6 +9,8 @@
 --
 --     Constraints also seem not to work.
 --
+--     See also dbms_utility.name_tokenize
+--
 create user schem_01 identified by schem_01;
 create user schem_02 identified by schem_02;
 -- grant create session,
