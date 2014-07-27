@@ -11,3 +11,7 @@
 [ex06](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_06) specifies `char (4000)` for a field whose data to be loaded is longer than 255 characters in order to prevent **Error Field in data file exceeds maximum length**.
 
 [ex07](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_07) The ctl-file maps a position in the `*.dat` file to a field name in the loaded table.
+
+[ex08](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_08) Loads a *CSV File*. Since the [file to be loaded](https://github.com/ReneNyffenegger/oracle-patterns/blob/master/SQLLoader/ex_08/load_8.csv)
+contains columns with commas (that are correctly set between apostrophes), the [control file](https://raw.githubusercontent.com/ReneNyffenegger/oracle-patterns/master/SQLLoader/ex_08/load_8.ctl)
+contains the directive `optionally enclosed by '"'`. Also, the csv file has a header that must not be imported. Therefore, the control file also specifies `options(skip=1)`.
