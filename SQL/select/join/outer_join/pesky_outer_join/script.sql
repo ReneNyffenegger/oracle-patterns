@@ -3,8 +3,8 @@ create table Z (i char  (1) primary key);
 
 create table A2Z (
   ia          not null references A,
-  flg char(1) not null,
-  iz  char(1) not null
+  flg char(1)     null,
+  iz  char(1)     null
 );
 
 insert into A values (1);
@@ -25,7 +25,7 @@ insert into A2Z values (1, 'n', 'b' );
 insert into A2Z values (2,null, 'c' );
 insert into A2Z values (2, 'q', 'd' );
 insert into A2Z values (3, 'y', 'e' );
-insert into A2Z values (4,    , 'f' );
+insert into A2Z values (4,null, 'f' );
 insert into A2Z values (5, 'y', null);
 insert into A2Z values (6, 'v', null);
 
