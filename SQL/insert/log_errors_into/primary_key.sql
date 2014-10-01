@@ -58,6 +58,7 @@ prompt
 insert into tq84_dest select * from tq84_source /* ORA-00001: unique constraint (SPEZMDBA.TQ84_DEST_PK) violated */
   log errors into tq84_dest_err;
 
+-- Note, tq84_dest is still empty
 select * from tq84_dest empty; 
 
 drop table tq84_source    purge;
