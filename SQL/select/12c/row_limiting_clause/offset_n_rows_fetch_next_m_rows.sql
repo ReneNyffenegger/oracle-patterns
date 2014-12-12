@@ -22,7 +22,9 @@ from
   tq84_table
 order by
   id
-offset 4 rows fetch next 3 rows only;
+offset     4 rows       -- skip first 4 records
+fetch next 3 rows only  -- fetch next 3 records
+;
 --
 --         ID TXT
 -- ---------- ----------
