@@ -12,12 +12,31 @@ insert into tq84_word_boundaries values ('Bar-Foo-Baz'           );
 
 select * from tq84_word_boundaries
   where
+    regexp_like(txt, '\bFoo\b');
+
+-- No records returned, Oracle does not support \b (at least not on 11i)
+
+
+select * from tq84_word_boundaries
+  where
+    regexp_like(txt, '\sFoo\s');
+
+-- TXT
+-- --------------------------------------------------
+-- A Foo without a Baz
+
+
+select * from tq84_word_boundaries
+  where
     regexp_like(txt, '(^|\s)Foo(^|\s)');
+
 
 -- TXT
 -- --------------------------------------------------
 -- A Foo without a Baz
 -- Foo Bar, Baz
+
+
 
 select * from tq84_word_boundaries
   where
@@ -31,4 +50,6 @@ select * from tq84_word_boundaries
 -- Is it a Foo?
 -- Bar-Foo-Baz
 
-drop table tq84_word_boundaries;
+
+
+drop table tq84_word_boundaries purge;
