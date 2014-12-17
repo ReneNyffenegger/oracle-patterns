@@ -28,7 +28,7 @@ select * from tq84_word_boundaries
 
 select * from tq84_word_boundaries
   where
-    regexp_like(txt, '(^|\s)Foo(^|\s)');
+    regexp_like(txt, '(^|\s)Foo($|\s)');
 
 
 -- TXT
@@ -40,7 +40,7 @@ select * from tq84_word_boundaries
 
 select * from tq84_word_boundaries
   where
-    regexp_like(txt, '(^|\s|\W)Foo(^|\s|\W)');
+    regexp_like(txt, '(^|\s|\W)Foo($|\s|\W)');
 
 -- TXT
 -- --------------------------------------------------
