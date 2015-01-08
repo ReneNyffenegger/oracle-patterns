@@ -18,6 +18,19 @@ insert into tq84_intervals values (
 );
 
 
-select * from tq84_intervals;
+insert into tq84_intervals values (
+  numtoyminterval(
+    months_between(date '2015-10-10',
+                   date '2017-10-10'),
+    'month'   
+  ), 
+  numtodsinterval(1 + 2/24 + 3/24/60 + 4/24/26/60, 'day'
+  )
+);
+
+
+select * from tq84_intervals
+  where
+    ds < numtodsinterval(2, 'day');
 
 drop table tq84_intervals purge;
