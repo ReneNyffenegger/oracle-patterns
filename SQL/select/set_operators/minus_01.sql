@@ -24,6 +24,12 @@ insert into tq84_minus_2 values (2);
 --
 select * from tq84_minus_1 minus
 select * from tq84_minus_2;
+--
+--           VAL
+--    ----------
+--             1
+--             3
+--
 
 drop table tq84_minus_1 purge;
 drop table tq84_minus_2 purge;
