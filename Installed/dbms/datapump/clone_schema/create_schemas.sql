@@ -35,21 +35,6 @@ grant  create session,
 
 -----  }
 
-create user to_schema_A -- {
---
---     This is the schema into which from_schema_A
---     is supposed to be cloned.
---
-       identified by p
-       quota unlimited on users;
-
-grant  create procedure,
-       create session,
-       create table,
-       create view
-   to  to_schema_A;
-
-
 -----  }
 
 create user exp_imp_admin -- {
@@ -82,10 +67,6 @@ create table table_b_1 (
 -- table to from_schema_A:
 grant insert, select on table_b_1 to from_schema_A;
 
--- Since to_schema_A will also access the same table
--- when it will be cloned, the same grants also go
--- for to_schema_A:
-grant insert, select on table_b_1 to to_schema_A;
 
 -----  }
 
