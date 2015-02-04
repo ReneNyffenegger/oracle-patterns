@@ -35,6 +35,7 @@ grant  create session,
 
 -----  }
 
+
 -----  }
 
 create user exp_imp_admin -- {
@@ -125,6 +126,9 @@ begin
 end trigger_a;
 /
 
+--     There's a trigger on the table, so the
+--     following insersts should fill table_b_1
+--    (in schema_b):
 insert into table_a_1 values (1, 'one');
 insert into table_a_1 values (2, 'two');
 
