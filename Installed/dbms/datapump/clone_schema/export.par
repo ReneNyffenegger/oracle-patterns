@@ -1,0 +1,5 @@
+content=metadata_only
+directory=DATAPUMP_DIR
+dumpfile=clone_schema_a.dmp
+schemas=from_schema_a
+# exclude=trigger

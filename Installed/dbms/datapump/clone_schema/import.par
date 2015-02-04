@@ -1,0 +1,4 @@
+directory=DATAPUMP_DIR
+dumpfile=clone_schema_a.dmp
+remap_schema=from_schema_a:to_schema_a
+transform=OID:n
