@@ -41,14 +41,14 @@ begin
 
   dbms_datapump.detach(datapump_job);
 
---exception when others then
---
---  dbms_output.put_line(sqlcode);
---  dbms_output.put_line(sqlerrm);
---
---  if datapump_job is not null then
---     dbms_datapump.detach(datapump_job);
---  end if;
+  exception when others then
+  
+    dbms_output.put_line(sqlcode);
+    dbms_output.put_line(sqlerrm);
+  
+    if datapump_job is not null then
+       dbms_datapump.detach(datapump_job);
+    end if;
 
 end;
 /
