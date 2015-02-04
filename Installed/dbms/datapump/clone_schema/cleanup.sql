@@ -6,6 +6,7 @@ connect rene/rene
 @drop_schema_if_exists       schema_B
 @drop_schema_if_exists  exp_imp_admin
 
+-- https://github.com/ReneNyffenegger/oracle_scriptlets/blob/master/sqlpath/utl_file_fremove.sql
 @utl_file_fremove DATAPUMP_DIR CLONE_SCHEMA_A.DMP
 
 -- https://github.com/ReneNyffenegger/oracle_scriptlets/blob/master/sqlpath/drop_if_exists.sql
