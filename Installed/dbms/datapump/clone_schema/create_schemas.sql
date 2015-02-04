@@ -15,7 +15,9 @@ grant  create procedure,
        create view
    to  from_schema_A;
 
-grant  read, write on directory DATAPUMP_DIR to from_schema_A;
+-- The following grants only used if from_schema_A performs
+-- the export:
+-- grant  read, write on directory DATAPUMP_DIR to from_schema_A;
 
 -----  }
 
