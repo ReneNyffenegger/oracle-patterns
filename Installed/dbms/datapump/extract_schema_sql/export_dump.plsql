@@ -15,6 +15,15 @@ begin
 
   dbms_output.put_line('datapump_job: ' || datapump_job);
 
+  --
+  --   Since this script is *only* used to create
+  --   an SQL script, we don't need to epxort
+  --   the data as well:
+  dbms_datapump.data_filter(
+    handle       => datapump_job,
+    name         =>'INCLUDE_ROWS',
+    value        => 0);
+
 
   dbms_datapump.add_file(
     handle    =>  datapump_job,
@@ -37,6 +46,6 @@ begin
   exception when others then
 
 @@dbms_datapump_exception.plsql
-  
+
 end;
 /
