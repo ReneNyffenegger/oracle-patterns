@@ -19,3 +19,5 @@ contains the directive `optionally enclosed by '"'`. Also, the csv file has a he
 [ex_09](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_09) An example that loads dates. When these dates are empty, it inserts `sysdate` instead.
 
 [ex_10](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_10) Demonstrating the `boundfiller` keyword in a *.ctl* file.
+
+[ex_11](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_11) Demonstrating the effect of the `trailing nullcols` option.
