@@ -49,10 +49,10 @@ create or replace package body tq84_bar as
 
         when tq84_foo.exc_one or tq84_foo.exc_two then
 
-             dbms_output.put_line('caught ' || sqlerrm);
+             dbms_output.put_line('tq84_bar caught ' || sqlerrm);
 
              if sqlcode = -20731 then
-                dbms_output.put_line('  Special Treatment for Exception One!!!');
+                raise;
              end if;
 
         when others then
