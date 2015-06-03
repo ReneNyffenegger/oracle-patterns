@@ -42,3 +42,18 @@ begin
 
 end;
 /
+
+
+-----------------------------------------------------------------------------
+--
+--    Select first four words of a string.
+--   (http://stackoverflow.com/a/30621140/180275)
+
+
+select
+   regexp_replace(
+     'Hello    world   this   is a   test     etc',
+     '(((\w+)\s+){4}).*',  -- Change 4 to wanted number of words here!
+     '\1'
+   )
+   from dual;
