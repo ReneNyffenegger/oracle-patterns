@@ -1,4 +1,28 @@
 declare
+--
+--  ORA-24248: XML DB extensible security not installed:
+--  ---------------------------------------------------
+--
+--  The following statement probably finds no record, indicating
+--  that «Oracle XML Database» is not installed.
+--
+--      select status from dba_registry where comp_name = 'Oracle XML Database';
+--
+--  Installing the «Oracle XML Database»:
+--
+--      sqlplus / as sysdba
+--      spool install_xml_db.log
+--      @?/rdbms/admin/catqm xdb users temp NO
+--                           ^   ^     ^    ^
+--                           |   |     |    |
+--                           |   |     |    +-- use secure files
+--                           |   |     |
+--                           |   |     +------- temporary tablespace name
+--                           |   |
+--                           |   +------------- tablespace name
+--                           |
+--                           +----------------- xdb password
+--
 
     c_mailserver constant varchar2(100) := 'mailserver.foo.bar.baz';
     c_port       constant number        :=  25;
