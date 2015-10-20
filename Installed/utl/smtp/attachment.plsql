@@ -32,13 +32,13 @@ declare
   is
   begin
 
-    utl_smtp.write_data(smtp_conn, 'Date: ' || to_char(sysdate, 'dd-mon-yyyy hh24:mi:ss') || utl_tcp.crlf);
-    utl_smtp.write_data(smtp_conn, 'To: ' || mail_addr_to || utl_tcp.crlf);
-    utl_smtp.write_data(smtp_conn, 'From: ' || mail_addr_from || utl_tcp.crlf);
-    utl_smtp.write_data(smtp_conn, 'Subject: ' || subject || utl_tcp.crlf);
-    utl_smtp.write_data(smtp_conn, 'reply-to: ' || from_addr || UTL_TCP.crlf);
-    utl_smtp.write_data(smtp_conn, 'MIME-Version: 1.0' || utl_tcp.crlf);
-    utl_smtp.write_data(smtp_conn, 'Content-Type: multipart/mixed; boundary="' || c_seperator || '"' || utl_tcp.crlf || utl_tcp.crlf);
+    utl_smtp.write_data(smtp, 'Date: ' || to_char(sysdate, 'dd-mon-yyyy hh24:mi:ss') || utl_tcp.crlf);
+    utl_smtp.write_data(smtp, 'To: ' || mail_addr_to || utl_tcp.crlf);
+    utl_smtp.write_data(smtp, 'From: ' || mail_addr_from || utl_tcp.crlf);
+    utl_smtp.write_data(smtp, 'Subject: ' || subject || utl_tcp.crlf);
+    utl_smtp.write_data(smtp, 'Reply-To: ' || mail_addr_from || UTL_TCP.crlf);
+    utl_smtp.write_data(smtp, 'MIME-Version: 1.0' || utl_tcp.crlf);
+    utl_smtp.write_data(smtp, 'Content-Type: multipart/mixed; boundary="' || c_seperator || '"' || utl_tcp.crlf || utl_tcp.crlf);
 
   end header; -- }
 
