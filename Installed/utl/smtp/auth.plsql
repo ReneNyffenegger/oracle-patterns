@@ -1,9 +1,9 @@
 declare
 
-    c_mailserver constant varchar2(100) := 'mailserver.foo.bar.baz';
-    c_from_user  constant varchar2(100) := 'foo@bar.yy';
-    c_recpient   constant varchar2(100) := 'scott@tiger.ch';
-    c_auth_pw    constant varchar2(100) := 'mySecretPassword';
+    c_mailserver constant varchar2(100) := '&1';
+    c_from_user  constant varchar2(100) := '&2';
+    c_recpient   constant varchar2(100) := '&3';
+    c_auth_pw    constant varchar2(100) := '&4';
     c_port       constant number        :=  587;
 
     v_connection      utl_smtp.connection;
