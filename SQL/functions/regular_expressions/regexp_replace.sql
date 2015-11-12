@@ -57,3 +57,21 @@ select
      '\1'
    )
    from dual;
+
+
+-----------------------------------------------------------------------------
+--
+--  Replace initcap()'ped canton abbreviations with correct upper case abbreviation:
+--    Ag -> AG, Ur -> UR, Zh -> ZH
+
+select 
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(c, 'Ag($|\s)', 'AG\1'),
+                    'Ur($|\s)', 'UR\1'),
+                    'Zh($|\s)', 'ZH\1')
+from (
+  select 'Foo Ag'     c from dual union all
+  select 'Bar Zh Baz' c from dual union all
+  select 'Moo Ur 1'   c from dual
+);   
