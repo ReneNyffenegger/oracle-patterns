@@ -62,14 +62,63 @@ select
 -----------------------------------------------------------------------------
 --
 --  Replace initcap()'ped canton abbreviations with correct upper case abbreviation:
---    Ag -> AG, Ur -> UR, Zh -> ZH
+--    Ag -> AG, Ur -> UR, Zh -> ZH etc
+
 
 select 
   regexp_replace(
   regexp_replace(
-  regexp_replace(c, 'Ag($|\s)', 'AG\1'),
-                    'Ur($|\s)', 'UR\1'),
-                    'Zh($|\s)', 'ZH\1')
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(
+  regexp_replace(c, 
+     'Zh($|\s)', 'ZH\1'), -- Zürich
+     'Be($|\s)', 'BE\1'), -- Bern
+     'Lu($|\s)', 'LU\1'), -- Luzern
+     'Ur($|\s)', 'UR\1'), -- Uri
+     'Sz($|\s)', 'SZ\1'), -- Schwyz
+     'Ow($|\s)', 'OW\1'), -- Obwalden
+     'Nw($|\s)', 'NW\1'), -- Nidwalden
+     'Gl($|\s)', 'GL\1'), -- Glarus
+     'Zg($|\s)', 'ZG\1'), -- Zug
+     'Fr($|\s)', 'FR\1'), -- Freiburg
+     'So($|\s)', 'SO\1'), -- Solothurn
+     'Bs($|\s)', 'BS\1'), -- Basel-Stadt
+     'Bl($|\s)', 'BL\1'), -- Basel-Landschaft
+     'Sh($|\s)', 'SH\1'), -- Schaffhausen
+     'Ar($|\s)', 'AR\1'), -- Appenzell A. Rh.
+     'Ai($|\s)', 'AI\1'), -- Appenzell I. Rh.
+     'Sg($|\s)', 'SG\1'), -- St. Gallen
+     'Gr($|\s)', 'GR\1'), -- Graubünden
+     'Ag($|\s)', 'AG\1'), -- Aargau
+     'Tg($|\s)', 'TG\1'), -- Thurgau
+     'Ti($|\s)', 'TI\1'), -- Tessin
+     'Vd($|\s)', 'VD\1'), -- Waadt
+     'Vs($|\s)', 'VS\1'), -- Wallis
+     'Ne($|\s)', 'NE\1'), -- Neuenburg
+     'Ge($|\s)', 'GE\1'), -- Genf
+     'Ju($|\s)', 'JU\1')  -- Jura
+    r
 from (
   select 'Foo Ag'     c from dual union all
   select 'Bar Zh Baz' c from dual union all
