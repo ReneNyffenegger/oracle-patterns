@@ -1,4 +1,4 @@
-alter session set plsql_ccflags='NEW_FEATURE:true';
+alter session set plsql_ccflags='NEW_FEATURE:true,SOME_NUM:42';
 
 
 create package tq84_package as
@@ -45,6 +45,7 @@ $END
       dbms_output.put_line( 'PLSQL_WARNINGS:        ' || $$PLSQL_WARNINGS        );
       dbms_output.put_line( 'NLS_LENGTH_SEMANTICS:  ' || $$NLS_LENGTH_SEMANTICS  );
       dbms_output.put_line( 'PERMIT_92_WRAP_FORMAT: ' || $$PERMIT_92_WRAP_FORMAT );
+      dbms_output.put_line( 'SOME_NUM:              ' || $$SOME_NUM              );
     end compilation_parameters;
 
 
@@ -77,7 +78,8 @@ exec tq84_package.unit;
 exec tq84_package.compilation_parameters;
 
 
-connect c##user_01/pw
+-- connect c##user_01/pw
+   connect rene/rene
 
 exec tq84_package.do;
 
