@@ -76,3 +76,19 @@ order by
   c.column_id,
   h.endpoint_number;
 
+select
+  column_name,
+  num_distinct,
+--low_value,
+--high_value,
+  density,
+  num_nulls,
+  num_buckets,
+  sample_size,
+  global_stats,
+  user_stats,
+  histogram
+from
+  user_tab_col_statistics 
+where
+  table_name = 'TQ84_TAB_STAT';
