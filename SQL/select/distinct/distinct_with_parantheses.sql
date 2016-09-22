@@ -25,14 +25,17 @@ insert into tq84_distinct values (4, 5, 6);
 select distinct (a),
        b,
        c
-  from tq84_distinct;
+  from tq84_distinct
+ order by a, b, c;
 
+prompt
 prompt
 
 select distinct 
        a,
        b,
        c
-  from tq84_distinct;
+  from tq84_distinct
+ order by a, b, c;
 
 drop table tq84_distinct purge;
