@@ -10,11 +10,8 @@ insert into tq84_select_from_table values ( null, '#'         , null       );
 insert into tq84_select_from_table values (   10,  null       , sysdate + 1);
 
 declare
---sql_stmt   varchar2(32000) := 'select a, b, c from tq84_select_from_table';
 
   c          number;
---cntCols    number;
---cols       dbms_sql.desc_tab;
 
   a_         number;
   b_         varchar2(42);
