@@ -1,3 +1,6 @@
+--
+--  Compare with dbms_utility.db_version
+--
 begin
 
   dbms_output.put_line('Version: ' || dbms_db_version.version);

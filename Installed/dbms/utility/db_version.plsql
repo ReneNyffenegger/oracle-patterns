@@ -1,3 +1,6 @@
+--
+--   Compare with procedures in dbms_db_version.version, dbms_db_release
+--
 declare
    version       varchar2(100);
    compatibility varchar2(100);
