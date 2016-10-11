@@ -16,6 +16,9 @@ insert into tq84_part_list_hash values (sysdate  , 'foo', 'one'  );
 insert into tq84_part_list_hash values (sysdate+1, 'bar', 'two'  );
 insert into tq84_part_list_hash values (sysdate  , 'baz', 'three');
 
-select * from tq84_part_list_hash partition (p_foo);
+select * 
+  from tq84_part_list_hash
+  partition (p_foo)         -- <== Partition extension clause
+;
 
 drop table tq84_part_list_hash purge;
