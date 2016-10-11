@@ -4,9 +4,8 @@ create table tq84_part_range_list (
   dat      varchar2(10)
 )
    partition by range (col_dt) 
-subpartition by list  (col_vc)
+subpartition by list  (col_vc) (
 ------------------------------
-(
   partition p1      values less than (date '2013-01-01') (
   ------------
      subpartition p1_foo  values ('foo'  ),
@@ -46,7 +45,7 @@ select
 from
   user_objects
 where
-  name = 'TQ84_PART_RANGE_LIST'
+  object_name = 'TQ84_PART_RANGE_LIST'
 --created > sysdate - 1 /24/60;
 
 
@@ -62,7 +61,7 @@ where
 
 
 set long 90
-column high_value a90
+column high_value format a90
 select
   composite,
   partition_name,
