@@ -59,9 +59,3 @@ create or replace package body tq84_catcher as
 
 end tq84_catcher;
 /
-
-
-
-
-
-
