@@ -1,0 +1,3 @@
+--
+-- dbms_random.terminate() is terminated (that is: deprecated) with Oracle 11R1
+--
