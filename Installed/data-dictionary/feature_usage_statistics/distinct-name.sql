@@ -1,0 +1,173 @@
+select
+  distinct name
+from
+  dba_feature_usage_statistics
+order by
+  name;
+  
+-- Active Data Guard - Real-Time Query on Physical Standby
+-- ADDM
+-- Advanced Replication
+-- Application Express
+-- ASO native encryption and checksumming
+-- Audit Options
+-- Automatic Maintenance - Optimizer Statistics Gathering
+-- Automatic Maintenance - Space Advisor
+-- Automatic Maintenance - SQL Tuning Advisor
+-- Automatic Memory Tuning
+-- Automatic Segment Space Management (system)
+-- Automatic Segment Space Management (user)
+-- Automatic SGA Tuning
+-- Automatic SQL Execution Memory
+-- Automatic SQL Tuning Advisor
+-- Automatic Storage Management
+-- Automatic Undo Management
+-- Automatic Workload Repository
+-- AWR Baseline
+-- AWR Baseline Template
+-- AWR Report
+-- Backup BASIC Compression
+-- Backup BZIP2 Compression
+-- Backup Encryption
+-- Backup HIGH Compression
+-- Backup LOW Compression
+-- Backup MEDIUM Compression
+-- Backup Rollforward
+-- Backup ZLIB Compression
+-- Baseline Adaptive Thresholds
+-- Baseline Static Computations
+-- Bigfile Tablespace
+-- Block Media Recovery
+-- Change Data Capture
+-- Change-Aware Incremental Backup
+-- Character Semantics
+-- Character Set
+-- Client Identifier
+-- Clusterwide Global Transactions
+-- Compression Advisor
+-- Crossedition Triggers
+-- CSSCAN
+-- Data Guard
+-- Data Mining
+-- Data Recovery Advisor
+-- Database Migration Assistant for Unicode
+-- Database Replay: Workload Capture
+-- Database Replay: Workload Replay
+-- DBFS Content
+-- DBFS HS
+-- DBFS SFS
+-- DBMS_STATS Incremental Maintenance
+-- Deferred Open Read Only
+-- Deferred Segment Creation
+-- Diagnostic Pack
+-- Direct NFS
+-- Dynamic SGA
+-- Editioning Views
+-- Editions
+-- EM Database Control
+-- EM Grid Control
+-- EM Performance Page
+-- Encrypted Tablespaces
+-- Exadata
+-- Extensibility
+-- File Mapping
+-- Flashback Data Archive
+-- Flashback Database
+-- GoldenGate
+-- HeapCompression
+-- Hybrid Columnar Compression
+-- Instance Caging
+-- Internode Parallel Execution
+-- Job Scheduler
+-- Label Security
+-- LOB
+-- Locally Managed Tablespaces (system)
+-- Locally Managed Tablespaces (user)
+-- Locator
+-- Logfile Multiplexing
+-- Long-term Archival Backup
+-- Materialized Views (User)
+-- Messaging Gateway
+-- MTTR Advisor
+-- Multi Section Backup
+-- Multiple Block Sizes
+-- Object
+-- OLAP - Analytic Workspaces
+-- OLAP - Cubes
+-- Oracle Database Vault
+-- Oracle Java Virtual Machine (system)
+-- Oracle Java Virtual Machine (user)
+-- Oracle Managed Files
+-- Oracle Multimedia
+-- Oracle Multimedia DICOM
+-- Oracle Secure Backup
+-- Oracle Text
+-- Oracle Utility Datapump (Export)
+-- Oracle Utility Datapump (Import)
+-- Oracle Utility External Table
+-- Oracle Utility Metadata API
+-- Oracle Utility SQL Loader (Direct Path Load)
+-- Parallel SQL DDL Execution
+-- Parallel SQL DML Execution
+-- Parallel SQL Query Execution
+-- Partitioning (system)
+-- Partitioning (user)
+-- Pillar Storage
+-- Pillar Storage with EHCC
+-- PL/SQL Native Compilation
+-- Quality of Service Management
+-- Read Only Tablespace
+-- Real Application Clusters (RAC)
+-- Real-Time SQL Monitoring
+-- Recovery Area
+-- Recovery Manager (RMAN)
+-- Resource Manager
+-- Restore Point
+-- Result Cache
+-- RMAN - Disk Backup
+-- RMAN - Tape Backup
+-- Rules Manager
+-- SecureFile Compression (system)
+-- SecureFile Compression (user)
+-- SecureFile Deduplication (system)
+-- SecureFile Deduplication (user)
+-- SecureFile Encryption (system)
+-- SecureFile Encryption (user)
+-- SecureFiles (system)
+-- SecureFiles (user)
+-- Segment Advisor
+-- Segment Advisor (user)
+-- Segment Shrink
+-- Semantics/RDF
+-- Server Flash Cache
+-- Server Parameter File
+-- Services
+-- Shared Server
+-- Spatial
+-- SQL Access Advisor
+-- SQL Monitoring and Tuning pages
+-- SQL Performance Analyzer
+-- SQL Plan Management
+-- SQL Profile
+-- SQL Repair Advisor
+-- SQL Tuning Advisor
+-- SQL Tuning Set (system)
+-- SQL Tuning Set (user)
+-- SQL Workload Manager
+-- Streams (system)
+-- Streams (user)
+-- Sun ZFS with EHCC
+-- Transparent Data Encryption
+-- Transparent Gateway
+-- Transportable Tablespace
+-- Tune MView
+-- Tuning Pack
+-- Undo Advisor
+-- Very Large Memory
+-- Virtual Private Database (VPD)
+-- Workspace Manager
+-- XDB
+-- XStream In
+-- XStream Out
+-- XStream Streams
+-- ZFS Storage
