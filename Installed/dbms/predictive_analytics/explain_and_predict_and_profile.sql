@@ -1,3 +1,6 @@
+drop table tq84_pred_data       purge;
+drop table tq84_pred_result     purge;
+drop table tq84_pred_prediction purge;
 
 create table tq84_pred_data (
   id    number  primary key,
@@ -103,6 +106,26 @@ from
   tq84_pred_data       d on p.id = d.id;
 
 
-drop table tq84_pred_data       purge;
-drop table tq84_pred_result     purge;
-drop table tq84_pred_prediction purge;
+begin
+
+  dbms_predictive_analytics.profile (
+    data_table_name    => 'tq84_pred_data',
+    target_column_name => 'res',
+    result_table_name  => 'tq84_pred_profile'
+  );
+
+end;
+/
+
+select
+  count(*),
+  sum(record_count)
+from
+  tq84_pred_profile;
+
+select
+--profile_id,
+--record_count,
+  description
+from
+  tq84_pred_profile;
