@@ -1,0 +1,214 @@
+select
+  name,
+  type,
+  description
+from
+  v$lock_type
+order by
+  lower(name);
+--
+-- ACD Relocation Gate Enqueue      	 FG 	 ACD relocation serialization
+-- ACD Xtnt Info CIC                	 FX 	 serialize ACD relocation CIC
+-- Active Session History Flushing  	 SH 	 To prevent multiple concurrent flushers
+-- Advisor Framework                	 AF 	 This enqueue is used to serialize access to an advisor task
+-- Alter Tablespace                 	 AT 	 Serializes 'alter tablespace' operations
+-- Analytic Workspace               	 AW 	 Synchronizes access to Analytic Workspace resources
+-- Analytic Workspace Generation    	 AG 	 Synchronizes generation use of a particular workspace
+-- AQ Notification Mail Host        	 MH 	 Lock used for recovery when setting Mail Host for AQ e-mail notifications
+-- AQ Notification Mail Port        	 ML 	 Lock used for recovery when setting Mail Port for AQ e-mail notifications
+-- AQ Notification No-Proxy         	 XH 	 Lock used for recovery when setting No Proxy Domains for AQ HTTP notifications
+-- AQ Notification Proxy            	 PH 	 Lock used for recovery when setting Proxy for AQ HTTP notifications
+-- AQ Notification Sender           	 SF 	 Lock used for recovery when setting Sender for AQ e-mail notifications
+-- AQ Notification Watermark        	 WA 	 Lock used for recovery when setting Watermark for memory usage in AQ notifications
+-- ASM Attributes Enque             	 KQ 	 Single Inst Sync of ASM attributes
+-- ASM Cached Attributes            	 KE 	 Synchronization of ASM cached attributes
+-- ASM Disk AU Lock                 	 AD 	 Synchronizes accesses to a specific ASM disk AU
+-- ASM Disk Group Modification      	 DG 	 Synchronizes accesses to ASM disk groups
+-- ASM Disk Header                  	 HD 	 Serializes accesses to ASM SGA data structures
+-- ASM Disk Online Lock             	 DO 	 Synchronizes disk onlines and their recovery
+-- ASM Enqueue                      	 AM 	 ASM instance general-purpose enqueue
+-- ASM Extent Fault Lock            	 XL 	 Keep multiple processes from faulting in the same extent chunk
+-- ASM Extent Relocation Enqueue    	 XQ 	 ASM extent relocation
+-- ASM Extent Relocation Lock       	 RX 	 Synchronizes relocating ASM extents
+-- ASM File Access Lock             	 FA 	 Synchronizes accesses to open ASM files
+-- ASM Freezing Cache Lock          	 FZ 	 Freezes ASM Cache for a diskgroup
+-- ASM Group Block lock             	 XB 	 Prevents client diskgroup use during storage reconfiguration
+-- ASM Instance Enqueue             	 CM 	 ASM instance and gate enqueue
+-- ASM Local Disk Group             	 DD 	 Synchronizes local accesses to ASM disk groups
+-- ASM Partnership and Status Table 	 PT 	 Gates inter-node synchronization of ASM PST metadata
+-- ASM PST Signalling               	 PM 	 Signals inter-instance access to ASM PST metadata
+-- ASM RBAL doorbell                	 DQ 	 Inter-RBAL process metadata invalidation notification
+-- ASM Relocation Lock              	 AR 	 Protects locked extent pointers during ASM file relocation
+-- ASM Rollback Recovery            	 RB 	 Serializes ASM rollback recovery operations
+-- ASM volume locks                 	 AV 	 id1 is for persistent DG number locking. id2 is for other volume serialization
+-- Audit Partition                  	 ZA 	 Lock held for adding partition to Aud table
+-- Auto BMR                         	 AB 	 A general class of locks used by auto BMR for various purposes
+-- Auto Online Exadata disks        	 XD 	 Serialize Auto Management of Exadata disks
+-- Auto Task Serialization          	 TK 	 Prevents more than one AutoTask Background Slave from being spawned
+-- AWR Flush                        	 WF 	 This enqueue is used to serialize the flushing of snapshots
+-- AWR Purge                        	 WP 	 This enqueue handles concurrency between purging and baselines
+-- Backup/Restore                   	 BR 	 Lock held by a backup/restore operation to allow other operations to wait for it
+-- Being Written Redo Log           	 WL 	 Coordinates access to redo log files and archive logs
+-- Block Change Tracking            	 CT 	 A general class of locks used by change tracking for various purposes
+-- Block Repair/Resilvering         	 RE 	 Synchronizes block repair/mirror resilvering operations
+-- BLOOM FILTER                     	 BF 	 Synchronize access to a bloom filter in a parallel statement
+-- Buffer Cache PreWarm             	 PW 	 Coordinates Direct Loads with Prewarmed cache buffers
+-- Calibration                      	 CA 	 Lock used by IO Calibration
+-- Cleanup querycache registrations 	 CQ 	 Serializes access to cleanup client query cache registrations
+-- clonedb bitmap file access       	 BM 	 synchronizes clonedb bitmap file operations
+-- Compression Analyzer             	 ZH 	 Synchronizes analysis and insert into compression$, prevents multiple threads analyzing the same table during a load
+-- Controlfile Transaction          	 CF 	 Synchronizes accesses to the controlfile
+-- Cross-Instance Call Invocation   	 CI 	 Coordinates cross-instance function invocations
+-- Cross-Instance Transaction       	 TW 	 Lock held by one instance to wait for transactions on all instances to finish
+-- Cursor                           	 CU 	 Recovers cursors in case of death while compiling
+-- Data Guard Broker                	 RF 	 Synchronizes broker lock operation involving lock value
+-- Database Mount/Open              	 DM 	 Enqueue held by foreground or DBWR to synchronize database mount/open with other operations
+-- Database Suspend                 	 DS 	 Prevents a database suspend during LMON reconfiguration
+-- Datafile Online in RAC           	 DF 	 Enqueue held by foreground or DBWR when a datafile is brought online in RAC
+-- DBFUS                            	 FU 	 This enqueue is used to serialize the capture of the DB Feature           Usage and High Water Mark Statistics
+-- DbsDriver                        	 DB 	 Synchronizes modification of database wide supplementallogging attributes
+-- Default Temporary Tablespace     	 DT 	 Serializes changing the default temporary table space and user creation
+-- Diana Versioning                 	 DV 	 Synchronizes access to lower-version Diana (PL/SQL intermediate representation)
+-- Direct Loader High Water Mark    	 HV 	 Lock used to broker the high water mark during parallel inserts
+-- Direct Loader Index Creation     	 DL 	 Lock to prevent index DDL during direct load
+-- Disk Group Chunk Mount           	 FC 	 controls access to an ACD chunk
+-- Disk Group Recovery              	 FR 	 enqueue to control ASM recovery
+-- Disk Group Redo Generation       	 FT 	 controls the privilege to generate redo in a thread
+-- Diskgroup number generator       	 DN 	 Serializes Group number generations
+-- Distributed Recovery             	 DR 	 Serializes the active distributed recovery operation
+-- Distributed Transaction          	 DX 	 Serializes tightly coupled distributed transaction branches
+-- DML                              	 TM 	 Synchronizes accesses to an object
+-- Edition Lock                     	 AE 	 Prevent Dropping an edition in use
+-- Encryption Wallet                	 OW 	 Serializes wallet initialization and access
+-- FGA Partition                    	 ZF 	 Lock held for adding partition to Fga table
+-- File Group                       	 ZG 	 Coordinates file group operations
+-- File Mapping                     	 FM 	 Synchronizes access to global file mapping state
+-- File Object                      	 FP 	 Synchronizes various File Object(FOB) operations
+-- File Set / Dictionary Check      	 FS 	 Enqueue used to synchronize recovery and file operations or synchronize dictionary check
+-- Flashback Database               	 FD 	 Coordinate flashback database
+-- Flashback database log           	 FL 	 Synchronize access to flashback database log
+-- Flashback Writer                 	 FW 	 Coordinate RVWR on multiple instances
+-- Format Block                     	 FB 	 Ensures that only one process can format data blocks in auto segment space managed tablespaces
+-- GES Deadlock Test                	 AK 	 Lock used for internal testing
+-- GES Internal                     	 DI 	 Coordinates Global Enqueue Service deadlock detection
+-- GES Resource Remastering         	 RM 	 Coordinates Global Enqueue Service resource remastering
+-- Global Context Action            	 ZZ 	 Lock held for updating Global context hash tables
+-- Global Parameter                 	 PG 	 Synchronizes global system parameter updates
+-- Global Transaction Branch        	 BB 	 2PC distributed transaction branch across RAC instances
+-- Hash Queue                       	 HQ 	 Synchronizes the creation of new queue IDs
+-- In memory Dispenser              	 DW 	 Serialize in memory dispenser operations
+-- In-Mem Temp Table Meta Creation  	 IT 	 Synchronizes accesses to a temp object's metadata
+-- INSTANCE LOCK                    	 IZ 	 Proctects the lock name space used by the instance
+-- Instance Recovery                	 IR 	 Synchronizes instance recovery
+-- Instance State                   	 IS 	 Enqueue used to synchronize instance state changes
+-- Instance Undo                    	 TA 	 Serializes operations on undo segments and undo tablespaces
+-- Internal                         	 IA
+-- Internal Test                    	 XY 	 Lock used for internal testing
+-- Job Queue                        	 JQ 	 Lock to prevent multiple instances from running a single job
+-- Job Queue Date                   	 JD 	 Synchronizes dates between job queue coordinator and slave processes
+-- Job Scheduler                    	 JS 	 Synchronizes accesses to the job cache
+-- Kick Instance to Switch Logs     	 KK 	 Lock held by open redo thread, used by other instances to force a log switch
+-- KSV slave startup                	 PV 	 Synchronizes slave start_shut
+-- KSXA Test Affinity Dictionary    	 AY 	 Affinity Dictionary test affinity synchronization
+-- ksz synch                        	 MX 	 Used to synchronize storage server info across all nodes
+-- KTCN REG enq                     	 CN 	 Enqueue held for registrations for change notifications
+-- KTF broadcast                    	 TE 	 Serializes broadcasts for flushes to SMON_SCN_TIME
+-- KTF map table enqueue            	 TD 	 Serializes updates and inserts to the SMON_SCN_TIME mapping table
+-- KTFA Recovery                    	 FE 	 Flashback archive Enqueue to serialize recovery
+-- Kti blr lock                     	 IM 	 Serializes block recovery for an IMU txn
+-- KTSJ Slave Task Cancel           	 SJ 	 Serializes cancelling task executed by slave process
+-- KTUCLO Master Slave enq          	 CO 	 Enqueue held for determining Master Slaves
+-- Kupp Process Startup             	 KP 	 Synchronizes kupp process startup
+-- Label Security                   	 IL 	 Synchronizes accesses to internal label data structures
+-- Label Security cache             	 CL 	 Synchronizes accesses to label cache and label tables
+-- LDAP Parameter                   	 DP 	 Synchronizes access to LDAP parameters
+-- Library Cache Invalidation       	 IV 	 Synchronizes library cache object invalidations across instances
+-- Library Cache Lock 1             	 L  	 Synchronizes accesses to library cache objects
+-- Library Cache Lock 2             	 E  	 Synchronizes accesses to library cache objects
+-- Library Cache Lock 3             	 V  	 Synchronizes accesses to library cache objects
+-- Library Cache Pin 1              	 N  	 Synchronizes accesses to the contents of library cache objects
+-- Library Cache Pin 2              	 G  	 Synchronizes accesses to the contents of library cache objects
+-- Library Cache Pin 3              	 Y  	 Synchronizes accesses to the contents of library cache objects
+-- LNS archiving log                	 WR 	 Coordinates access to logs by Async LNS and ARCH/FG
+-- LOB KSI LOCK                     	 KL 	 KSI lock for buffer cache and wgc concurrency
+-- Log Lock                         	 TL 	 Serializes threshold log table read and update
+-- LogicalStandby                   	 SB 	 Synchronizes Logical Standby metadata operations
+-- LogMiner                         	 MN 	 Synchronizes updates to the LogMiner dictionary and prevents multiple instances from preparing the same LogMiner session
+-- LogWriter Standby                	 WS 	 Used by LogWriter to coordinate communication to standby databases
+-- Master Key                       	 MK 	 Serializes enc$ access
+-- Materialized View                	 JI 	 Lock held during materialized view operations (like refresh, alter) to prevent concurrent operations on the same materialized view
+-- Materialized View Flags          	 RW 	 Lock used when creating or readingmaterialized view flags in detail tables
+-- Materialized View Log DDL        	 MD 	 Lock held during materialized view log DDL statements
+-- Materialized View Refresh Log    	 MS 	 Lock held during materialized view refresh to setup MV log
+-- Media Recovery                   	 MR 	 Lock used to coordinate media recovery with other uses of datafiles
+-- MMON restricted session          	 MO 	 Serialize MMON operations for restricted sessions
+-- Multiple Object Checkpoint       	 KO 	 Coordinates checkpointing of multiple objects
+-- Multiple Object Reuse            	 RO 	 Coordinates flushing of multiple objects
+-- MultiWriter Object Access        	 AO 	 Synchronizes access to objects and scalar variables
+-- MWIN Schedule                    	 MW 	 This enqueue is used to serialize the calibration of the           manageability schedules with the Maintenance Window
+-- NID                              	 ID 	 Lock held by a NID operation to allow other operations to wait for it
+-- OLAPI Histories                  	 OQ 	 Synchronizes access to olapi history resources
+-- Online Datafile Move             	 MV 	 Synchronizes online datafile move operation or cleanup
+-- Online DDLs                      	 OD 	 Lock to prevent concurrent online DDLs
+-- Outline Cache                    	 OC 	 Synchronizes write accesses to the outline cache
+-- Outline Name                     	 OL 	 Synchronizes accesses to a particular outline name
+-- Parameter                        	 PE 	 Synchronizes system parameter updates
+-- Password File                    	 PF 	 Synchronizes accesses to the password file
+-- Process Startup                  	 PR 	 Synchronizes process startup
+-- Property Lock                    	 PD 	 Serializes property update
+-- PX Process Reservation           	 PS 	 Parallel Execution Server Process reservation and synchronization
+-- Queue Page                       	 HP 	 Synchronizes accesses to queue pages
+-- Queue table enqueue              	 TQ 	 Synchronizes access to queue table
+-- Quiesce / Force Logging          	 XR 	 Lock held during database quiesce or for database force logging
+-- RAC Encryption Wallet Lock       	 RL 	 RAC encryption wallet lock
+-- RAC Load                         	 RD 	 synchronize update of RAC load info
+-- Reclaimable Space                	 RS 	 Lock held by a space reclaimable operation to allow other operations to wait for it
+-- Redo Log Nab Computation         	 RN 	 Coordinates nab computations of online logs during recovery
+-- Redo Thread                      	 RT 	 Thread locks held by LGWR, DBW0, and RVWR to indicate mounted or open status
+-- Remote PX Process Spawn Status   	 PI 	 Communicates remote Parallel Execution Server Process creation status
+-- Resilver / Repair                	 RP 	 Enqueue held when resilvering is needed or when datablock is repaired from mirror
+-- Result Cache: Enqueue            	 RC 	 Accessing a result in the result-set cache
+-- Reuse Block Range                	 CR 	 Coordinates checkpointing of block range reuse
+-- Rolling Migration                	 RU 	 Serilized rolling migration operations
+-- Row Cache                        	 Q  	 Coordinates updates and accesses to row cache objects
+-- Runtime Fixed Table Purge        	 TP 	 Lock used for fixed runtime table purge and definition
+-- SaveUndo Segment                 	 SU 	 Serializes access to SaveUndo Segment
+-- Scheduler                        	 KM 	 Synchronizes various Resource Manager operations
+-- Scheduler Master DBRM            	 KD 	 Determine DBRM master
+-- Scheduler Plan                   	 KT 	 Synchronizes accesses to the current Resource Manager plan
+-- Segment High Water Mark          	 HW 	 Lock used to broker the high water mark during parallel inserts
+-- Sequence Cache                   	 SQ 	 Lock to ensure that only one process can replenish the sequence cache
+-- Sequence Ordering                	 SV 	 Lock to ensure ordered sequence allocation in RAC mode
+-- Serialize Lock request           	 SL 	 Request serialization to LCK0
+-- Service Operations               	 AS 	 Synchronizes new service activation
+-- Session Migration                	 SE 	 Lock used by transparent session migration
+-- Shared Object                    	 SO 	 Synchronizes access to Shared Object(PL/SQL Shared Object Manager)
+-- Shrink Segment                   	 SK 	 Serialize shrink of a segment
+-- SMON Serialization               	 SM 	 Lock to check SMON global work in RAC
+-- Sort Segment                     	 SS 	 Ensures that sort segments created during parallel DML operations aren't prematurely cleaned up
+-- Space Transaction                	 ST 	 Synchronizes space management activities in dictionary-managed tablespaces
+-- Spare Enqueue                    	 SP 	 Spare enqueue for one-off backports
+-- SPM Autopurge                    	 AP 	 This enqueue is used to serialize the purging of SQL plan baselines
+-- SQL STATEMENT QUEUE              	 JX 	 synchronize SQL statement queue operations
+-- SQL Tuning Base Existence Cache  	 TB 	 Synchronizes writes to the SQL Tuning Base Existence Cache
+-- Streams Table Instantiation      	 SI 	 Prevents muiltiple streams table instantiations
+-- Suspend Writes                   	 SW 	 Coordinates the 'alter system suspend' operation
+-- Synchronized Replication         	 SR 	 Coordinates replication / streams operations
+-- System Change Number             	 SC 	 Coordinates system change number generation on multiple instances
+-- Tablespace                       	 TT 	 Serializes DDL operations on tablespaces
+-- Tablespace Checkpoint            	 TC 	 Lock held to guarantee uniqueness of a tablespace checkpoint
+-- Temp Object                      	 TO 	 Synchronizes DDL and DML operations on a temp object
+-- Temporary File                   	 TF 	 Serializes dropping of a temporary file
+-- Temporary Segment                	 TS 	 Serializes accesses to temp segments
+-- TEXT: Generic Lock               	 OT 	 Generic Lock on CTX index
+-- TEXT: Index Specific Lock        	 CX 	 Index Specific Lock on CTX index
+-- Threshold Chain                  	 TH 	 Serializes threshold in-memory chain access
+-- Transaction                      	 TX 	 Lock held by a transaction to allow other transactions to wait for it
+-- Transportable Tablespace         	 PL 	 Coordinates plug-in operation of transportable tablespaces
+-- Undo Segment                     	 US 	 Lock held to perform DDL on the undo segment
+-- User-defined                     	 UL 	 Lock used by user applications
+-- wallet_set_mkey                  	 RK 	 Serializes wallet master key rekey
+-- WLM Plan Operations              	 WM 	 Synchronizes new WLM Plan activation
+-- Workload Capture and Replay      	 RR 	 Prevents concurrent invokers of DBMS_WORKLOAD_*
+-- Write gather local enqueue       	 WG 	 Long term lock on wgc file state
+-- XDB Configuration                	 XC 	 Synchronization access to XDB configuration
