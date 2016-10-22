@@ -21,3 +21,5 @@ contains the directive `optionally enclosed by '"'`. Also, the csv file has a he
 [ex_10](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_10) Demonstrating the `boundfiller` keyword in a *.ctl* file.
 
 [ex_11](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_11) Demonstrating the effect of the `trailing nullcols` option.
+
+[ex_12_skip-columns](https://github.com/ReneNyffenegger/oracle-patterns/tree/master/SQLLoader/ex_12_skip-columns) Use the `filler` keyword to »skip« (not load) specific columns.
