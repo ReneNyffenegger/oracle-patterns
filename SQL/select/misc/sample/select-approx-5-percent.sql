@@ -15,5 +15,7 @@ select * from tq84_sample_src sample (5);
 select count(*) from tq84_sample_dest;
 -- 52
 
+select * from tq84_sample_dest;
+
 drop table tq84_sample_src  purge;
 drop table tq84_sample_dest purge;
