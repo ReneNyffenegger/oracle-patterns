@@ -3,7 +3,7 @@ create or replace procedure print_stack_trace is -- {
   call_stack_   varchar2(4000);
   current_line_ varchar2(100);
 
-  function next_line(cs in out varchar2) return varchar2 is 
+  function next_line(cs in out varchar2) return varchar2 is  -- {
       next_line_ varchar2(100); 
   begin
       cs := substr(cs, instr(call_stack_, chr(10))+1);
@@ -11,31 +11,30 @@ create or replace procedure print_stack_trace is -- {
       next_line_ := substr(cs, 1, instr(cs, chr(10))-1 );
 
       return next_line_;
-  end next_line;
+  end next_line; -- }
 
 begin
 
   call_stack_ := dbms_utility.format_call_stack;
 
-  -------------------------------------------------------------------------------------
-  -- Jump over the header that looks something like so (constisting of two lines):
-  --
-  --    ----- PL/SQL Call Stack -----
-  --      object      line  object
-  --      handle    number  name
-
-  call_stack_ := substr(call_stack_, instr(call_stack_, chr(10))+1);
-  call_stack_ := substr(call_stack_, instr(call_stack_, chr(10))+1);
-
-  -------------------------------------------------------------------------------------
-
   --   Get line for line:
-  loop current_line_ := next_line(call_stack_);
+  loop current_line_ := next_line(call_stack_); -- {
 
     dbms_output.put_line(current_line_);
 
     exit when current_line_ is null;
-  end loop;
+  end loop; -- }
+
+--  Call stack looks something like:
+--
+--   object      line  object
+--   handle    number  name
+-- 0x4aeb783460        18  procedure RENE.PRINT_STACK_TRACE
+-- 0x4aeb1e67a8         4  package body RENE.TQ84_CALL_STACK
+-- 0x4aeb1e67a8         8  package body RENE.TQ84_CALL_STACK
+-- 0x4aeb1e67a8        12  package body RENE.TQ84_CALL_STACK
+-- 0x4aeb1e67a8        16  package body RENE.TQ84_CALL_STACK
+-- 0x4af5035760         2  anonymous block
 
 
 end print_stack_trace;
