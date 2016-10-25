@@ -8,6 +8,9 @@ select /*+ ordered */
   trx.used_urec      unco_records_used,
   trx.used_ublk      undo_blocks_used,
   --
+  ses.osuser,
+  ses.username,
+  --
   sql.sql_text,
   --
   trx.xidusn         undo_segment_number,
