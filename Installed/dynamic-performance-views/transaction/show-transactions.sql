@@ -29,8 +29,8 @@ select /*+ ordered */
 --trx.ses_addr       session_address,
   trx.ptx            parallel_transaction
 from
-  v$transaction  trx                                 join
-  v$session      ses on trx.ses_addr = ses.saddr     join
+  v$transaction  trx                                      join
+  v$session      ses on trx.ses_addr = ses.saddr     left join
   v$sqlarea      sql on ses.sql_id   = sql.sql_id
 --where
 --  trx.addr = '00000049DE4C7D98'
