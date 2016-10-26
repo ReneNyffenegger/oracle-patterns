@@ -1,0 +1,295 @@
+break on group_name
+
+select 
+  group_name,
+  metric_name,
+  metric_unit
+from
+  v$metricname
+order by
+  lower(group_name),
+  lower(metric_name);
+-- Event Class Metrics                                              Average Users Waiting Counts                                     Users
+--                                                                  Database Time Spent Waiting (%)                                  % (TimeWaited / DBTime)
+--                                                                  Total Time Waited                                                CentiSeconds
+--                                                                  Total Time Waited (Foreground)                                   CentiSeconds
+--                                                                  Total Wait Counts                                                Waits
+--                                                                  Total Wait Counts (Foreground)                                   Waits
+-- Event Metrics                                                    Number of Sessions Waiting (Event)                               Sessions
+--                                                                  Total Time Waited                                                CentiSeconds
+--                                                                  Total Time Waited (Foreground)                                   CentiSeconds
+--                                                                  Total Wait Counts                                                Waits
+--                                                                  Total Wait Counts (Foreground)                                   Waits
+-- File Metrics Long Duration                                       Average File Read Time (Files-Long)                              CentiSeconds Per Read
+--                                                                  Average File Write Time (Files-Long)                             CentiSeconds Per Write
+--                                                                  Physical Block Reads (Files-Long)                                Blocks
+--                                                                  Physical Block Writes (Files-Long)                               Blocks
+--                                                                  Physical Reads (Files-Long)                                      Reads
+--                                                                  Physical Writes (Files-Long)                                     Writes
+-- I/O Stats by Function Metrics                                    Average Wait Time                                                Milliseconds
+--                                                                  Large Read Requests per Second                                   Requests per Second
+--                                                                  Large Write Requests per Second                                  Requests per Second
+--                                                                  MegaBytes of Large Reads per Second                              MegaBytes per Second
+--                                                                  MegaBytes of Large Writes per Second                             MegaBytes per Second
+--                                                                  MegaBytes of Small Reads per Second                              MegaBytes per Second
+--                                                                  MegaBytes of Small Writes per Second                             MegaBytes per Second
+--                                                                  Number of Waits                                                  Waits
+--                                                                  Small Read Requests per Second                                   Requests per Second
+--                                                                  Small Write Requests per Second                                  Requests per Second
+-- Resource Manager Stats                                           Consumed CPU Time                                                Milliseconds
+--                                                                  CPU Wait Time                                                    Milliseconds
+--                                                                  DBRM CPU Decisions Alone                                         Number of Decisions
+--                                                                  DBRM CPU Decisions Present                                       Number of Decisions
+--                                                                  DBRM CPU Runs                                                    Number of Runs
+--                                                                  I/O Requests                                                     Number of Requests
+--                                                                  I/O Wait Time                                                    Milliseconds
+--                                                                  Maximum CPU Utilization Limit                                    Percentage
+--                                                                  MegaBytes of I/O                                                 MegaBytes
+--                                                                  Number CPUs in Use                                               Number of CPUs in Use
+--                                                                  Total DBRM CPU Decisions                                         Number of Decisions
+--                                                                  Total Number CPUs                                                Total Number of CPUs
+-- Service Metrics                                                  CPU Time Per User Call                                           Microseconds Per Call
+--                                                                  DB Time Per Second                                               CentiSeconds
+--                                                                  DB Time Per User Call                                            Microseconds Per Call
+--                                                                  Elapsed Time Per User Call                                       Microseconds Per Call
+--                                                                  User Calls Per Second                                            User Calls Per Second
+-- Service Metrics (Short)                                          CPU Time Per User Call                                           Microseconds Per Call
+--                                                                  DB Time Per Second                                               CentiSeconds
+--                                                                  DB Time Per User Call                                            Microseconds Per Call
+--                                                                  Elapsed Time Per User Call                                       Microseconds Per Call
+--                                                                  User Calls Per Second                                            User Calls Per Second
+-- Session Metrics Long Duration                                    Blocked User Session Count                                       Sessions
+-- Session Metrics Short Duration                                   CPU Time (Session)                                               CentiSeconds
+--                                                                  Hard Parse Count (Session)                                       Parses
+--                                                                  Logical Read Count                                               Reads
+--                                                                  Logical Reads Ratio (Sess/Sys) %                                 % SessLogRead/SystemLogRead
+--                                                                  PGA Memory (Session)                                             Bytes
+--                                                                  Physical Reads (Session)                                         Reads
+--                                                                  Physical Reads Ratio (Sess/Sys) %                                % SessPhyRead/SystemPhyRead
+--                                                                  Soft Parse Count                                                 Parses
+--                                                                  Total Parse Count (Session)                                      Parses
+--                                                                  User Transaction Count (Session)                                 Transactions
+-- System Metrics Long Duration                                     Active Parallel Sessions                                         Sessions
+--                                                                  Active Serial Sessions                                           Sessions
+--                                                                  Average Active Sessions                                          Active Sessions
+--                                                                  Average Synchronous Single-Block Read Latency                    Milliseconds
+--                                                                  Background Checkpoints Per Sec                                   Check Points Per Second
+--                                                                  Background CPU Usage Per Sec                                     CentiSeconds Per Second
+--                                                                  Background Time Per Sec                                          Active Sessions
+--                                                                  Branch Node Splits Per Sec                                       Splits Per Second
+--                                                                  Branch Node Splits Per Txn                                       Splits Per Txn
+--                                                                  Buffer Cache Hit Ratio                                           % (LogRead - PhyRead)/LogRead
+--                                                                  Captured user calls                                              calls
+--                                                                  Cell Physical IO Interconnect Bytes                              bytes
+--                                                                  Consistent Read Changes Per Sec                                  Blocks Per Second
+--                                                                  Consistent Read Changes Per Txn                                  Blocks Per Txn
+--                                                                  Consistent Read Gets Per Sec                                     Blocks Per Second
+--                                                                  Consistent Read Gets Per Txn                                     Blocks Per Txn
+--                                                                  CPU Usage Per Sec                                                CentiSeconds Per Second
+--                                                                  CPU Usage Per Txn                                                CentiSeconds Per Txn
+--                                                                  CR Blocks Created Per Sec                                        Blocks Per Second
+--                                                                  CR Blocks Created Per Txn                                        Blocks Per Txn
+--                                                                  CR Undo Records Applied Per Sec                                  Undo Records Per Second
+--                                                                  CR Undo Records Applied Per Txn                                  Records Per Txn
+--                                                                  Current Logons Count                                             Logons
+--                                                                  Current Open Cursors Count                                       Cursors
+--                                                                  Current OS Load                                                  Number Of Processes
+--                                                                  Cursor Cache Hit Ratio                                           % CursorCacheHit/SoftParse
+--                                                                  Database CPU Time Ratio                                          % Cpu/DB_Time
+--                                                                  Database Time Per Sec                                            CentiSeconds Per Second
+--                                                                  Database Wait Time Ratio                                         % Wait/DB_Time
+--                                                                  DB Block Changes Per Sec                                         Blocks Per Second
+--                                                                  DB Block Changes Per Txn                                         Blocks Per Txn
+--                                                                  DB Block Changes Per User Call                                   Blocks Per Call
+--                                                                  DB Block Gets Per Sec                                            Blocks Per Second
+--                                                                  DB Block Gets Per Txn                                            Blocks Per Txn
+--                                                                  DB Block Gets Per User Call                                      Blocks Per Call
+--                                                                  DBWR Checkpoints Per Sec                                         Check Points Per Second
+--                                                                  DDL statements parallelized Per Sec                              Statements Per Second
+--                                                                  Disk Sort Per Sec                                                Sorts Per Second
+--                                                                  Disk Sort Per Txn                                                Sorts Per Txn
+--                                                                  DML statements parallelized Per Sec                              Statements Per Second
+--                                                                  Enqueue Deadlocks Per Sec                                        Deadlocks Per Second
+--                                                                  Enqueue Deadlocks Per Txn                                        Deadlocks Per Txn
+--                                                                  Enqueue Requests Per Sec                                         Requests Per Second
+--                                                                  Enqueue Requests Per Txn                                         Requests Per Txn
+--                                                                  Enqueue Timeouts Per Sec                                         Timeouts Per Second
+--                                                                  Enqueue Timeouts Per Txn                                         Timeouts Per Txn
+--                                                                  Enqueue Waits Per Sec                                            Waits Per Second
+--                                                                  Enqueue Waits Per Txn                                            Waits Per Txn
+--                                                                  Execute Without Parse Ratio                                      % (ExecWOParse/TotalExec)
+--                                                                  Executions Per Sec                                               Executes Per Second
+--                                                                  Executions Per Txn                                               Executes Per Txn
+--                                                                  Executions Per User Call                                         Executes Per Call
+--                                                                  Full Index Scans Per Sec                                         Scans Per Second
+--                                                                  Full Index Scans Per Txn                                         Scans Per Txn
+--                                                                  GC CR Block Received Per Second                                  Blocks Per Second
+--                                                                  GC CR Block Received Per Txn                                     Blocks Per Txn
+--                                                                  GC Current Block Received Per Second                             Blocks Per Second
+--                                                                  GC Current Block Received Per Txn                                Blocks Per Txn
+--                                                                  Global Cache Average CR Get Time                                 CentiSeconds Per Get
+--                                                                  Global Cache Average Current Get Time                            CentiSeconds Per Get
+--                                                                  Global Cache Blocks Corrupted                                    Blocks
+--                                                                  Global Cache Blocks Lost                                         Blocks
+--                                                                  Hard Parse Count Per Sec                                         Parses Per Second
+--                                                                  Hard Parse Count Per Txn                                         Parses Per Txn
+--                                                                  Host CPU Usage Per Sec                                           CentiSeconds Per Second
+--                                                                  Host CPU Utilization (%)                                         % Busy/(Idle+Busy)
+--                                                                  I/O Megabytes per Second                                         Megabtyes per Second
+--                                                                  I/O Requests per Second                                          Requests per Second
+--                                                                  Leaf Node Splits Per Sec                                         Splits Per Second
+--                                                                  Leaf Node Splits Per Txn                                         Splits Per Txn
+--                                                                  Library Cache Hit Ratio                                          % Hits/Pins
+--                                                                  Library Cache Miss Ratio                                         % Misses/Gets
+--                                                                  Logical Reads Per Sec                                            Reads Per Second
+--                                                                  Logical Reads Per Txn                                            Reads Per Txn
+--                                                                  Logical Reads Per User Call                                      Reads Per Call
+--                                                                  Logons Per Sec                                                   Logons Per Second
+--                                                                  Logons Per Txn                                                   Logons Per Txn
+--                                                                  Long Table Scans Per Sec                                         Scans Per Second
+--                                                                  Long Table Scans Per Txn                                         Scans Per Txn
+--                                                                  Memory Sorts Ratio                                               % MemSort/(MemSort + DiskSort)
+--                                                                  Network Traffic Volume Per Sec                                   Bytes Per Second
+--                                                                  Open Cursors Per Sec                                             Cursors Per Second
+--                                                                  Open Cursors Per Txn                                             Cursors Per Txn
+--                                                                  Parse Failure Count Per Sec                                      Parses Per Second
+--                                                                  Parse Failure Count Per Txn                                      Parses Per Txn
+--                                                                  PGA Cache Hit %                                                  % Bytes/TotalBytes
+--                                                                  Physical Read Bytes Per Sec                                      Bytes Per Second
+--                                                                  Physical Read IO Requests Per Sec                                Requests Per Second
+--                                                                  Physical Read Total Bytes Per Sec                                Bytes Per Second
+--                                                                  Physical Read Total IO Requests Per Sec                          Requests Per Second
+--                                                                  Physical Reads Direct Lobs Per Sec                               Reads Per Second
+--                                                                  Physical Reads Direct Lobs Per Txn                               Reads Per Txn
+--                                                                  Physical Reads Direct Per Sec                                    Reads Per Second
+--                                                                  Physical Reads Direct Per Txn                                    Reads Per Txn
+--                                                                  Physical Reads Per Sec                                           Reads Per Second
+--                                                                  Physical Reads Per Txn                                           Reads Per Txn
+--                                                                  Physical Write Bytes Per Sec                                     Bytes Per Second
+--                                                                  Physical Write IO Requests Per Sec                               Requests Per Second
+--                                                                  Physical Write Total Bytes Per Sec                               Bytes Per Second
+--                                                                  Physical Write Total IO Requests Per Sec                         Requests Per Second
+--                                                                  Physical Writes Direct Lobs  Per Txn                             Writes Per Txn
+--                                                                  Physical Writes Direct Lobs Per Sec                              Writes Per Second
+--                                                                  Physical Writes Direct Per Sec                                   Writes Per Second
+--                                                                  Physical Writes Direct Per Txn                                   Writes Per Txn
+--                                                                  Physical Writes Per Sec                                          Writes Per Second
+--                                                                  Physical Writes Per Txn                                          Writes Per Txn
+--                                                                  PQ QC Session Count                                              Sessions
+--                                                                  PQ Slave Session Count                                           Sessions
+--                                                                  Process Limit %                                                  % Processes/Limit
+--                                                                  PX downgraded 1 to 25% Per Sec                                   PX Operations Per Second
+--                                                                  PX downgraded 25 to 50% Per Sec                                  PX Operations Per Second
+--                                                                  PX downgraded 50 to 75% Per Sec                                  PX Operations Per Second
+--                                                                  PX downgraded 75 to 99% Per Sec                                  PX Operations Per Second
+--                                                                  PX downgraded to serial Per Sec                                  PX Operations Per Second
+--                                                                  PX operations not downgraded Per Sec                             PX Operations Per Second
+--                                                                  Queries parallelized Per Sec                                     Queries Per Second
+--                                                                  Recursive Calls Per Sec                                          Calls Per Second
+--                                                                  Recursive Calls Per Txn                                          Calls Per Txn
+--                                                                  Redo Allocation Hit Ratio                                        % (#Redo - RedoSpaceReq)/#Redo
+--                                                                  Redo Generated Per Sec                                           Bytes Per Second
+--                                                                  Redo Generated Per Txn                                           Bytes Per Txn
+--                                                                  Redo Writes Per Sec                                              Writes Per Second
+--                                                                  Redo Writes Per Txn                                              Writes Per Txn
+--                                                                  Replayed user calls                                              calls
+--                                                                  Response Time Per Txn                                            CentiSeconds Per Txn
+--                                                                  Row Cache Hit Ratio                                              % Hits/Gets
+--                                                                  Row Cache Miss Ratio                                             % Misses/Gets
+--                                                                  Rows Per Sort                                                    Rows Per Sort
+--                                                                  Session Count                                                    Sessions
+--                                                                  Session Limit %                                                  % Sessions/Limit
+--                                                                  Shared Pool Free %                                               % Free/Total
+--                                                                  Soft Parse Ratio                                                 % SoftParses/TotalParses
+--                                                                  SQL Service Response Time                                        CentiSeconds Per Call
+--                                                                  Streams Pool Usage Percentage                                    % Memory allocated / Size of Streams pool
+--                                                                  Temp Space Used                                                  bytes
+--                                                                  Total Index Scans Per Sec                                        Scans Per Second
+--                                                                  Total Index Scans Per Txn                                        Scans Per Txn
+--                                                                  Total Parse Count Per Sec                                        Parses Per Second
+--                                                                  Total Parse Count Per Txn                                        Parses Per Txn
+--                                                                  Total PGA Allocated                                              bytes
+--                                                                  Total PGA Used by SQL Workareas                                  bytes
+--                                                                  Total Sorts Per User Call                                        Sorts Per Call
+--                                                                  Total Table Scans Per Sec                                        Scans Per Second
+--                                                                  Total Table Scans Per Txn                                        Scans Per Txn
+--                                                                  Total Table Scans Per User Call                                  Tables Per Call
+--                                                                  Txns Per Logon                                                   Txns Per Logon
+--                                                                  User Calls Per Sec                                               Calls Per Second
+--                                                                  User Calls Per Txn                                               Calls Per Txn
+--                                                                  User Calls Ratio                                                 % UserCalls/AllCalls
+--                                                                  User Commits Per Sec                                             Commits Per Second
+--                                                                  User Commits Percentage                                          % (UserCommit/TotalUserTxn)
+--                                                                  User Limit %                                                     % Sessions/License_Limit
+--                                                                  User Rollback Undo Records Applied Per Txn                       Records Per Txn
+--                                                                  User Rollback UndoRec Applied Per Sec                            Records Per Second
+--                                                                  User Rollbacks Per Sec                                           Rollbacks Per Second
+--                                                                  User Rollbacks Percentage                                        % (UserRollback/TotalUserTxn)
+--                                                                  User Transaction Per Sec                                         Transactions Per Second
+--                                                                  Workload Capture and Replay status                               status
+-- System Metrics Short Duration                                    Average Active Sessions                                          Active Sessions
+--                                                                  Buffer Cache Hit Ratio                                           % (LogRead - PhyRead)/LogRead
+--                                                                  Cell Physical IO Interconnect Bytes                              bytes
+--                                                                  Consistent Read Changes Per Sec                                  Blocks Per Second
+--                                                                  Consistent Read Changes Per Txn                                  Blocks Per Txn
+--                                                                  Consistent Read Gets Per Sec                                     Blocks Per Second
+--                                                                  Consistent Read Gets Per Txn                                     Blocks Per Txn
+--                                                                  Database CPU Time Ratio                                          % Cpu/DB_Time
+--                                                                  Database Time Per Sec                                            CentiSeconds Per Second
+--                                                                  DB Block Changes Per Sec                                         Blocks Per Second
+--                                                                  DB Block Changes Per Txn                                         Blocks Per Txn
+--                                                                  DB Block Gets Per Sec                                            Blocks Per Second
+--                                                                  DB Block Gets Per Txn                                            Blocks Per Txn
+--                                                                  Execute Without Parse Ratio                                      % (ExecWOParse/TotalExec)
+--                                                                  Executions Per Sec                                               Executes Per Second
+--                                                                  Executions Per Txn                                               Executes Per Txn
+--                                                                  Full Index Scans Per Sec                                         Scans Per Second
+--                                                                  Full Index Scans Per Txn                                         Scans Per Txn
+--                                                                  Host CPU Usage Per Sec                                           CentiSeconds Per Second
+--                                                                  Host CPU Utilization (%)                                         % Busy/(Idle+Busy)
+--                                                                  Library Cache Hit Ratio                                          % Hits/Pins
+--                                                                  Logical Reads Per Sec                                            Reads Per Second
+--                                                                  Logical Reads Per Txn                                            Reads Per Txn
+--                                                                  Logons Per Sec                                                   Logons Per Second
+--                                                                  Logons Per Txn                                                   Logons Per Txn
+--                                                                  Memory Sorts Ratio                                               % MemSort/(MemSort + DiskSort)
+--                                                                  Physical Reads Direct Per Sec                                    Reads Per Second
+--                                                                  Physical Reads Direct Per Txn                                    Reads Per Txn
+--                                                                  Physical Reads Per Sec                                           Reads Per Second
+--                                                                  Physical Reads Per Txn                                           Reads Per Txn
+--                                                                  Physical Writes Per Sec                                          Writes Per Second
+--                                                                  Physical Writes Per Txn                                          Writes Per Txn
+--                                                                  Redo Generated Per Sec                                           Bytes Per Second
+--                                                                  Redo Generated Per Txn                                           Bytes Per Txn
+--                                                                  Redo Writes Per Sec                                              Writes Per Second
+--                                                                  Redo Writes Per Txn                                              Writes Per Txn
+--                                                                  Shared Pool Free %                                               % Free/Total
+--                                                                  Soft Parse Ratio                                                 % SoftParses/TotalParses
+--                                                                  Temp Space Used                                                  bytes
+--                                                                  Total PGA Allocated                                              bytes
+--                                                                  Total PGA Used by SQL Workareas                                  bytes
+--                                                                  Total Table Scans Per Sec                                        Scans Per Second
+--                                                                  Total Table Scans Per Txn                                        Scans Per Txn
+--                                                                  Txns Per Logon                                                   Txns Per Logon
+--                                                                  User Calls Per Sec                                               Calls Per Second
+--                                                                  User Calls Per Txn                                               Calls Per Txn
+--                                                                  User Transaction Per Sec                                         Transactions Per Second
+-- Tablespace Metrics Long Duration                                 Tablespace Bytes Space Usage                                     Tablespace KiloBytes
+--                                                                  Tablespace Space Usage                                           Tablespace Blocks
+-- WCR metrics                                                      Percentage of replay threads doing IO                            %
+--                                                                  Percentage of replay threads on CPU                              %
+--                                                                  WRC average IO latency                                           sec
+-- WLM PC Metrics                                                   DB CPU Per User Request                                          Microseconds Per Request
+--                                                                  DB Time Per User Request                                         Microseconds Per Request
+--                                                                  File IO Service Time Per User Request                            Centiseconds Per Request
+--                                                                  File IO Wait Time Per User Request                               Centiseconds Per Request
+--                                                                  GC CR Time Per User Request                                      Microseconds Per Request
+--                                                                  GC CUR Time Per User Request                                     Microseconds Per Request
+--                                                                  In call idle Wait Time Per User Request                          Microseconds Per Request
+--                                                                  Non-idle Wait Count Per User Request                             Waits Count Per Request
+--                                                                  Non-idle Wait Time Per User Request                              Microseconds Per Request
+--                                                                  OS CPU Qt Wait Time Per User Request                             OS Qt Wait Time Per Request
+--                                                                  Scheduler Wait Time Per User Request                             Microseconds Per Request
+--                                                                  User Calls Per Second                                            User Calls Per Second
+--                                                                  User Requests Per Second                                         User Requests Per Second
+  
