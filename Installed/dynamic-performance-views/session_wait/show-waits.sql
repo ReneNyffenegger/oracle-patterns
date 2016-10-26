@@ -4,7 +4,7 @@ select
   sesw.event,
   -----------------------------------------------
   case sesw.p1text 
-       when 'file#' then dafi.name
+       when 'file#' then dbfi.name
        else  sesw.p1text || ': ' || sesw.p1
        end                                    p1,
   -----------------------------------------------
@@ -20,4 +20,4 @@ select
   -----------------------------------------------       
 from
   v$session_wait  sesw                                    left join
-  v$datafile      dafi on sesw.p1 = dafi.file#
+  v$dbfile  dbfi on sesw.p1 = dbfi.file#
