@@ -1,0 +1,645 @@
+select
+  statistic#,
+  name
+from
+  v$sysstat
+order by
+  lower(name);
+-- 308   active txn count during cleanout
+--  21   application wait time
+-- 316   auto extends on undo tablespace
+-- 238   background checkpoints completed
+-- 237   background checkpoints started
+--  33   background timeouts
+-- 278   Batched IO (bound) vector count
+-- 276   Batched IO (full) vector count
+-- 277   Batched IO (space) vector count
+-- 274   Batched IO block miss count
+-- 280   Batched IO buffer defrag count
+-- 275   Batched IO double miss count
+-- 279   Batched IO same unit count
+-- 272   Batched IO single block count
+-- 281   Batched IO slow jump count
+-- 271   Batched IO vector block count
+-- 270   Batched IO vector read count
+-- 273   Batched IO zero block count
+-- 314   Block Cleanout Optim referenced
+-- 169   blocks decrypted
+-- 168   blocks encrypted
+-- 414   branch node splits
+-- 574   buffer is not pinned count
+-- 573   buffer is pinned count
+-- 590   bytes received via SQL*Net from client
+-- 593   bytes received via SQL*Net from dblink
+-- 589   bytes sent via SQL*Net to client
+-- 592   bytes sent via SQL*Net to dblink
+-- 596   bytes via SQL*Net vector from client
+-- 598   bytes via SQL*Net vector from dblink
+-- 595   bytes via SQL*Net vector to client
+-- 597   bytes via SQL*Net vector to dblink
+-- 313   Cached Commit SCN referenced
+-- 173   calls to get snapshot scn: kcmgss
+-- 172   calls to kcmgas
+-- 170   calls to kcmgcs
+-- 171   calls to kcmgrs
+-- 513   CCursor + sql area evicted
+-- 395   cell blocks helped by commit cache
+-- 396   cell blocks helped by minscn optimization
+-- 389   cell blocks processed by cache layer
+-- 391   cell blocks processed by data layer
+-- 392   cell blocks processed by index layer
+-- 390   cell blocks processed by txn layer
+-- 393   cell commit cache queries
+-- 406   cell CUs processed for compressed
+-- 405   cell CUs processed for uncompressed
+-- 403   cell CUs sent compressed
+-- 404   cell CUs sent head piece
+-- 402   cell CUs sent uncompressed
+-- 605   cell flash cache read hits
+-- 424   cell index scans
+-- 407   cell IO uncompressed bytes
+-- 262   cell num fast response sessions
+-- 263   cell num fast response sessions continuing to smart scan
+-- 260   cell num smart file creation sessions using rdbms block IO mode
+-- 256   cell num smart IO sessions in rdbms block IO due to big payload
+-- 255   cell num smart IO sessions in rdbms block IO due to no cell mem
+-- 254   cell num smart IO sessions in rdbms block IO due to user
+-- 258   cell num smart IO sessions using passthru mode due to cellsrv
+-- 259   cell num smart IO sessions using passthru mode due to timezone
+-- 257   cell num smart IO sessions using passthru mode due to user
+-- 246   cell physical IO bytes eligible for predicate offload
+-- 247   cell physical IO bytes saved by storage index
+-- 244   cell physical IO bytes saved during optimized file creation
+-- 245   cell physical IO bytes saved during optimized RMAN file restore
+-- 248   cell physical IO bytes sent directly to DB node to balance CPU
+--  56   cell physical IO interconnect bytes
+-- 261   cell physical IO interconnect bytes returned by smart scan
+-- 388   cell scans
+-- 400   cell simulated physical IO bytes eligible for predicate offload
+-- 401   cell simulated physical IO bytes returned by predicate offload
+-- 252   cell smart IO session cache hard misses
+-- 250   cell smart IO session cache hits
+-- 253   cell smart IO session cache hwm
+-- 249   cell smart IO session cache lookups
+-- 251   cell smart IO session cache soft misses
+-- 264   cell statistics spare1
+-- 265   cell statistics spare2
+-- 266   cell statistics spare3
+-- 267   cell statistics spare4
+-- 268   cell statistics spare5
+-- 269   cell statistics spare6
+-- 394   cell transactions found in commit cache
+-- 398   chained rows processed by cell
+-- 399   chained rows rejected by cell
+-- 397   chained rows skipped by cell
+-- 129   change write time
+-- 152   checkpoint clones created for ADG recovery
+-- 309   cleanout - number of ktugct calls
+-- 297   cleanouts and rollbacks - consistent read gets
+-- 295   cleanouts only - consistent read gets
+-- 386   cluster key scan block gets
+-- 385   cluster key scans
+--  19   cluster wait time
+-- 527   Clusterwide global transactions
+-- 528   Clusterwide global transactions spanning RAC nodes
+-- 162   cold recycle reads
+-- 328   commit batch performed
+-- 325   commit batch requested
+-- 327   commit batch/immediate performed
+-- 324   commit batch/immediate requested
+-- 137   commit cleanout failures: block lost
+-- 140   commit cleanout failures: buffer being written
+-- 141   commit cleanout failures: callback failure
+-- 138   commit cleanout failures: cannot pin
+-- 139   commit cleanout failures: hot backup in progress
+-- 136   commit cleanout failures: write disabled
+-- 142   commit cleanouts
+-- 143   commit cleanouts successfully completed
+-- 329   commit immediate performed
+-- 326   commit immediate requested
+-- 334   commit nowait performed
+-- 331   commit nowait requested
+-- 312   Commit SCN cached
+-- 307   commit txn count during cleanout
+-- 335   commit wait performed
+-- 332   commit wait requested
+-- 333   commit wait/nowait performed
+-- 330   commit wait/nowait requested
+--  20   concurrency wait time
+--  85   consistent changes
+--  72   consistent gets
+--  75   consistent gets - examination
+--  76   consistent gets direct
+--  73   consistent gets from cache
+--  74   consistent gets from cache (fastpath)
+--  17   CPU used by this session
+--  16   CPU used when call started
+-- 146   CR blocks created
+-- 147   current blocks converted for CR
+-- 558   cursor authentications
+-- 293   data blocks consistent reads - undo records applied
+--  84   db block changes
+--  68   db block gets
+--  71   db block gets direct
+--  69   db block gets from cache
+--  70   db block gets from cache (fastpath)
+-- 106   db corrupt blocks detected
+-- 107   db corrupt blocks recovered
+--  18   DB time
+-- 110   DBWR checkpoint buffers written
+-- 119   DBWR checkpoints
+-- 120   DBWR fusion writes
+-- 118   DBWR lru scans
+-- 114   DBWR object drop buffers written
+-- 113   DBWR parallel query checkpoint buffers written
+-- 117   DBWR revisited being-written buffer
+-- 112   DBWR tablespace checkpoint buffers written
+-- 111   DBWR thread checkpoint buffers written
+-- 115   DBWR transaction table writes
+-- 116   DBWR undo block writes
+-- 561   DDL statements parallelized
+-- 306   deferred (CURRENT) block cleanout applications
+-- 311   deferred CUR cleanouts (index blocks)
+-- 562   DFO trees parallelized
+-- 132   dirty buffers inspected
+-- 560   DML statements parallelized
+-- 319   doubling up with imu segment
+-- 317   drop segment calls in space pressure
+-- 526   DX/BB enqueue lock background get time
+-- 525   DX/BB enqueue lock background gets
+-- 523   DX/BB enqueue lock foreground requests
+-- 524   DX/BB enqueue lock foreground wait time
+-- 235   Effective IO time
+-- 507   EHCC Analyze CUs Decompressed
+-- 510   EHCC Analyzer Calls
+-- 486   EHCC Archive CUs Compressed
+-- 495   EHCC Archive CUs Decompressed
+-- 509   EHCC Check CUs Decompressed
+-- 498   EHCC Columns Decompressed
+-- 487   EHCC Compressed Length Compressed
+-- 496   EHCC Compressed Length Decompressed
+-- 491   EHCC CU Row Pieces Compressed
+-- 483   EHCC CUs Compressed
+-- 492   EHCC CUs Decompressed
+-- 488   EHCC Decompressed Length Compressed
+-- 497   EHCC Decompressed Length Decompressed
+-- 503   EHCC DML CUs Decompressed
+-- 508   EHCC Dump CUs Decompressed
+-- 504   EHCC Normal Scan CUs Decompressed
+-- 501   EHCC Pieces Buffered for Decompression
+-- 485   EHCC Query High CUs Compressed
+-- 494   EHCC Query High CUs Decompressed
+-- 484   EHCC Query Low CUs Compressed
+-- 493   EHCC Query Low CUs Decompressed
+-- 506   EHCC Rowid CUs Decompressed
+-- 489   EHCC Rows Compressed
+-- 490   EHCC Rows Not Compressed
+-- 499   EHCC Total Columns for Decompression
+-- 502   EHCC Total Pieces for Decompression
+-- 500   EHCC Total Rows for Decompression
+-- 505   EHCC Turbo Scan CUs Decompressed
+--  42   enqueue conversions
+--  40   enqueue deadlocks
+--  43   enqueue releases
+--  41   enqueue requests
+--  38   enqueue timeouts
+--  39   enqueue waits
+-- 130   exchange deadlocks
+-- 588   execute count
+-- 416   failed probes on index block reclamation
+-- 206   file io service time
+-- 207   file io wait time
+--  99   flash cache eviction: aged out
+--  98   flash cache eviction: buffer pinned
+--  97   flash cache eviction: invalidated
+-- 105   flash cache insert skip: corrupt
+-- 101   flash cache insert skip: DBWR overloaded
+-- 102   flash cache insert skip: exists
+-- 104   flash cache insert skip: modification
+-- 100   flash cache insert skip: not current
+-- 103   flash cache insert skip: not useful
+--  93   flash cache inserts
+-- 166   flashback cache read optimizations for block new
+-- 167   flashback direct read optimizations for block new
+-- 243   flashback log write bytes
+-- 242   flashback log writes
+-- 529   Forwarded 2PC commands across RAC nodes
+-- 587   frame signature mismatch
+-- 135   free buffer inspected
+-- 131   free buffer requested
+-- 225   gc blocks compressed
+-- 228   gc blocks corrupt
+-- 226   gc blocks lost
+-- 227   gc claim blocks lost
+-- 229   gc CPU used by this session
+-- 231   gc cr block build time
+-- 209   gc cr block flush time
+-- 218   gc cr block receive time
+-- 232   gc cr block send time
+-- 217   gc cr blocks received
+-- 208   gc cr blocks served
+-- 216   gc current block flush time
+-- 215   gc current block pin time
+-- 220   gc current block receive time
+-- 233   gc current block send time
+-- 219   gc current blocks received
+-- 214   gc current blocks served
+-- 224   gc kbytes saved
+-- 223   gc kbytes sent
+-- 221   gc local grants
+-- 212   gc read wait failures
+-- 210   gc read wait time
+-- 213   gc read wait timeouts
+-- 211   gc read waits
+-- 230   gc reader bypass grants
+-- 222   gc remote grants
+--  62   gcs messages sent
+--  63   ges messages sent
+--  64   global enqueue CPU used by this session
+--  46   global enqueue get time
+--  45   global enqueue gets async
+--  44   global enqueue gets sync
+--  47   global enqueue releases
+-- 336   global undo segment hints helped
+-- 337   global undo segment hints were stale
+-- 530   GTX processes spawned by autotune
+-- 531   GTX processes stopped by autotune
+-- 452   HCC Conventional DMLs
+-- 453   HCC non-CU Compressed Blocks
+-- 454   HCC: Number of times tried to non-CU Compress a Block
+-- 436   heap block compress
+-- 450   Heap Segment Array Inserts
+-- 451   Heap Segment Array Updates
+-- 134   hot buffers moved to head of LRU
+-- 440   HSC Compressed Segment Block Changes
+-- 441   HSC Heap Segment Block Changes
+-- 439   HSC IDL Compressed Blocks
+-- 438   HSC OLTP Compressed Blocks
+-- 449   HSC OLTP compression block checked
+-- 448   HSC OLTP Compression skipped rows
+-- 447   HSC OLTP Drop Column
+-- 446   HSC OLTP inline compression
+-- 444   HSC OLTP negative compression
+-- 442   HSC OLTP Non Compressible Blocks
+-- 443   HSC OLTP positive compression
+-- 445   HSC OLTP recursive compression
+-- 437   HSC OLTP Space Saving
+-- 305   immediate (CR) block cleanout applications
+-- 304   immediate (CURRENT) block cleanout applications
+-- 310   immediate CR cleanouts (index blocks)
+-- 347   IMU bind flushes
+-- 341   IMU commits
+-- 343   IMU contention
+-- 350   IMU CR rollbacks
+-- 342   IMU Flushes
+-- 346   IMU ktichg flush
+-- 348   IMU mbu flush
+-- 349   IMU pool not allocated
+-- 344   IMU recursive-transaction flush
+-- 352   IMU Redo allocation size
+-- 351   IMU undo allocation size
+-- 345   IMU undo retention flush
+-- 353   IMU- failed to get a private strand
+--  26   in call idle wait time
+-- 410   index crx upgrade (found)
+-- 411   index crx upgrade (positioned)
+-- 409   index crx upgrade (prefetch)
+-- 427   index fast full scans (direct read)
+-- 425   index fast full scans (full)
+-- 426   index fast full scans (rowid ranges)
+-- 428   index fetch by key
+-- 418   index reclamation/extension switch
+-- 429   index scans kdiixs1
+--  61   IPC CPU used by this session
+-- 546   java call heap collected bytes
+-- 545   java call heap collected count
+-- 544   java call heap gc count
+-- 542   java call heap live object count
+-- 543   java call heap live object count max
+-- 538   java call heap live size
+-- 539   java call heap live size max
+-- 540   java call heap object count
+-- 541   java call heap object count max
+-- 534   java call heap total size
+-- 535   java call heap total size max
+-- 536   java call heap used size
+-- 537   java call heap used size max
+-- 557   java session heap collected bytes
+-- 556   java session heap collected count
+-- 555   java session heap gc count
+-- 553   java session heap live object count
+-- 554   java session heap live object count max
+-- 549   java session heap live size
+-- 550   java session heap live size max
+-- 551   java session heap object count
+-- 552   java session heap object count max
+-- 547   java session heap used size
+-- 548   java session heap used size max
+-- 413   leaf node 90-10 splits
+-- 412   leaf node splits
+-- 421   lob reads
+-- 580   LOB table id lookup cache misses
+-- 422   lob writes
+-- 423   lob writes unaligned
+-- 338   local undo segment hints helped
+-- 339   local undo segment hints were stale
+--  77   logical read bytes from cache
+--   2   logons cumulative
+--   3   logons current
+--  65   max cf enq hold time
+--  32   messages received
+--  31   messages sent
+-- 315   min active SCN optimization applied on CR
+-- 354   Misses for writing mapping
+-- 419   native hash arithmetic execute
+-- 420   native hash arithmetic fail
+-- 575   no buffer to keep pinned count
+-- 294   no work - consistent read gets
+-- 515   No. of Decrypt ops
+-- 514   No. of Encrypt ops
+-- 518   No. of Namespaces Created
+-- 521   No. of Principal Cache Misses
+-- 522   No. of Principal Invalidations
+-- 520   No. of Roles Enabled or Disabled
+-- 519   No. of User Callbacks Executed
+-- 517   No. of XS Sessions Attached
+-- 516   No. of XS Sessions Created
+--  25   non-idle wait count
+--  24   non-idle wait time
+-- 241   number of map misses
+-- 240   number of map operations
+-- 236   Number of read IOs issued
+--   4   opened cursors cumulative
+--   5   opened cursors current
+-- 631   OS Block input operations
+-- 632   OS Block output operations
+--   0   OS CPU Qt wait time
+-- 625   OS Integral shared text size
+-- 626   OS Integral unshared data size
+-- 627   OS Integral unshared stack size
+-- 637   OS Involuntary context switches
+-- 624   OS Maximum resident set size
+-- 629   OS Page faults
+-- 628   OS Page reclaims
+-- 635   OS Signals received
+-- 634   OS Socket messages received
+-- 633   OS Socket messages sent
+-- 630   OS Swaps
+-- 623   OS System time used
+-- 622   OS User time used
+-- 636   OS Voluntary context switches
+-- 602   OTC commit optimization attempts
+-- 604   OTC commit optimization failure - setup
+-- 603   OTC commit optimization hits
+-- 568   Parallel operations downgraded 1 to 25 pct
+-- 567   Parallel operations downgraded 25 to 50 pct
+-- 566   Parallel operations downgraded 50 to 75 pct
+-- 565   Parallel operations downgraded 75 to 99 pct
+-- 564   Parallel operations downgraded to serial
+-- 563   Parallel operations not downgraded
+-- 586   parse count (describe)
+-- 585   parse count (failures)
+-- 584   parse count (hard)
+-- 583   parse count (total)
+-- 581   parse time cpu
+-- 582   parse time elapsed
+--  83   physical read bytes
+--  80   physical read flash cache hits
+--  82   physical read IO requests
+--  50   physical read requests optimized
+--  52   physical read total bytes
+--  51   physical read total bytes optimized
+--  48   physical read total IO requests
+--  49   physical read total multi block requests
+--  78   physical reads
+--  79   physical reads cache
+-- 154   physical reads cache prefetch
+--  81   physical reads direct
+-- 160   physical reads direct (lob)
+--  94   physical reads direct temporary tablespace
+-- 165   physical reads for flashback new
+-- 155   physical reads prefetch warmup
+-- 159   physical reads retry corrupt
+--  96   physical write bytes
+--  92   physical write IO requests
+--  55   physical write total bytes
+--  53   physical write total IO requests
+--  54   physical write total multi block requests
+--  89   physical writes
+--  90   physical writes direct
+-- 161   physical writes direct (lob)
+--  95   physical writes direct temporary tablespace
+--  91   physical writes from cache
+-- 108   physical writes non checkpoint
+-- 133   pinned buffers inspected
+--  11   pinned cursors current
+-- 127   prefetch clients - 16k
+-- 124   prefetch clients - 2k
+-- 128   prefetch clients - 32k
+-- 125   prefetch clients - 4k
+-- 126   prefetch clients - 8k
+-- 123   prefetch clients - default
+-- 121   prefetch clients - keep
+-- 122   prefetch clients - recycle
+-- 157   prefetch warmup blocks aged out before use
+-- 158   prefetch warmup blocks flushed out before use
+-- 156   prefetched blocks aged out before use
+--  28   process last non-idle time
+-- 570   PX local messages recv'd
+-- 569   PX local messages sent
+-- 572   PX remote messages recv'd
+-- 571   PX remote messages sent
+-- 559   queries parallelized
+-- 431   queue flush
+-- 434   queue ocp pages
+-- 432   queue position update
+-- 435   queue qno pages
+-- 433   queue single row
+-- 430   queue splits
+-- 408   queue update without cp update
+-- 239   read-only violation count
+-- 145   recovery array read time
+-- 144   recovery array reads
+-- 153   recovery block gets from cache
+--  86   recovery blocks read
+--  87   recovery blocks read for lost write detection
+--  88   recovery blocks skipped lost write checks
+-- 417   recursive aborts on index block reclamation
+--   9   recursive calls
+--  10   recursive cpu usage
+--  37   recursive system API invocations
+-- 187   redo blocks checksummed by FG (exclusive)
+-- 188   redo blocks checksummed by LGWR
+-- 174   redo blocks read for recovery
+-- 185   redo blocks written
+-- 182   redo buffer allocation retries
+-- 177   redo entries
+-- 179   redo entries for lost write detection
+-- 175   redo k-bytes read for recovery
+-- 176   redo k-bytes read for terminal recovery
+-- 202   redo KB read
+-- 203   redo KB read (memory)
+-- 205   redo KB read (memory) for transport
+-- 204   redo KB read for transport
+-- 189   redo log space requests
+-- 190   redo log space wait time
+-- 191   redo ordering marks
+-- 178   redo size
+-- 181   redo size for direct writes
+-- 180   redo size for lost write detection
+-- 192   redo subscn max counts
+-- 199   redo synch long waits
+-- 200   redo synch poll writes
+-- 201   redo synch polls
+-- 196   redo synch time
+-- 197   redo synch time (usec)
+-- 198   redo synch writes
+-- 183   redo wastage
+-- 194   redo write broadcast ack count
+-- 193   redo write broadcast ack time
+-- 195   redo write broadcast lgwr post count
+-- 186   redo write time
+-- 184   redo writes
+--  34   remote Oradebug requests
+--   1   Requests to/from client
+-- 302   rollback changes - undo records applied
+-- 296   rollbacks only - consistent read gets
+-- 415   root node splits
+-- 301   RowCR - resume
+-- 300   RowCR - row contention
+-- 298   RowCR attempts
+-- 299   RowCR hits
+-- 387   rows fetched via callback
+--  23   scheduler wait time
+-- 473   securefile add dedupd lob to set
+-- 455   securefile allocation bytes
+-- 456   securefile allocation chunks
+-- 467   securefile bytes cleartext
+-- 470   securefile bytes deduplicated
+-- 466   securefile bytes encrypted
+-- 464   securefile bytes non-transformed
+-- 468   securefile compressed bytes
+-- 471   securefile create dedup set
+-- 479   securefile dedup callback oper final
+-- 481   securefile dedup fits inline
+-- 478   securefile dedup flush too low
+-- 480   securefile dedup hash collision
+-- 476   securefile dedup prefix hash match
+-- 482   securefile dedup wapp cache miss
+-- 472   securefile destroy dedup set
+-- 457   securefile direct read bytes
+-- 459   securefile direct read ops
+-- 458   securefile direct write bytes
+-- 460   securefile direct write ops
+-- 463   securefile inode ioreap time
+-- 461   securefile inode read time
+-- 462   securefile inode write time
+-- 477   securefile number of flushes
+-- 465   securefile number of non-transformed flushes
+-- 475   securefile reject deduplication
+-- 474   securefile rmv from dedup set
+-- 469   securefile uncompressed bytes
+-- 358   segment cfs allocations
+-- 359   segment chunks allocation from disepnser
+-- 357   segment dispenser allocations
+-- 356   segment dispenser load empty
+-- 355   segment dispenser load tasks
+-- 373   segment prealloc bytes
+-- 372   segment prealloc ops
+-- 371   segment prealloc tasks
+-- 374   segment prealloc time (ms)
+-- 375   segment prealloc ufs2cfs bytes
+-- 360   segment total chunk allocation
+-- 285   serializable aborts
+--  27   session connect time
+-- 533   session cursor cache count
+-- 532   session cursor cache hits
+--  12   session logical reads
+--  13   session logical reads in local numa group
+--  14   session logical reads in remote numa group
+--  35   session pga memory
+--  36   session pga memory max
+--  15   session stored procedure space
+--  29   session uga memory
+--  30   session uga memory max
+-- 163   shared hash latch upgrades - no wait
+-- 164   shared hash latch upgrades - wait
+-- 283   shared io pool buffer get failure
+-- 282   shared io pool buffer get success
+-- 370   SMON posted for dropping temp segment
+-- 368   SMON posted for instance recovery
+-- 367   SMON posted for txn recovery for other instances
+-- 366   SMON posted for undo segment recovery
+-- 369   SMON posted for undo segment shrink
+-- 600   sorts (disk)
+-- 599   sorts (memory)
+-- 601   sorts (rows)
+-- 322   space was found by tune down
+-- 323   space was not found by tune down
+--  57   spare statistic 1
+--  58   spare statistic 2
+--  59   spare statistic 3
+--  60   spare statistic 4
+-- 512   sql area evicted
+-- 511   sql area purged
+-- 591   SQL*Net roundtrips to/from client
+-- 594   SQL*Net roundtrips to/from dblink
+-- 321   steps of tune down ret. in space pressure
+-- 109   summed dirty queue length
+-- 148   switch current to new buffer
+-- 383   table fetch by rowid
+-- 384   table fetch continued row
+-- 382   table scan blocks gotten
+-- 381   table scan rows gotten
+-- 379   table scans (cache partitions)
+-- 380   table scans (direct read)
+-- 377   table scans (long tables)
+-- 378   table scans (rowid ranges)
+-- 376   table scans (short tables)
+-- 364   TBS Extension: bytes extended
+-- 363   TBS Extension: files extended
+-- 361   TBS Extension: tasks created
+-- 362   TBS Extension: tasks executed
+-- 284   temp space allocated (bytes)
+--  66   total cf enq hold time
+--  67   total number of cf enq holders
+-- 234   total number of slots
+-- 365   total number of times SMON posted
+-- 318   total number of undo segments dropped
+-- 289   transaction lock background get time
+-- 288   transaction lock background gets
+-- 286   transaction lock foreground requests
+-- 287   transaction lock foreground wait time
+-- 303   transaction rollbacks
+-- 292   transaction tables consistent read rollbacks
+-- 291   transaction tables consistent reads - undo records applied
+-- 320   tune down retentions in space pressure
+-- 290   undo change vector size
+-- 340   undo segment header was pinned
+--   8   user calls
+--   6   user commits
+--  22   user I/O wait time
+--   7   user rollbacks
+-- 579   workarea executions - multipass
+-- 578   workarea executions - onepass
+-- 577   workarea executions - optimal
+-- 576   workarea memory allocated
+-- 607   Workload Capture: dbtime
+-- 614   Workload Capture: errors
+-- 606   Workload Capture: size (in bytes) of recording
+-- 610   Workload Capture: unreplayable user calls
+-- 613   Workload Capture: unsupported user calls
+-- 608   Workload Capture: user calls
+-- 609   Workload Capture: user calls flushed
+-- 612   Workload Capture: user logins
+-- 611   Workload Capture: user txns
+-- 615   Workload Replay: dbtime
+-- 621   Workload Replay: deadlocks resolved
+-- 616   Workload Replay: network time
+-- 617   Workload Replay: think time
+-- 618   Workload Replay: time gain
+-- 619   Workload Replay: time loss
+-- 620   Workload Replay: user calls
+-- 151   write clones created for recovery
+-- 150   write clones created in background
+-- 149   write clones created in foreground
