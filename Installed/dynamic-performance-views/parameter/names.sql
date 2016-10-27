@@ -1,11 +1,11 @@
 select * from (
-  select 'OK'      , name, description from v$parameter union all
-  select 'Obsolete', name, null        from v$obsolete_parameter
+  select 'OK'      , name         , description                                      from v$parameter          union all
+  select 'Obsolete', name         , null                                             from v$obsolete_parameter union all
+  select '?'       ,'_fix_control','See v$session_fix_control, v$system_fix_control' from dual
 )
 order by
-  replace(name, '_','')
+  replace(lower(name), '_','')
 ;
--- OK         O7_DICTIONARY_ACCESSIBILITY                 Version 7 Dictionary Accessibility Support
 -- OK         active_instance_count                       number of active instances in the cluster database
 -- Obsolete   allow_partial_sn_results
 -- Obsolete   always_anti_join
@@ -129,8 +129,8 @@ order by
 -- OK         dml_locks                                   dml locks - one for each table modified in a transaction
 -- Obsolete   drs_start
 -- OK         dst_upgrade_insert_conv                     Enables/Disables internal conversions during DST upgrade
--- OK         _enable_NUMA_support                        Enable NUMA support and optimizations
 -- OK         enable_ddl_logging                          enable ddl logging
+-- OK         _enable_NUMA_support                        Enable NUMA support and optimizations
 -- Obsolete   enqueue_resources
 -- OK         event                                       debug event control - default null string
 -- OK         fal_client                                  FAL client
@@ -144,6 +144,7 @@ order by
 -- OK         file_mapping                                enable file mapping
 -- OK         _file_size_increase_increment               Amount of file size increase increment, in bytes
 -- OK         filesystemio_options                        IO operations on filesystem files
+-- ?          _fix_control                                See v$session_fix_control, v$system_fix_control
 -- OK         fixed_date                                  fixed SYSDATE value
 -- Obsolete   freeze_DB_for_fast_instance_recovery
 -- Obsolete   gc_defer_time
@@ -320,6 +321,7 @@ order by
 -- OK         nls_timestamp_format                        time stamp format
 -- OK         nls_timestamp_tz_format                     timestamp with timezone format
 -- OK         nls_time_tz_format                          time with timezone format
+-- OK         O7_DICTIONARY_ACCESSIBILITY                 Version 7 Dictionary Accessibility Support
 -- OK         object_cache_max_size_percent               percentage of maximum size over optimal of the user session's object cache
 -- OK         object_cache_optimal_size                   optimal size of the user session's object cache in bytes
 -- Obsolete   ogms_home
