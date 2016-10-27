@@ -1,0 +1,174 @@
+select
+        command_type,
+  lower(command_name) sql_command
+from
+  v$sqlcommand
+where
+  command_name is not null
+order by
+  command_name;
+--
+--  217	alter assembly
+--    5	alter cluster
+--   35	alter database
+--  225	alter database link
+--  175	alter dimension
+--  193	alter disk group
+--  213	alter edition
+--  219	alter flashback archive
+--   92	alter function
+--   11	alter index
+--  166	alter indextype
+--  161	alter java
+--  196	alter library
+--   75	alter materialized view 
+--   72	alter materialized view log
+--  183	alter operator
+--  179	alter outline
+--   95	alter package
+--   98	alter package body
+--   25	alter procedure
+--   67	alter profile
+--   70	alter resource cost
+--  210	alter rewrite equivalence
+--   79	alter role
+--   37	alter rollback seg
+--   14	alter sequence
+--   42	alter session
+--  172	alter summary
+--  192	alter synonym
+--   49	alter system
+--   15	alter table
+--   40	alter tablespace
+--   58	alter tracing
+--   60	alter trigger
+--   80	alter type
+--   82	alter type body
+--   43	alter user
+--   88	alter view
+--   64	analyze cluster
+--   63	analyze index
+--   62	analyze table
+--  168	associate statistics
+--   30	audit object
+--  170	call method
+--  190	change password
+--   29	comment
+--   44	commit
+--  216	create assembly
+--   87	create bitmapfile
+--    4	create cluster
+--  177	create context
+--   57	create control file
+--   34	create database
+--   32	create database link
+--  174	create dimension
+--  157	create directory
+--  194	create disk group
+--  212	create edition
+--  218	create flashback archive
+--   91	create function
+--    9	create index
+--  164	create indextype
+--  160	create java
+--  159	create library
+--   74	create materialized view 
+--   71	create materialized view log
+--  163	create operator
+--  180	create outline
+--   94	create package
+--   97	create package body
+--  188	create pfile
+--   24	create procedure
+--   65	create profile
+--  206	create restore point
+--   52	create role
+--   36	create rollback seg
+--   56	create schema
+--  222	create schema synonym
+--   13	create sequence
+--  187	create spfile
+--  171	create summary
+--   19	create synonym
+--    1	create table
+--   39	create tablespace
+--   59	create trigger
+--   77	create type
+--   81	create type body
+--   51	create user
+--   21	create view
+--  209	declare rewrite equivalence
+--    7	delete
+--  169	disassociate statistics
+--  215	drop assembly
+--   89	drop bitmapfile
+--    8	drop cluster
+--  178	drop context
+--  203	drop database
+--   33	drop database link
+--  176	drop dimension
+--  158	drop directory
+--  195	drop disk group
+--  214	drop edition
+--  220	drop flashback archive
+--   93	drop function
+--   10	drop index
+--  165	drop indextype
+--  162	drop java
+--   84	drop library
+--   76	drop materialized view 
+--   73	drop materialized view  log
+--  167	drop operator
+--  181	drop outline
+--   96	drop package
+--   99	drop package body
+--   68	drop procedure
+--   66	drop profile
+--  207	drop restore point
+--  211	drop rewrite equivalence
+--   54	drop role
+--   38	drop rollback seg
+--  224	drop schema synonym
+--   16	drop sequence
+--  173	drop summary
+--   20	drop synonym
+--   12	drop table
+--   41	drop tablespace
+--   61	drop trigger
+--   78	drop type
+--   83	drop type body
+--   53	drop user
+--   22	drop view
+--  184	do not use 184
+--  185	do not use 185
+--  186	do not use 186
+--   50	explain
+--  204	flashback database
+--  205	flashback table
+--   17	grant object
+--    2	insert
+--   26	lock table
+--   27	no-op
+--   31	noaudit object
+--   47	pl/sql execute
+--  198	purge dba recyclebin
+--  201	purge index
+--  200	purge table
+--  199	purge tablespace
+--  197	purge user recyclebin
+--   28	rename
+--   18	revoke object
+--   45	rollback
+--   46	savepoint
+--    3	select
+--   90	set constraints
+--   55	set role
+--   48	set transaction
+--   86	truncate cluster
+--   85	truncate table
+--  202	undrop object
+--    6	update
+--  182	update indexes
+--  191	update join index
+--  189	upsert
+--   23	validate index
