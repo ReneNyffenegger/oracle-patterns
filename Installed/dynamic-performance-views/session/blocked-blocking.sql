@@ -1,3 +1,6 @@
+--
+-- See also v$session_blockers
+--
 select 
   ses.sid                      blocked_sid,
   ses.username                 blocked_username,
