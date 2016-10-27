@@ -1,5 +1,6 @@
 select
-  lnm.name,
+--lnm.name,
+  lat.name,
   lat.addr,
   lat.gets,
   lat.misses,
@@ -9,7 +10,7 @@ select
   lah.pid                   latch_holder_pid
 from
   v$latch       lat                              left join
-  v$latchholder lah on lat.addr    = lah.laddr   left join
-  v$latchname   lnm on lat.latch#  = lnm.latch#
+  v$latchholder lah on lat.addr    = lah.laddr /*left join
+  v$latchname   lnm on lat.latch#  = lnm.latch# */
 order by
    lat.gets desc;
