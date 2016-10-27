@@ -1,3 +1,6 @@
+-- Alter session for consisting ordering
+alter session set nls_language='english';
+
 select * from (
   select 'OK'      , name         , description                                      from v$parameter          union all
   select 'Obsolete', name         , null                                             from v$obsolete_parameter union all
@@ -6,6 +9,7 @@ select * from (
 order by
   replace(lower(name), '_','')
 ;
+--
 -- OK         active_instance_count                       number of active instances in the cluster database
 -- Obsolete   allow_partial_sn_results
 -- Obsolete   always_anti_join
