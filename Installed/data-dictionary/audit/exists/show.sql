@@ -1,0 +1,10 @@
+select
+  os_username,
+  timestamp,
+  owner,
+  obj_name,
+  action_name,
+  returncode,
+  sql_text
+from
+  dba_audit_exists;
