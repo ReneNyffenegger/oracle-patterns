@@ -1,0 +1,18 @@
+select
+  sequence_id,
+  reason_message_id,
+  reason_argument_count,
+  reason_argument_1,
+  reason_argument_2,
+  reason_argument_3,
+  reason_argument_4,
+  reason_argument_5,
+  action_message_id,
+  action_argument_count,
+  action_argument_1,
+  action_argument_2,
+  action_argument_3,
+  action_argument_4,
+  action_argument_5
+from
+  dba_alert_arguments;
