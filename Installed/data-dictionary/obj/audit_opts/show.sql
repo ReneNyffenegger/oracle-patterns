@@ -1,0 +1,25 @@
+select
+  owner,
+  object_name,
+  object_type,
+  alt,
+  aud,
+  com,
+  del,
+  gra,
+  ind,
+  loc,
+  ren,
+  sel,
+  upd,
+  ref,
+  exe,
+  cre,
+  rea,
+  wri,
+  fbk
+from
+  dba_obj_audit_opts
+order by
+  owner,
+  object_name;
