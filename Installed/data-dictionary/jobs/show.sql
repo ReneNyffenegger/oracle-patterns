@@ -1,0 +1,23 @@
+select
+  job,
+  log_user,
+  priv_user,
+  schema_user,
+  last_date,
+--last_sec,
+--this_date,
+--this_sec,
+  next_date,
+--next_sec,
+  round(total_time),
+  broken,
+  interval,
+  failures,
+  what
+--nls_env,
+--misc_env,
+--instance
+from
+  dba_jobs
+order by
+  job;

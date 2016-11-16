@@ -1,10 +1,10 @@
-select
-  distinct name
+select distinct
+  name
 from
   dba_feature_usage_statistics
 order by
-  name;
-  
+  lower(name);
+--
 -- Active Data Guard - Real-Time Query on Physical Standby
 -- ADDM
 -- Advanced Replication
