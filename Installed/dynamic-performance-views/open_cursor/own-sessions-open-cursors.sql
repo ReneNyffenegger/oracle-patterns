@@ -15,4 +15,4 @@ from
 where
   ses.audsid = sys_context('userenv', 'sessionid')
 order by
-  decode (user_name, 'SYS', 1, 0);
+  decode (opc.user_name, 'SYS', 1, 0);

@@ -6,6 +6,7 @@ select
     lop.target_desc,
     lop.sofar,
     lop.totalwork,
+    lop.time_remaining    estimated_time_remaining_sec,
     round( (sysdate - lop.start_time      ) * 24*60*60) started_s_ago,
     round( (sysdate - lop.last_update_time) * 24*60*60) updated_s_ago,
     lop.elapsed_seconds,
