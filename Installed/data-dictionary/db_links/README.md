@@ -1,4 +1,4 @@
-$ dba_db_links
+# dba_db_links
 
 Show existing database links.
 
