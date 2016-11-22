@@ -1,23 +1,28 @@
-create package tq84_pck as -- {
+create or replace package tq84_pck as -- {
 
   procedure p;
 
 end tq84_pck; -- }
 /
 
-create package body tq84_pck as -- {
+create or replace package body tq84_pck as -- {
 
   procedure p is -- {
   begin
-    $IF $$TQ84_HELLO_WORLD $THEN
-        dbms_output.put_line('hello, world');
+
+    $IF $$TQ84_BOOL $THEN
+        dbms_output.put_line('hello, world. The num is: '   || $$TQ84_NUM);
     $ELSE
-        dbms_output.put_line('good bye, world');
+        dbms_output.put_line('good bye, world. The num is ' || $$TQ84_NUM);
     $END
+
   end p; -- }
 
 end tq84_pck; -- }
 /
+
+exec tq84_pck.p
+-- good bye, world. The num is
 
 column plsql_code_type        format a15
 column plsql_debug            format a15
@@ -46,7 +51,11 @@ where
 
 
 
-alter session set plsql_ccflags='TQ84_HELLO_WORLD:TRUE';
+alter session set plsql_ccflags='TQ84_BOOL:TRUE';
+select substrb(value, 1, 50) val from v$parameter where name = 'plsql_ccflags';
+-- VAL
+-- --------------------------------------------------
+-- TQ84_BOOL:TRUE
 
 select
   plsql_optimize_level,
@@ -84,7 +93,15 @@ where
 --
 -- PLSQL_OPTIMIZE_LEVEL PLSQL_CODE_TYPE PLSQL_DEBUG     PLSQL_WARNINGS  NLS_LENGTH_SEMA PLSQL_CCFLAGS             PLSCOPE_SETTINGS
 -- -------------------- --------------- --------------- --------------- --------------- ------------------------- ----------------
---                    2 INTERPRETED     FALSE           DISABLE:ALL     CHAR            TQ84_HELLO_WORLD:TRUE     IDENTIFIERS:NONE
+--                    2 INTERPRETED     FALSE           DISABLE:ALL     CHAR            TQ84_BOOL:TRUE            IDENTIFIERS:NONE
 
+
+exec tq84_pck.p
+-- hello, world. The num is:
+
+alter session set plsql_ccflags='TQ84_NUM:42';
+alter package tq84_pck compile;
+exec tq84_pck.p
+-- good bye, world. The num is 42
 
 drop package tq84_pck;
