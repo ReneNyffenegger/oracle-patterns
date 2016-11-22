@@ -45,8 +45,7 @@ end tq84_pkg_print_source; -- }
 
 exec tq84_pkg_print_source;
 
-alter session set plsql_ccflags='tq84_flg:true';
-alter package tq84_pkg compile;
+alter package tq84_pkg compile plsql_ccflags='tq84_flg:true';
 
 exec tq84_pkg_print_source;
 
