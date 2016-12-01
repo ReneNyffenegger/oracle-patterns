@@ -1,0 +1,9 @@
+select
+  minimal,
+  primary_key,
+  unique_index,
+  foreign_key,
+  all_column,
+  procedural
+from
+  dba_supplemental_logging;
