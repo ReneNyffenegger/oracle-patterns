@@ -1,0 +1,315 @@
+select
+  lower(name)
+from
+  stmt_audit_option_map
+order by
+  name;
+--
+-- administer any sql tuning set
+-- administer database trigger
+-- administer key management
+-- administer resource manager
+-- administer sql management object
+-- administer sql tuning set
+-- advisor
+-- all statements
+-- alter any assembly
+-- alter any cluster
+-- alter any cube
+-- alter any cube build process
+-- alter any cube dimension
+-- alter any dimension
+-- alter any edition
+-- alter any evaluation context
+-- alter any index
+-- alter any indextype
+-- alter any library
+-- alter any materialized view
+-- alter any measure folder
+-- alter any mining model
+-- alter any operator
+-- alter any outline
+-- alter any procedure
+-- alter any role
+-- alter any rule
+-- alter any rule set
+-- alter any sequence
+-- alter any sql profile
+-- alter any sql translation profile
+-- alter any table
+-- alter any trigger
+-- alter any type
+-- alter database
+-- alter database link
+-- alter java class
+-- alter java resource
+-- alter java source
+-- alter mining model
+-- alter profile
+-- alter public database link
+-- alter resource cost
+-- alter rollback segment
+-- alter sequence
+-- alter session
+-- alter sql translation profile
+-- alter system
+-- alter table
+-- alter tablespace
+-- alter user
+-- analyze any
+-- analyze any dictionary
+-- audit any
+-- backup any table
+-- become user
+-- change notification
+-- cluster
+-- comment any mining model
+-- comment any table
+-- comment edition
+-- comment mining model
+-- comment table
+-- context
+-- create any assembly
+-- create any cluster
+-- create any context
+-- create any credential
+-- create any cube
+-- create any cube build process
+-- create any cube dimension
+-- create any dimension
+-- create any directory
+-- create any edition
+-- create any evaluation context
+-- create any index
+-- create any indextype
+-- create any job
+-- create any library
+-- create any materialized view
+-- create any measure folder
+-- create any mining model
+-- create any operator
+-- create any outline
+-- create any procedure
+-- create any rule
+-- create any rule set
+-- create any sequence
+-- create any sql profile
+-- create any sql translation profile
+-- create any synonym
+-- create any table
+-- create any trigger
+-- create any type
+-- create any view
+-- create assembly
+-- create cluster
+-- create credential
+-- create cube
+-- create cube build process
+-- create cube dimension
+-- create database link
+-- create dimension
+-- create evaluation context
+-- create external job
+-- create indextype
+-- create java class
+-- create java resource
+-- create java source
+-- create job
+-- create library
+-- create materialized view
+-- create measure folder
+-- create mining model
+-- create operator
+-- create pluggable database
+-- create procedure
+-- create profile
+-- create public database link
+-- create public synonym
+-- create role
+-- create rollback segment
+-- create rule
+-- create rule set
+-- create sequence
+-- create session
+-- create sql translation profile
+-- create synonym
+-- create table
+-- create tablespace
+-- create trigger
+-- create type
+-- create user
+-- create view
+-- database link
+-- debug any procedure
+-- debug connect session
+-- debug procedure
+-- delete any cube dimension
+-- delete any measure folder
+-- delete any table
+-- delete table
+-- dequeue any queue
+-- dimension
+-- directory
+-- direct_path load
+-- direct_path unload
+-- drop any assembly
+-- drop any cluster
+-- drop any context
+-- drop any cube
+-- drop any cube build process
+-- drop any cube dimension
+-- drop any dimension
+-- drop any directory
+-- drop any edition
+-- drop any evaluation context
+-- drop any index
+-- drop any indextype
+-- drop any library
+-- drop any materialized view
+-- drop any measure folder
+-- drop any mining model
+-- drop any operator
+-- drop any outline
+-- drop any procedure
+-- drop any role
+-- drop any rule
+-- drop any rule set
+-- drop any sequence
+-- drop any sql profile
+-- drop any sql translation profile
+-- drop any synonym
+-- drop any table
+-- drop any trigger
+-- drop any type
+-- drop any view
+-- drop java class
+-- drop java resource
+-- drop java source
+-- drop profile
+-- drop public database link
+-- drop public synonym
+-- drop rollback segment
+-- drop sql translation profile
+-- drop tablespace
+-- drop user
+-- em express connect
+-- enqueue any queue
+-- execute any assembly
+-- execute any class
+-- execute any evaluation context
+-- execute any indextype
+-- execute any library
+-- execute any operator
+-- execute any procedure
+-- execute any program
+-- execute any rule
+-- execute any rule set
+-- execute any type
+-- execute assembly
+-- execute library
+-- execute procedure
+-- exempt access policy
+-- exempt ddl redaction policy
+-- exempt dml redaction policy
+-- exempt identity policy
+-- exempt redaction policy
+-- export full database
+-- flashback any table
+-- flashback archive administer
+-- force any transaction
+-- force transaction
+-- global query rewrite
+-- grant any object privilege
+-- grant any privilege
+-- grant any role
+-- grant directory
+-- grant edition
+-- grant mining model
+-- grant procedure
+-- grant sequence
+-- grant sql translation profile
+-- grant table
+-- grant type
+-- grant user
+-- import full database
+-- index
+-- inherit any privileges
+-- inherit privileges
+-- insert any cube dimension
+-- insert any measure folder
+-- insert any table
+-- insert table
+-- keep date time
+-- keep sysguid
+-- lock any table
+-- lock table
+-- logmining
+-- manage any file group
+-- manage any queue
+-- manage file group
+-- manage scheduler
+-- manage tablespace
+-- materialized view
+-- merge any view
+-- mining model
+-- network
+-- not exists
+-- on commit refresh
+-- outline
+-- pluggable database
+-- procedure
+-- profile
+-- public database link
+-- public synonym
+-- purge dba_recyclebin
+-- query rewrite
+-- read any file group
+-- read any table
+-- redefine any table
+-- restricted session
+-- resumable
+-- role
+-- rollback segment
+-- select any cube
+-- select any cube build process
+-- select any cube dimension
+-- select any dictionary
+-- select any measure folder
+-- select any mining model
+-- select any sequence
+-- select any table
+-- select any transaction
+-- select mining model
+-- select sequence
+-- select table
+-- sequence
+-- set container
+-- sql translation profile
+-- synonym
+-- sysbackup
+-- sysdba
+-- sysdg
+-- syskm
+-- sysoper
+-- system audit
+-- system grant
+-- table
+-- tablespace
+-- translate any sql
+-- translate sql
+-- trigger
+-- type
+-- under any table
+-- under any type
+-- under any view
+-- unlimited tablespace
+-- update any cube
+-- update any cube build process
+-- update any cube dimension
+-- update any table
+-- update table
+-- use any sql translation profile
+-- use edition
+-- use sql translation profile
+-- user
+-- view
