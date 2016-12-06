@@ -1,0 +1,20 @@
+select
+  name,
+  guid,
+  external_source,
+  roles_default_enabled,
+  status,
+  account_status,
+  lock_date,
+  expiry_date,
+  profile,
+  schema,
+  start_date,
+  end_date,
+  direct_logon_user,
+  verifier_type,
+  description
+from
+  dba_xs_users
+order by
+  name;
