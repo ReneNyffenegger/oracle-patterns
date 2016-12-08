@@ -18,6 +18,11 @@ create or replace procedure tq84_result(i number) as
 begin
 
   open cur for select * from tq84_tab where a = i;
+  
+  --   After returning the result with return_result, it
+  --   can be retrieved with dbms_sql.get_next_result()
+  --   In SQL*Plus (12) and sqlcl, this seems to be automatically
+  --   done.
   dbms_sql.return_result(cur);
 
 end tq84_result;
