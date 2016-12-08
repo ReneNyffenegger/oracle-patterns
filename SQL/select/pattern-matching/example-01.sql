@@ -83,7 +83,7 @@ from
     pattern (strt down+ up+)
     define
       down as down.price < prev(down.price),
-      up   as up.price > prev(up.price)
+      up   as up  .price > prev(up  .price)
   ) mr
 order by
   mr.company,
