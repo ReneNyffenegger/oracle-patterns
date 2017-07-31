@@ -27,4 +27,10 @@ select partition_name, high_value from user_tab_partitions where table_name = 'T
 insert into tq84_interval_partition values (4, 'anoth part', date '2011-02-20');
 select partition_name, high_value from user_tab_partitions where table_name = 'TQ84_INTERVAL_PARTITION';
 
+-- Select from specific partition:
+--   1) name of partition is known
+select * from tq84_interval_partition partition     (tq84_partition_1);
+--   2) name of partition is unknown
+select * from tq84_interval_partition partition for (date '2010-08-01');
+
 drop table tq84_interval_partition purge;
