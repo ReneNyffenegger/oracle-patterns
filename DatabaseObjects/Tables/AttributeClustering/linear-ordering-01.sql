@@ -34,7 +34,8 @@ select
   table_name,
   clustering_type,
   on_load,
-  on_datamovement
+  on_datamovement,
+  with_zonemap
 from
   user_clustering_tables
 where
