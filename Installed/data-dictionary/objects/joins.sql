@@ -14,12 +14,17 @@ select
   syn.table_owner || '.' || syn.table_name      syn_target,
   tpt.subpartition_count                        tpt_subpartition_cnt,
   clu.tablespace_name                           clu_ts,
+  clt.clustering_type                           clt_clustering_type,
+  clt.on_load                                   clt_on_load,
+  clt.on_datamovement                           clt_on_datamovement,
+  clt.with_zonemap                              clt_with_zonemap,
   seq.last_number                               seq_last_num,
   vie.text                                      vie_text,
   dir.directory_path                            dir_path,
   edi.usable                                    edi_usable
 from
   dba_objects             obj                                                                                                                        left join
+  dba_clustering_tables   clt on obj.owner = clt.         owner and obj.object_name = clt.   table_name                                              left join
   dba_clusters            clu on obj.owner = clu.         owner and obj.object_name = clu. cluster_name                                              left join
   dba_directories         dir on obj.owner = dir.         owner and obj.object_name = dir.directory_name                                             left join
   dba_editions            edi on                                    obj.object_name = edi. edition_name                                              left join
@@ -36,8 +41,13 @@ from
   --
   dba_directories         exd on ext.directory_owner = exd.owner           and
                                  ext.directory_name  = exd.directory_name
+where
+  -- obj.owner      =     '???' and
+  -- obj.object_name like '???%'
 order by
   case when obj.object_type in (
     'CLUSTER', 'DIRECTORY', 'EDITION', 'INDEX', 'LOB', 'PACKAGE', 'PACKAGE BODY', 'QUEUE', 'SEQUENCE', 'SYNONYM', 'TABLE', 'TYPE', 'VIEW')
-   then 1 else 0 end
+   then 1 else 0 end,
+  obj_owner,
+  obj_name
 ;
