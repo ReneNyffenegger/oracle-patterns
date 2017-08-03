@@ -10,11 +10,14 @@ insert into tq84_random_normal
   connect by level <= 10000;
 
 select
-   avg     (val) avg_val,
-   median  (val) median_val,
-   variance(val) var_val,
-   var_pop (val) var_pop_val,
-   var_samp(val) var_samp_val
+   to_char(avg     (val), '90.9999') avg_val,
+   to_char(median  (val), '90.9999') median_val,
+   to_char(variance(val), '90.9999') var_val,
+   to_char(var_pop (val), '90.9999') var_pop_val,
+   to_char(var_samp(val), '90.9999') var_samp_val,
+   --
+   to_char(min     (val), '90.9999') min_val,
+   to_char(max     (val), '90.9999') max_val
 from
   tq84_random_normal;
 
