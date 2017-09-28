@@ -8,7 +8,7 @@ select
 from
   dba_tab_privs
 where
-  grantee = 'RNYFFENEGGER'
+  grantee = 'RENE'
 order by
   owner,
   table_name,
