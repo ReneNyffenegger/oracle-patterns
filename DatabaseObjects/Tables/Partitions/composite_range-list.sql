@@ -46,7 +46,8 @@ from
   user_objects
 where
   object_name = 'TQ84_PART_RANGE_LIST'
---created > sysdate - 1 /24/60;
+--created > sysdate - 1 /24/60
+;
 
 
 select
