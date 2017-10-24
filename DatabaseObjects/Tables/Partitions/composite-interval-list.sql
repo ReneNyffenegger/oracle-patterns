@@ -18,10 +18,10 @@ partition by range (dt) interval (numtoyminterval(1, 'month'))
 
 insert into tq84_part_interval_list values (1, 'abc', 'foo', date '2017-03-01');
 insert into tq84_part_interval_list values (2, 'def', 'bar', date '2017-03-02');
-insert into tq84_part_interval_list values (3, 'ghi', 'bar', date '2017-03-03');
+insert into tq84_part_interval_list values (3, 'ghi', 'baz', date '2017-03-03');
 insert into tq84_part_interval_list values (4, 'jkl', 'foo', date '2017-12-01');
 insert into tq84_part_interval_list values (5, 'mno', 'bar', date '2017-12-02');
-insert into tq84_part_interval_list values (6, 'pqr', 'bar', date '2017-12-03');
+insert into tq84_part_interval_list values (6, 'pqr', 'baz', date '2017-12-03');
 
 select * from user_tab_subpartitions where table_name = 'TQ84_PART_INTERVAL_LIST';
 
