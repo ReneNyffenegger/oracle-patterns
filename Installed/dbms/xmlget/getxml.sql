@@ -8,8 +8,8 @@ insert into tq84_table values (1, 'one'  , date '1905-05-23');
 insert into tq84_table values (2, 'two'  , date '1875-02-16');
 insert into tq84_table values (3, 'three', date '1897-09-29');
 insert into tq84_table values (4, 'four' , date '2017-11-17');
-
 commit;
+
 select
   dbms_xmlgen.getxml('
      select * from tq84_table
