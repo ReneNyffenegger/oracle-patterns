@@ -1,39 +1,56 @@
 create table tq84_range_partition (
   id   number,
-  txt  varchar2(10),
+  txt  varchar2(15),
   dt   date
 )
 partition by range (dt) (
+  partition tq84_range_partition_2009  values less than (date '2010-01-01'),
   partition tq84_range_partition_2010  values less than (date '2011-01-01'),
   partition tq84_range_partition_2011  values less than (date '2012-01-01'),
-  partition tq84_range_partition_2012  values less than (date '2013-01-01'),
-  partition tq84_range_partition_9999  values less than (      maxvalue   )
+  partition tq84_range_partition_max   values less than (      maxvalue   )
 );
 
 
-create index tq84_non_local on tq84_range_partition (id);
+create unique index tq84_non_local on tq84_range_partition (id);
 
-declare
-  start_date  date := date '2010-01-01';
-  end_date    date := date '2014-12-31';
-begin
+insert into tq84_range_partition values( 9, 'nine'  , date '2009-09-09');
+insert into tq84_range_partition values(10, 'ten'   , date '2010-10-10');
+insert into tq84_range_partition values(11, 'eleven', date '2011-11-11');
+insert into tq84_range_partition values(12, 'twelve', date '2012-12-12');
 
-  for r in 0 .. end_date - start_date loop
 
-      insert into tq84_range_partition values (r, 'foo bar', start_date + r);
 
-  end loop;
+select status from user_indexes where index_name = 'TQ84_NON_LOCAL';
+--
+-- VALID
+--
 
-end;
-/
-
-select 'Count before drop: ' || count(*) cnt from tq84_range_partition;
-
-select partition_name from user_tab_partitions where table_name = 'TQ84_RANGE_PARTITION';
-
+--
+-- Droping one partition:
+--
 alter table tq84_range_partition drop partition tq84_range_partition_2010;
 
-select 'Count after drop: ' || count(*)  cnt from tq84_range_partition;
+select status from user_indexes where index_name = 'TQ84_NON_LOCAL';
+--
+-- UNUSABLE
+--
 
-select partition_name from user_tab_partitions where table_name = 'TQ84_RANGE_PARTITION';
+--
+-- Because the index is unusable AND unique, the following statement generates
+--
+--      ORA-01502: index 'SNB_DBA.TQ84_NON_LOCAL' or partition of
+--      such index is in unusable state
+--
+-- If the index were not unique, the insert statement would not fail.
+--
+insert into tq84_range_partition values(13, 'does not work', date '2011-05-17');
+-- 
+--         ID TXT             DT
+-- ---------- --------------- -------------------
+--          9 nine            09.09.2009 00:00:00
+--         11 eleven          11.11.2011 00:00:00
+--         12 twelve          12.12.2012 00:00:00
+-- 
+select * from tq84_range_partition;
+
 drop table tq84_range_partition purge;
