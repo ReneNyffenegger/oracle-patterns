@@ -5,7 +5,7 @@ select /*+ ordered */
   trx.cr_get         consistent_gets,
   trx.cr_change      consistent_changes,
   --
-  trx.used_urec      unco_records_used,
+  trx.used_urec      undo_records_used,
   trx.used_ublk      undo_blocks_used,
   --
   ses.osuser,

@@ -1,0 +1,18 @@
+select
+  utl_raw.cast_to_varchar2(
+    hextoraw (
+      '48' ||  -- H
+      '65' ||  -- e
+      '6C' ||  -- l
+      '6C' ||  -- l
+      '6F' ||  -- o
+      '20' ||  --
+      '77' ||  -- W
+      '6F' ||  -- o
+      '72' ||  -- r
+      '6C' ||  -- l
+      '64'     -- d
+    )
+  ) say_hello
+from
+  dual;

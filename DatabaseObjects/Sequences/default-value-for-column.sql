@@ -18,5 +18,5 @@ select * from tq84_tab;
 --          3 baz
 
 
-drop table    tq84_tab;
+drop table    tq84_tab purge;
 drop sequence tq84_seq;
