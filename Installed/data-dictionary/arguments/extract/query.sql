@@ -1,12 +1,13 @@
 select
-  case when new_item = 'new' then prc_or_fnc      end prc_or_fnc,
-  case when new_item = 'new' then prc_or_fnc_name end prc_or_fnc_name,
-  arg_name,
-  case when arg_pos = 0 then 'RETURN' else arg_in_out end arg_in_out,
-  arg_data_type,
-  arg_pls_type,
-  arg_type_name,
-  arg_type_owner
+   case when new_item = 'new' then prc_or_fnc      end prc_or_fnc,
+   case when new_item = 'new' then prc_or_fnc_name end prc_or_fnc_name,
+   arg_name,
+   case when arg_pos = 0 then 'RETURN' else arg_in_out end arg_in_out,
+   arg_data_type,
+   arg_pls_type,
+   arg_type_name,
+   arg_type_owner
+-- case when arg_defaulted = 'Y' then 'defaulted' end defaulted
 from (
 select
    case when prc.subprogram_id !=
