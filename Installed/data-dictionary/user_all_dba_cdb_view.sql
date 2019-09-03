@@ -33,7 +33,9 @@ select
    cu.comments cu,
    ca.comments ca,
    cd.comments cd,
-   cc.comments cc
+   case when cc.comments  = ' in all containers' then ''
+        else cc.comments
+   end                                                       cc
 from
                     o                                    left join
                     u on o.obj         = u.obj           left join
