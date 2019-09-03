@@ -1,7 +1,7 @@
 
 select
   '  ' ||
--- case when not_obsolete          = 'TRUE' then '✓' else '✗' end || ' ☰ ' ||
+   case when not_obsolete          = 'TRUE' then '✓' else '✗' end || ' ☰ ' ||
 -- status                                                         || ' ☰ ' ||
 -- case when isdeprecated          = 'TRUE' then '✓' else '✗' end || ' ☰ ' ||
    case when isbasic               = 'TRUE' then '✓' else '✗' end || ' ☰ ' ||
