@@ -32,7 +32,7 @@ with name as (
    select 'global_uid'                 space from dual union all
    select 'host'                       space from dual union all
    select 'identification_type'        space from dual union all
-   select 'instance'                   space from dual union all
+   select 'instance'                   space from dual union all  -- Identifies an instance. Relevant in RAC environments. Also used in v$ views.
    select 'instance_name'              space from dual union all
    select 'ip_address'                 space from dual union all
 -- select 'is_apply_server'            space from dual union all
