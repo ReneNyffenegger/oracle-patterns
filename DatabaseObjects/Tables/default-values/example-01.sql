@@ -1,9 +1,11 @@
 create sequence tq84_seq start with 1 increment by 1;
 
 create table tq84_tab (
-  id    number        default tq84_seq.nextval primary key,
-  txt_1 varchar2(10)                           not null,
-  txt_2 varchar2(10)  default on null 'n/a'    not null
+--                     clause           expression
+-- ----- ------------  ---------------  ----------------  -----------
+   id    number        default          tq84_seq.nextval  primary key,
+   txt_1 varchar2(10)                                     not null,
+   txt_2 varchar2(10)  default on null 'n/a'              not null
 );
 
 insert into tq84_tab (txt_1, txt_2) values ('one', 'foo');
