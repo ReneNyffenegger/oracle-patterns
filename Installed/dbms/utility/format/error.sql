@@ -4,6 +4,8 @@ create or replace procedure print_stacks(id varchar2) is begin
    dbms_output.put_line(dbms_utility.format_error_stack);
    dbms_output.put_line('format_error_backtrace');
    dbms_output.put_line(dbms_utility.format_error_backtrace);
+-- dbms_output.put_line('format_call_stack');
+-- dbms_output.put_line(dbms_utility.format_call_stack);
 end;
 /
 
