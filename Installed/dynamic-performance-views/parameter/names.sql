@@ -1,4 +1,4 @@
--- Alter session for consisting ordering
+-- Alter session for consistent ordering
 alter session set nls_language='english';
 
 select
