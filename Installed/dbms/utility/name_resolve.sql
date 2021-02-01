@@ -1,22 +1,9 @@
---
---     Using dbms_utility.name_resolve to find out
---     what object is behind an identifier (such
---     as  userfoo.objsomethin)
---
---     Metalink document 1008700.6 states that
---     the procedure supports only only for procedures,
---     functions, and packages, not tables.
---
---     Constraints also seem not to work.
---
---     See also dbms_utility.name_tokenize
---
 create user schem_01 identified by schem_01;
 create user schem_02 identified by schem_02;
 -- grant create session,
 --       create procedure
 --       to schem_01;
-   
+
 
 create table schem_01.tab ( a number );
 create table schem_02.tab ( a number );
@@ -45,11 +32,11 @@ create procedure tq84_resolve_identifier(identifier in varchar2) is --{
             dblink     varchar2(128);
             part1_type number;
             object_id  number;
-          
+
        begin
 
-           
-            dbms_utility.name_resolve(identifier, ctx, 
+
+            dbms_utility.name_resolve(identifier, ctx,
                               schema, part1, part2, dblink, part1_type, object_id);
 
             if object_id > 0 then -- {
@@ -88,7 +75,7 @@ create procedure tq84_resolve_identifier(identifier in varchar2) is --{
                dbms_output.put_line(identifier || ' contains invalid characters');
                return true;
             end if;
-          
+
             dbms_output.put_line(sqlerrm);
             dbms_output.put_line(sqlcode);
 
@@ -110,7 +97,7 @@ end tq84_resolve_identifier; -- }
 /
 
 
-exec tq84_resolve_identifier('tab'         )  /* note that Oracle ships with an object belongig to sys wit this name */; 
+exec tq84_resolve_identifier('tab'         )  /* note that Oracle ships with an object belongig to sys wit this name */;
 exec tq84_resolve_identifier('does.not_exist');
 exec tq84_resolve_identifier('invalid identifier');
 exec tq84_resolve_identifier('schem_01.tab');
