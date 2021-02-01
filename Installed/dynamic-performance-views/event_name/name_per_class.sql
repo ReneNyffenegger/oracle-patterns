@@ -8,10 +8,12 @@ from
 order by
   lower(wait_class),
   lower(name      );
+-- 
 -- Administrative alter rbs offline
 --                alter system set dispatcher
 --                ASM COD rollback operation completion
 --                ASM mount : wait for heartbeat
+--                BA: Performance API
 --                Backup: MML command to channel
 --                Backup: MML commit backup piece
 --                Backup: MML create a backup piece
@@ -48,11 +50,13 @@ order by
 --                connection pool wait
 --                control file backup creation
 --                datafile copy range completion
+--                datafile pre-create
 --                db flash cache dynamic disabling wait
 --                enq: DB - contention
 --                enq: MV - datafile move
 --                enq: TW - contention
 --                enq: ZG - contention
+--                index (re)build lock or pin object
 --                index (re)build online cleanup
 --                index (re)build online merge
 --                index (re)build online start
@@ -60,6 +64,7 @@ order by
 --                JS kgl get object wait
 --                JS kill job wait
 --                multiple dbwriter suspend/resume for file offline
+--                OFS operation completion
 --                switch logfile command
 --                switch undo - offline
 --                wait for possible quiesce finish
@@ -74,10 +79,10 @@ order by
 --                External Procedure call
 --                External Procedure initial connection
 --                OLAP DML Sleep
+--                REPL Apply: apply DDL
+--                REPL Capture: filter callback ruleset
 --                SQL*Net break/reset to client
 --                SQL*Net break/reset to dblink
---                Streams capture: filter callback waiting for ruleset
---                Streams: apply reader waiting for DDL to apply
 --                Wait for Table Lock
 --                WCR: replay lock order
 -- Cluster        ASM PST query : wait for [PM][grp][0] grant
@@ -92,15 +97,23 @@ order by
 --                gc cr block busy
 --                gc cr block congested
 --                gc cr block lost
---                gc cr block unknown
+--                gc cr block remote read
 --                gc cr cancel
+--                gc cr cluster flash cache read
 --                gc cr disk read
 --                gc cr disk request
 --                gc cr failure
+--                gc cr flash cache copy
 --                gc cr grant 2-way
+--                gc cr grant 3-way
 --                gc cr grant busy
+--                gc cr grant cluster flash cache read
 --                gc cr grant congested
---                gc cr grant unknown
+--                gc cr grant ka
+--                gc cr grant read-mostly invalidation
+--                gc cr grant read-only instance invalidation
+--                gc cr multi block grant
+--                gc cr multi block mixed
 --                gc cr multi block request
 --                gc cr request
 --                gc current block 2-way
@@ -108,12 +121,16 @@ order by
 --                gc current block busy
 --                gc current block congested
 --                gc current block lost
---                gc current block unknown
 --                gc current cancel
 --                gc current grant 2-way
+--                gc current grant 3-way
 --                gc current grant busy
+--                gc current grant cluster flash cache read
 --                gc current grant congested
---                gc current grant unknown
+--                gc current grant ka
+--                gc current grant read-mostly invalidation
+--                gc current grant read-only instance invalidation
+--                gc current index split
 --                gc current multi block request
 --                gc current request
 --                gc current retry
@@ -121,55 +138,93 @@ order by
 --                gc domain validation
 --                gc flushed buffer
 --                gc freelist
---                gc object scan
+--                gc imc multi block quiesce
+--                gc imc multi block request
+--                gc index operation
 --                gc quiesce
 --                gc recovery
 --                gc recovery free
 --                gc recovery quiesce
 --                gc remaster
+--                gc send complete
+--                gc transaction table
 --                lock remastering
 --                pi renounce write complete
+--                remote log force - buffer read
+--                remote log force - buffer update
+--                remote log force - log switch/recovery
+--                remote log force - SCN range
+--                remote log force - session cleanout
 --                retry contact SCN lock master
+--                service monitor: inst recovery completion
+--                Service operation completion
 -- Commit         enq: BB - 2PC across RAC instances
 --                log file sync
+--                Nologging standby progress
+--                nologging standby txn commit
+--                remote log force - commit
 -- Concurrency    buffer busy waits
+--                Cube Build Master Wait for Jobs
 --                cursor: mutex S
 --                cursor: mutex X
 --                cursor: pin S
 --                cursor: pin S wait on X
 --                cursor: pin X
 --                db flash cache invalidate wait
+--                enq: BE - Critical Block Allocation
+--                enq: CB - role operation
 --                enq: HV - contention
+--                enq: IV - cross instance invalidation
+--                enq: KV - IMA key vector access
+--                enq: RI - Reader Farm SQL Isolation
+--                enq: TG - IMCDT global resource
+--                enq: TI - IMCDT object HT
 --                enq: TX - index contention
 --                enq: WG - lock fso
+--                IM buffer busy
+--                IM buffer busy SHR
+--                IM buffer busy TXN
+--                Inmemory Populate: get loadscn
 --                latch: cache buffers chains
 --                latch: In memory undo latch
+--                latch: MGA asr alloc latch
+--                latch: MGA heap latch
+--                latch: MGA pid alloc latch
+--                latch: MGA shared context latch
+--                latch: MGA shared context root latch
 --                latch: MQL Tracking Latch
 --                latch: row cache objects
 --                latch: shared pool
 --                latch: Undo Hint Latch
+--                LCK0 row cache object free
 --                libcache interrupt action by LCK
 --                library cache load lock
 --                library cache lock
 --                library cache pin
+--                library cache: bucket mutex X
+--                library cache: dependency mutex X
 --                library cache: mutex S
 --                library cache: mutex X
+--                log file sync: SCN ordering
 --                logout restrictor
---                os thread startup
 --                pipe put
+--                REPL Apply: dependency
 --                resmgr:internal state change
 --                resmgr:sessions to exit
+--                result cache lock wait
 --                row cache lock
+--                row cache mutex
 --                row cache read
 --                securefile chain update
 --                SecureFile mutex
 --                Shared IO Pool Memory
---                Streams apply: waiting for dependency
+--                Unpin a recreatable chunk
 -- Configuration  checkpoint completed
 --                enq: HW - contention
 --                enq: SQ - contention
 --                enq: SS - contention
 --                enq: ST - contention
+--                enq: SV -  contention
 --                enq: TX - allocate ITL entry
 --                flashback buf free by RVWR
 --                free buffer waits
@@ -181,35 +236,63 @@ order by
 --                log file switch (checkpoint incomplete)
 --                log file switch (private strand flush incomplete)
 --                log file switch completion
+--                memoptimize write buffer get
+--                nologging range consumption list
+--                REPL Apply: commit
+--                SecureFile log buffer
 --                sort segment request
 --                statement suspended, wait error to be cleared
---                Streams apply: waiting to commit
 --                undo segment extension
 --                undo segment tx slot
 --                wait for EMON to process ntfns
 --                write complete waits
 --                write complete waits: flash cache
--- Idle           ASM background timer
+-- Idle           AQ Cross Master idle
+--                AQ: 12c message cache init wait
+--                AQPC idle
+--                ASM background timer
+--                ASM cluster membership changes
 --                auto-sqltune: wait graph update
+--                Backup Appliance Comm SGA setup wait
+--                Backup Appliance Servlet wait
+--                Backup Appliance Surrogate wait
+--                Backup Appliance waiting for work
+--                Backup Appliance waiting restore start
+--                block compare coord process idle
 --                cell worker idle
 --                class slave wait
 --                cmon timer
+--                Data Guard: controlfile update
+--                Data Guard: Gap Manager
+--                Data Guard: Timer
+--                DBWR timer
 --                DIAG idle wait
 --                dispatcher timer
+--                DNFS disp IO slave idle
+--                Emon coordinator main loop
 --                EMON slave idle wait
+--                Emon slave main loop
 --                fbar timer
 --                GCR sleep
 --                gcs remote message
+--                gcs yield cpu
 --                ges remote message
+--                gopp msg
 --                heartbeat monitor sleep
+--                heartbeat redo informer
 --                HS message to agent
 --                i/o slave wait
+--                imco timer
+--                IMFS defer writes scheduler
 --                IORM Scheduler Slave Idle Wait
+--                iowp file id
+--                iowp msg
 --                jobq slave wait
 --                JOX Jit Process Sleep
 --                JS external job
---                KSV master wait
 --                LGWR real time apply sync
+--                LGWR worker group idle
+--                LMS CR slave timer
 --                LNS ASYNC archive log
 --                LNS ASYNC dest activation
 --                LNS ASYNC end of log
@@ -217,6 +300,7 @@ order by
 --                LogMiner builder: branch
 --                LogMiner builder: idle
 --                LogMiner client: transaction
+--                LogMiner merger: idle
 --                LogMiner preparer: idle
 --                LogMiner reader: log (idle)
 --                LogMiner reader: redo (idle)
@@ -225,16 +309,25 @@ order by
 --                LogMiner: internal
 --                LogMiner: other
 --                LogMiner: reset
+--                lreg timer
+--                memoptimize write drain idle
 --                MRP redo arrival
+--                netp network
+--                nologging fetch slave idle
+--                OFS idle
+--                OFS Receive Queue
 --                parallel recovery control message reply
+--                parallel recovery coordinator idle wait
 --                parallel recovery coordinator waits for slave cleanup
 --                parallel recovery slave idle wait
 --                parallel recovery slave next change
 --                PING
 --                pipe get
 --                PL/SQL lock timer
+--                pman timer
 --                pmon timer
 --                pool server timer
+--                process in prespawned state
 --                PX Deq Credit: need buffer
 --                PX Deq Credit: send blkd
 --                PX Deq: Execute Reply
@@ -242,7 +335,6 @@ order by
 --                PX Deq: Index Merge Close
 --                PX Deq: Index Merge Execute
 --                PX Deq: Index Merge Reply
---                PX Deq: Join ACK
 --                PX Deq: kdcph_mai
 --                PX Deq: kdcphc_ack
 --                PX Deq: Metadata Update
@@ -255,7 +347,19 @@ order by
 --                PX Deque wait
 --                PX Idle Wait
 --                rdbms ipc message
+--                recovery coordinator idle
+--                recovery logmerger idle
+--                recovery receiver idle
+--                recovery sender idle
+--                REPL Apply: txns
+--                REPL Capture/Apply: messages
+--                REPL Capture/Apply: RAC AQ qmn coordinator
+--                REPL Capture: archive log
+--                RMA: IPC0 completion sync
+--                SCM slave idle
 --                SGA: MMAN sleep for component shrink
+--                Sharded  Queues : Part Maintenance idle
+--                Sharded  Queues : Part Truncate idle
 --                shared server idle wait
 --                simulated log write delay
 --                single-task message
@@ -267,14 +371,13 @@ order by
 --                Streams AQ: deallocate messages from Streams Pool
 --                Streams AQ: delete acknowledged messages
 --                Streams AQ: emn coordinator idle wait
+--                Streams AQ: load balancer idle
+--                Streams AQ: opt idle
 --                Streams AQ: qmn coordinator idle wait
 --                Streams AQ: qmn slave idle wait
---                Streams AQ: RAC qmn coordinator idle wait
 --                Streams AQ: waiting for messages in the queue
 --                Streams AQ: waiting for time management or cleanup tasks
---                Streams capture: waiting for archive log
---                Streams fetch slave: waiting for txns
---                Streams: waiting for messages
+--                virtual circuit next request
 --                VKRM Idle
 --                VKTM Init Wait for GSGA
 --                VKTM Logical Idle Wait
@@ -289,19 +392,14 @@ order by
 --                ARCH wait for netserver detach
 --                ARCH wait for netserver init 2
 --                ARCH wait for netserver start
---                ARCH wait on ATTACH
---                ARCH wait on DETACH
---                ARCH wait on SENDREQ
+--                ASM remote SQL
+--                connection broker handoff
+--                Data Guard network buffer stall reap
 --                dedicated server timer
 --                dispatcher listen timer
---                LGWR wait on ATTACH
---                LGWR wait on DETACH
+--                IPC group service call
 --                LGWR wait on LNS
---                LGWR wait on SENDREQ
---                LNS wait on ATTACH
---                LNS wait on DETACH
 --                LNS wait on LGWR
---                LNS wait on SENDREQ
 --                remote db file read
 --                remote db file write
 --                remote db operation
@@ -320,36 +418,61 @@ order by
 --                TEXT: URL_DATASTORE network wait
 --                virtual circuit wait
 -- Other          ack for a broadcasted res from a remote instance
+--                ADG instance recovery complete
+--                ADG query scn advance
+--                ADG switchover completion
 --                ADR block file read
 --                ADR block file write
 --                ADR file lock
 --                affinity expansion in replay
+--                Analyze hash compare
+--                AQ Background Master: slave start
+--                AQ master shutdown
+--                AQ master: time mgmt/task cleanup
+--                AQ OPT Operation Complete
 --                AQ propagation connection
+--                AQ reload SO release
+--                AQ slave: time mgmt/task cleanup
 --                AQ spill debug idle
---                ARCH wait for archivelog lock
---                ARCH wait for process death 1
---                ARCH wait for process start 1
---                ARCH wait for process start 3
+--                AQ: RAC AQ Network
+--                AQ:non durable subscriber add or drop
+--                AQPC: new master
+--                ARCH Remote Write
 --                ARCH wait on c/f tx acquire 1
+--                ASM Async Scrub
 --                ASM background starting
+--                ASM check disk slices
 --                ASM cluster file access
+--                ASM concurrent diskgroup dismount
 --                ASM db client exists
---                ASM DG Unblock
 --                ASM file metadata operation
 --                ASM Instance startup
 --                ASM internal hang test
+--                ASM ioctl to dematerialize blocks
 --                ASM metadata cache frozen
 --                ASM network foreground exits
 --                ASM PST operation
+--                ASM Scrub Running
+--                ASM Scrub Stop
+--                ASM Scrubbing I/O
 --                ASM Volume Background
+--                ASM volume directive send
+--                ASM Volume Resource Action
 --                ASM: MARK subscribe to msg channel
 --                ASM: OFS Cluster membership update
+--                ASM: Send msg to MARK
+--                ASM: VAM activation
+--                ASMB cookie valid check
+--                ASYNC Remote Write
 --                asynch descriptor resize
 --                Auto BMR completion
 --                Auto BMR RPC standby catchup
 --                AWR Flush
 --                AWR Metric Capture
---                Backup Restore Event 19778 sleep
+--                Backup Appliance container I/O
+--                Backup Appliance container synchronous read
+--                Backup Appliance container synchronous write
+--                Backup Restore Event sleep
 --                Backup Restore Switch Bitmap sleep
 --                Backup Restore Throttle sleep
 --                BFILE check if exists
@@ -372,13 +495,20 @@ order by
 --                buffer invalidation wait
 --                buffer latch
 --                buffer rememberlist busy
---                buffer resize
 --                buffer write wait
 --                buffer writeList full
+--                call
+--                cancel media recovery on switchover
+--                CDB: Per Instance Query for PDB Info
 --                cell manager cancel work request
+--                cell manager: CRS DG start
+--                cell manager: CRS DG unmounted list
+--                cell ram cache population
+--                cell smart flash keep
 --                cell smart flash unkeep
 --                cell worker online completion
 --                cell worker retry
+--                CGS ping operation
 --                CGS skgxn join retry
 --                CGS wait for IPC msg
 --                change tracking file parallel write
@@ -386,6 +516,7 @@ order by
 --                change tracking file synchronous write
 --                check CPU wait times
 --                checkpoint advanced
+--                chunk move metadata prefetch
 --                cleanup of aborted process
 --                Cluster stabilization wait
 --                Cluster Suspension wait
@@ -394,6 +525,8 @@ order by
 --                control file heartbeat
 --                cr request retry
 --                CRS call completion
+--                CRS get service attributes
+--                CSS cookie check
 --                CSS group membership query
 --                CSS group registration
 --                CSS initialization
@@ -405,54 +538,120 @@ order by
 --                CSS Xgrp shared operation
 --                CTWR media recovery checkpoint request
 --                Data Guard Broker Wait
---                Data Guard: process clean up
---                Data Guard: process exit
---                Data Guard: RFS disk I/O
+--                Data Guard server operation completion
+--                Data Guard: rtrt work
 --                Data Pump slave init
 --                Data Pump slave startup
+--                database open on read-write instance
 --                datafile move cleanup during resize
+--                DB Split Delay
 --                DBMS_LDAP: LDAP operation
+--                DBMS_ROLLING instruction completion
 --                DBWR range invalidation sync
 --                debugger command
+--                defer SGA allocation slave
 --                DFS db file lock
 --                DFS lock handle
+--                DIAG lock acquisition
 --                dispatcher shutdown
+--                DLM cross inst call completion
+--                DLM enqueue copy completion
+--                DLM Omni Enq Owner replication
+--                DLM: shared instance mode init
 --                dma prepare busy
+--                DNFS disp IO slave cleanup
 --                DSKM to complete cell health check
 --                dupl. cluster key
---                EMON slave messages
+--                Emon coordinator startup
 --                EMON termination
 --                enq: AB - ABMR process initialized
 --                enq: AB - ABMR process start/stop
+--                enq: AC - acquiring partition id
 --                enq: AD - allocate AU
 --                enq: AD - deallocate AU
+--                enq: AD - flush writes to AU
 --                enq: AD - relocate AU
 --                enq: AE - lock
 --                enq: AF - task serialization
 --                enq: AG - contention
+--                enq: AH -  contention
+--                enq: AK -  contention
 --                enq: AM - ASM ACD Relocation
 --                enq: AM - ASM Amdu Dump
+--                enq: AM - ASM ATB COD creation
+--                enq: AM - ASM ATE conversion
+--                enq: AM - ASM Audit file Cleanup
+--                enq: AM - ASM Audit file Delete
 --                enq: AM - ASM cache freeze
+--                enq: AM - ASM Client Assisted Offline
+--                enq: AM - ASM Client Assisted Offline Chk
+--                enq: AM - ASM client check
+--                enq: AM - ASM client operation
+--                enq: AM - ASM DD update SrRloc
 --                enq: AM - ASM disk based alloc/dealloc
+--                enq: AM - ASM Drop Mirror
+--                enq: AM - ASM file access req
+--                enq: AM - ASM file chown
+--                enq: AM - ASM file create
 --                enq: AM - ASM file descriptor
 --                enq: AM - ASM File Destroy
 --                enq: AM - ASM file relocation
 --                enq: AM - ASM Grow ACD
+--                enq: AM - ASM metadata replication
+--                enq: AM - ASM Mirror Prepare
+--                enq: AM - ASM Mirror Split
 --                enq: AM - ASM Password File Update
+--                enq: AM - ASM PDB Mirror Split
 --                enq: AM - ASM reserved
+--                enq: AM - ASM resync from ATE
+--                enq: AM - ASM Sparse Disk IOCTL
+--                enq: AM - ASM Split Mirror File Create
+--                enq: AM - ASM Split Mirror File Delete
+--                enq: AM - ASM Split Mirror ODM File Crt
+--                enq: AM - ASM Split Mirror ODM File Del
+--                enq: AM - ASM Split Status Read
+--                enq: AM - ASM Split Status Write
+--                enq: AM - ASM SR Batch Allocation
+--                enq: AM - ASM SR relocation
+--                enq: AM - ASM SR Segment Reuse
+--                enq: AM - ASM SR Segment Reuse Lookup
 --                enq: AM - ASM User
+--                enq: AM - ASM VAL cache
+--                enq: AM - ASM VAM Active
+--                enq: AM - ASM VAT migration
+--                enq: AM - ASM: group unblock
+--                enq: AM - ASMB Renew
+--                enq: AM - ASMB Startup
 --                enq: AM - background COD reservation
 --                enq: AM - block repair
+--                enq: AM - Change file group redundancy
 --                enq: AM - client registration
+--                enq: AM - Create default DG key in OCR
+--                enq: AM - Create Prepare Child file group
+--                enq: AM - Credential creation
+--                enq: AM - Credential deletion
+--                enq: AM - DB Drop Mirror Copy
+--                enq: AM - DB Mirror Prepare
+--                enq: AM - DB Mirror Split
+--                enq: AM - Disable Remote ASM
 --                enq: AM - disk offline
+--                enq: AM - Enable Remote ASM
 --                enq: AM - group block
 --                enq: AM - group use
+--                enq: AM - PDB Mirror Split
+--                enq: AM - Register with IOServer
 --                enq: AM - rollback COD reservation
 --                enq: AM - shutdown
+--                enq: AM - SR slice Clear/Mark
+--                enq: AM - Update SR nomark flag
 --                enq: AO - contention
 --                enq: AP - contention
+--                enq: AQ - QPT fg map dqpt
+--                enq: AQ - QPT fg map qpt
+--                enq: AR -  contention
 --                enq: AS - service activation
 --                enq: AT - contention
+--                enq: AU - ADR Purge Operation
 --                enq: AV - add/enable first volume in DG
 --                enq: AV - AVD client registration
 --                enq: AV - persistent DG number
@@ -462,17 +661,44 @@ order by
 --                enq: AW - AW$ table lock
 --                enq: AW - user access for AW
 --                enq: AY - contention
+--                enq: AZ - AQ_SRVNTFN_Q Creation
+--                enq: BA - SUBBMAP contention
+--                enq: BC - create container
+--                enq: BC - drop container
+--                enq: BC - drop container group
+--                enq: BC - group - create container
+--                enq: BC - group - create file
 --                enq: BF - allocation contention
 --                enq: BF - PMON Join Filter cleanup
+--                enq: BI - create file
+--                enq: BI - delete file
+--                enq: BI - identify file
 --                enq: BM - clonedb bitmap file write
+--                enq: BO -  contention
 --                enq: BR - file shrink
 --                enq: BR - multi-section restore header
 --                enq: BR - multi-section restore section
 --                enq: BR - perform autobackup
+--                enq: BR - perform catalog recovery area
 --                enq: BR - proxy-copy
 --                enq: BR - request autobackup
 --                enq: BR - space info datafile hdr update
+--                enq: BS - Backup spare0
+--                enq: BS - Backup spare1
+--                enq: BS - Backup spare2
+--                enq: BS - Backup spare3
+--                enq: BS - Backup spare4
+--                enq: BS - Backup spare5
+--                enq: BS - Backup spare6
+--                enq: BS - Backup spare7
+--                enq: BS - Backup spare8
+--                enq: BS - Backup spare9
+--                enq: BU - recovery set construct
+--                enq: BU - recovery set takeover
+--                enq: BV - rebuild/validate group
+--                enq: BZ - resize file
 --                enq: CA - contention
+--                enq: CC - decryption
 --                enq: CF - contention
 --                enq: CI - contention
 --                enq: CL - compare labels
@@ -484,6 +710,7 @@ order by
 --                enq: CN - race with reg
 --                enq: CN - race with txn
 --                enq: CO - master slave det
+--                enq: CP - Pluggable database resetlogs
 --                enq: CQ - contention
 --                enq: CR - block range reuse ckpt
 --                enq: CT - change stream ownership
@@ -496,24 +723,53 @@ order by
 --                enq: CT - state change gate 2
 --                enq: CU - contention
 --                enq: CX - TEXT: Index Specific Lock
+--                enq: DA - Slave Process Array
 --                enq: DD - contention
+--                enq: DE - Update Draining Test
 --                enq: DF - contention
 --                enq: DG - contention
+--                enq: DI -  contention
 --                enq: DL - contention
+--                enq: DM - access control
 --                enq: DM - contention
 --                enq: DN - contention
 --                enq: DO - disk online
---                enq: DO - disk online operation
 --                enq: DO - disk online recovery
 --                enq: DO - Staleness Registry create
 --                enq: DO - startup of MARK process
 --                enq: DP - contention
+--                enq: DQ -  contention
 --                enq: DR - contention
 --                enq: DS - contention
 --                enq: DT - contention
 --                enq: DV - contention
 --                enq: DW - contention
 --                enq: DX - contention
+--                enq: EA -  contention
+--                enq: EB -  contention
+--                enq: EC -  contention
+--                enq: ED -  contention
+--                enq: EE -  contention
+--                enq: EF -  contention
+--                enq: EG -  contention
+--                enq: EH -  contention
+--                enq: EI -  contention
+--                enq: EJ -  contention
+--                enq: EK -  contention
+--                enq: EL -  contention
+--                enq: EM -  contention
+--                enq: EN -  contention
+--                enq: EO -  contention
+--                enq: EP -  contention
+--                enq: EQ -  contention
+--                enq: ER -  contention
+--                enq: ES -  contention
+--                enq: ET -  contention
+--                enq: EU -  contention
+--                enq: EV -  contention
+--                enq: EX -  contention
+--                enq: EY -  contention
+--                enq: EZ -  contention
 --                enq: FA - access file
 --                enq: FB - contention
 --                enq: FC - open an ACD thread
@@ -528,62 +784,186 @@ order by
 --                enq: FG - FG redo generation enq race
 --                enq: FG - LGWR redo generation enq race
 --                enq: FG - serialize ACD relocate
+--                enq: FH - contention
 --                enq: FL - Flashback database log
 --                enq: FL - Flashback db command
 --                enq: FM - contention
+--                enq: FO - file system operation contention
 --                enq: FP - global fob contention
 --                enq: FR - contention
 --                enq: FR - recover the thread
 --                enq: FR - use the thread
 --                enq: FS - contention
+--                enq: FS - online log operation
 --                enq: FT - allow LGWR writes
 --                enq: FT - disable LGWR writes
 --                enq: FU - contention
+--                enq: FW -  contention
 --                enq: FX - issue ACD Xtnt Relocation CIC
+--                enq: FZ -  contention
+--                enq: GA -  contention
+--                enq: GB -  contention
+--                enq: GC -  contention
+--                enq: GD -  contention
+--                enq: GE -  contention
+--                enq: GF -  contention
+--                enq: GG -  contention
+--                enq: GH -  contention
+--                enq: GI -  contention
+--                enq: GJ -  contention
+--                enq: GK -  contention
+--                enq: GL -  contention
+--                enq: GM -  contention
+--                enq: GN -  contention
+--                enq: GO -  contention
+--                enq: GP -  contention
+--                enq: GQ -  contention
+--                enq: GR -  contention
+--                enq: GS -  contention
+--                enq: GT -  contention
+--                enq: GU -  contention
+--                enq: GV -  contention
+--                enq: GX -  contention
+--                enq: GY -  contention
+--                enq: GZ -  contention
+--                enq: HC - HSM cache read
+--                enq: HC - HSM cache write
 --                enq: HD - contention
+--                enq: HM -  contention
 --                enq: HP - contention
 --                enq: HQ - contention
 --                enq: IA - contention
+--                enq: IC - IOServer clientID
 --                enq: ID - contention
+--                enq: IF - file close
+--                enq: IF - file open
+--                enq: II -  contention
+--                enq: IK -  contention
 --                enq: IL - contention
 --                enq: IM - contention for blr
+--                enq: IN - contention
+--                enq: IP - open/close PDB
+--                enq: IR - arbitrate instance recovery
 --                enq: IR - contention
 --                enq: IR - contention2
+--                enq: IR - global serialization
+--                enq: IR - local serialization
 --                enq: IS - contention
 --                enq: IT - contention
+--                enq: IV -  contention
+--                enq: IZ -  contention
 --                enq: JD - contention
+--                enq: JG - contention
+--                enq: JG - evt notify
+--                enq: JG - evtsub add
+--                enq: JG - evtsub drop
+--                enq: JG - q mem clnup lck
+--                enq: JG - queue lock
+--                enq: JG - sch locl enqs
 --                enq: JI - contention
 --                enq: JQ - contention
 --                enq: JS - aq sync
---                enq: JS - contention
 --                enq: JS - evt notify
---                enq: JS - evtsub add
---                enq: JS - evtsub drop
 --                enq: JS - job recov lock
 --                enq: JS - job run lock - synchronize
---                enq: JS - q mem clnup lck
---                enq: JS - queue lock
---                enq: JS - sch locl enqs
 --                enq: JS - wdw op
+--                enq: JZ - Join group dictionary
+--                enq: KA - ACL control status
 --                enq: KD - determine DBRM master
+--                enq: KE -  contention
+--                enq: KI - contention
+--                enq: KL -  contention
 --                enq: KM - contention
 --                enq: KP - contention
 --                enq: KQ - access ASM attribute
+--                enq: KR - Add rule to ruleset
+--                enq: KR - Drop rule force
+--                enq: KR - Remove rule from ruleset
 --                enq: KT - contention
+--                enq: KZ -  contention
+--                enq: LA -  contention
+--                enq: LB -  contention
+--                enq: LC -  contention
+--                enq: LD -  contention
+--                enq: LE -  contention
+--                enq: LF -  contention
+--                enq: LG -  contention
+--                enq: LH -  contention
+--                enq: LI -  contention
+--                enq: LJ -  contention
+--                enq: LK -  contention
+--                enq: LL -  contention
+--                enq: LM -  contention
+--                enq: LN -  contention
+--                enq: LO -  contention
+--                enq: LP -  contention
+--                enq: LQ -  contention
+--                enq: LR -  contention
+--                enq: LS -  contention
+--                enq: LT -  contention
+--                enq: LU -  contention
+--                enq: LV -  contention
+--                enq: LX -  contention
+--                enq: LY -  contention
+--                enq: LZ -  contention
+--                enq: MC - Securefile log
 --                enq: MD - contention
+--                enq: MF - creating swap in instance
+--                enq: MF - flush bkgnd periodic
+--                enq: MF - flush client
+--                enq: MF - flush destroy
+--                enq: MF - flush prior error
+--                enq: MF - flush space
+--                enq: MG - client shared context allocation
+--                enq: MG - MGA allocation
 --                enq: MH - contention
 --                enq: MK - contention
 --                enq: ML - contention
+--                enq: MM - MMON Autotask scheduling
 --                enq: MN - contention
 --                enq: MO - contention
+--                enq: MR - adg instance recovery
+--                enq: MR - any role transition
 --                enq: MR - contention
+--                enq: MR - datafile online
+--                enq: MR - datafile pre-create
+--                enq: MR - multi instance redo apply
+--                enq: MR - PDB open
+--                enq: MR - preplugin recovery
 --                enq: MR - standby role transition
 --                enq: MS - contention
 --                enq: MW - contention
 --                enq: MX - sync storage server info
+--                enq: NA -  contention
+--                enq: NB -  contention
+--                enq: NC -  contention
+--                enq: ND -  contention
+--                enq: NE -  contention
+--                enq: NF -  contention
+--                enq: NG -  contention
+--                enq: NH -  contention
+--                enq: NI -  contention
+--                enq: NJ -  contention
+--                enq: NK -  contention
+--                enq: NL -  contention
+--                enq: NM -  contention
+--                enq: NN -  contention
+--                enq: NO -  contention
+--                enq: NP -  contention
+--                enq: NQ -  contention
+--                enq: NR -  contention
+--                enq: NS -  contention
+--                enq: NT -  contention
+--                enq: NU -  contention
+--                enq: NV -  contention
+--                enq: NX -  contention
+--                enq: NY -  contention
+--                enq: NZ -  contention
 --                enq: OC - contention
 --                enq: OD - Serializing DDLs
 --                enq: OL - contention
+--                enq: OP - OLS Cleanup unused profiles
+--                enq: OP - OLS Store user entries
 --                enq: OQ - xsoq*histrecb
 --                enq: OQ - xsoqhiAlloc
 --                enq: OQ - xsoqhiClose
@@ -592,35 +972,122 @@ order by
 --                enq: OT - TEXT: Generic Lock
 --                enq: OW - initialization
 --                enq: OW - termination
+--                enq: PA - modify a privilege capture
+--                enq: PA - read a privilege capture
+--                enq: PB - PDB Lock
+--                enq: PC - read privilege capture info
+--                enq: PC - update privilege capture info
 --                enq: PD - contention
 --                enq: PE - contention
 --                enq: PF - contention
 --                enq: PG - contention
 --                enq: PH - contention
 --                enq: PI - contention
+--                enq: PJ - modify DV policy
+--                enq: PJ - read DV policy
 --                enq: PL - contention
+--                enq: PM -  contention
+--                enq: PP -  contention
+--                enq: PQ - QPT add dqpt
+--                enq: PQ - QPT add dqpt fg
+--                enq: PQ - QPT add qpt
+--                enq: PQ - QPT add qpt fg
+--                enq: PQ - QPT drop dqpt
+--                enq: PQ - QPT drop qpt
+--                enq: PQ - QPT LB Trunc sync
+--                enq: PQ - QPT Trunc
+--                enq: PQ - QPT XSTART Trunc sync
 --                enq: PR - contention
 --                enq: PS - contention
+--                enq: PT - ASM Storage May Split
 --                enq: PT - contention
 --                enq: PV - syncshut
 --                enq: PV - syncstart
 --                enq: PW - perwarm status in dbw0
+--                enq: PX - PDB instance recovery
+--                enq: PZ - flush passwordfile metadata
+--                enq: PZ - load passwordfile metadata
+--                enq: QA -  contention
+--                enq: QB -  contention
+--                enq: QC -  contention
+--                enq: QD -  contention
+--                enq: QE -  contention
+--                enq: QF -  contention
+--                enq: QG -  contention
+--                enq: QH -  contention
+--                enq: QI -  contention
+--                enq: QJ -  contention
+--                enq: QK -  contention
+--                enq: QL -  contention
+--                enq: QM -  contention
+--                enq: QN -  contention
+--                enq: QO -  contention
+--                enq: QP -  contention
+--                enq: QQ -  contention
+--                enq: QR -  contention
+--                enq: QS -  contention
+--                enq: QT -  contention
+--                enq: QU -  contention
+--                enq: QV -  contention
+--                enq: QX -  contention
+--                enq: QY -  contention
+--                enq: QZ -  contention
+--                enq: RA - RT ADDM flood control
 --                enq: RB - contention
 --                enq: RD - RAC load
 --                enq: RE - block repair contention
 --                enq: RF - atomicity
+--                enq: RF - Broker Chief Lock
+--                enq: RF - Broker LSBY FO Lock
+--                enq: RF - Broker NSV Lock
+--                enq: RF - Broker State Lock
 --                enq: RF - DG Broker Current File ID
 --                enq: RF - FSFO Observer Heartbeat
 --                enq: RF - FSFO Primary Shutdown suspended
+--                enq: RF - FSFO string buffer
 --                enq: RF - new AI
 --                enq: RF - RF - Database Automatic Disable
 --                enq: RF - synch: DG Broker metadata
 --                enq: RF - synchronization: aifo master
 --                enq: RF - synchronization: critical ai
+--                enq: RG - Apply coord start/stop
+--                enq: RH - quarantine
+--                enq: RK - queue wallet and TS keys
 --                enq: RK - set key
 --                enq: RL - RAC wallet lock
+--                enq: RM -  contention
 --                enq: RN - contention
 --                enq: RP - contention
+--                enq: RQ - AQ cached commit WM update
+--                enq: RQ - AQ cached dequeue by condition
+--                enq: RQ - AQ Cross Shard mem free
+--                enq: RQ - AQ Cross update scn for delay
+--                enq: RQ - AQ Dq Ptn Mapping
+--                enq: RQ - AQ Enq commit block truncate
+--                enq: RQ - AQ Enq commit incarnation wrap
+--                enq: RQ - AQ Eq Ptn Mapping
+--                enq: RQ - AQ Evict: block truncate
+--                enq: RQ - AQ indexed cached commit
+--                enq: RQ - AQ rollback retry count update
+--                enq: RQ - AQ Rule evaluation segment load
+--                enq: RQ - AQ Shid Gen
+--                enq: RQ - AQ Trnc mem free
+--                enq: RQ - AQ Trnc mem free by CP
+--                enq: RQ - AQ Trnc mem free by LB
+--                enq: RQ - AQ Trnc mem free remote
+--                enq: RQ - AQ uncached commit WM update
+--                enq: RQ - AQ uncached dequeue
+--                enq: RQ - AQ Unevict PGA: Queue View
+--                enq: RQ - AQ Unevict PGA: setup subscriber
+--                enq: RQ - Cross export subshard
+--                enq: RQ - Cross import subshard
+--                enq: RQ - Cross update scn
+--                enq: RQ - Dequeue update scn
+--                enq: RQ - Enqueue commit cached
+--                enq: RQ - Enqueue commit uncached
+--                enq: RQ - Free shadow shard
+--                enq: RQ - Parallel cross update scn
+--                enq: RQ - Trucate subshard
 --                enq: RR - contention
 --                enq: RS - file delete
 --                enq: RS - persist alert level
@@ -636,10 +1103,19 @@ order by
 --                enq: RW - MV metadata contention
 --                enq: RX - relocate extent
 --                enq: RX - unlock extent
+--                enq: RZ - add element
+--                enq: RZ - remove element
+--                enq: SA - MRP SRL access
+--                enq: SA - standby redo logfiles
 --                enq: SB - logical standby metadata
 --                enq: SB - table instantiation
+--                enq: SC -  contention
 --                enq: SE - contention
 --                enq: SF - contention
+--                enq: SG - OLS Add Group
+--                enq: SG - OLS Alter Group Parent
+--                enq: SG - OLS Create Group
+--                enq: SG - OLS Drop Group
 --                enq: SH - contention
 --                enq: SI - contention
 --                enq: SJ - Slave Task Cancel
@@ -647,14 +1123,22 @@ order by
 --                enq: SL - escalate lock
 --                enq: SL - get lock
 --                enq: SL - get lock for undo
+--                enq: SM -  contention
+--                enq: SN - PDB SGA allocation
+--                enq: SN - PDB SGA free
+--                enq: SN - PDB SGA protection
 --                enq: SO - contention
---                enq: SP - contention 1
---                enq: SP - contention 2
---                enq: SP - contention 3
+--                enq: SP - close wallet
 --                enq: SP - contention 4
+--                enq: SP - iso or unite keystore
+--                enq: SP - TS online or offline rekey
 --                enq: SR - contention
 --                enq: SU - contention
 --                enq: SW - contention
+--                enq: SX - contention 5
+--                enq: SX - contention 6
+--                enq: SY - IM populate by other session
+--                enq: SZ - contention
 --                enq: TA - contention
 --                enq: TB - SQL Tuning Base Cache Load
 --                enq: TB - SQL Tuning Base Cache Update
@@ -669,51 +1153,165 @@ order by
 --                enq: TL - contention
 --                enq: TO - contention
 --                enq: TP - contention
+--                enq: TQ -  sq TM contention
+--                enq: TQ - create eviction table
 --                enq: TQ - DDL contention
 --                enq: TQ - DDL-INI contention
 --                enq: TQ - INI contention
+--                enq: TQ - INI sq contention
+--                enq: TQ - LB drop volatile shard
+--                enq: TQ - MC free sync at cross job end
+--                enq: TQ - MC free sync at cross job start
+--                enq: TQ - MC free sync at cross job stop
+--                enq: TQ - MC free sync at export subshard
 --                enq: TQ - TM contention
+--                enq: TQ - TM Job cache initialization
+--                enq: TQ - TM Job cache use
+--                enq: TR - database key open check
+--                enq: TR - serialize system rekeys
+--                enq: TR - serialize TS rekeys
 --                enq: TS - contention
 --                enq: TT - contention
+--                enq: TU - UMF topology
 --                enq: TX - contention
+--                enq: TZ - contention
+--                enq: UF - undo stat flush per PDB
 --                enq: US - contention
+--                enq: UT - transfer audit records
+--                enq: VA -  contention
+--                enq: VB -  contention
+--                enq: VC -  contention
+--                enq: VD -  contention
+--                enq: VE -  contention
+--                enq: VF -  contention
+--                enq: VG -  contention
+--                enq: VH -  contention
+--                enq: VI -  contention
+--                enq: VJ -  contention
+--                enq: VK -  contention
+--                enq: VL -  contention
+--                enq: VM -  contention
+--                enq: VN -  contention
+--                enq: VO -  contention
+--                enq: VP -  contention
+--                enq: VQ -  contention
+--                enq: VR -  contention
+--                enq: VS -  contention
+--                enq: VT -  contention
+--                enq: VU -  contention
+--                enq: VV -  contention
+--                enq: VX -  contention
+--                enq: VY -  contention
+--                enq: VZ -  contention
 --                enq: WA - contention
+--                enq: WD - AWR mail package retrieval
+--                enq: WE - AWR auto-export
 --                enq: WF - contention
 --                enq: WG - delete fso
+--                enq: WI - AWR import
 --                enq: WL - contention
---                enq: WL - RAC-wide SGA contention
+--                enq: WL - Far Sync Fail Over
+--                enq: WL - Network Throttle
+--                enq: WL - RAC-wide SGA dump
+--                enq: WL - RAC-wide SGA initialize
+--                enq: WL - RAC-wide SGA write
+--                enq: WL - redo_db table update
+--                enq: WL - redo_log table update
 --                enq: WL - RFS global state contention
+--                enq: WL - SNA access/locking
+--                enq: WL - Switchover To Primary
 --                enq: WL - Test access/locking
 --                enq: WM - WLM Plan activation
+--                enq: WN - rw snapshot synchronization
 --                enq: WP - contention
 --                enq: WR - contention
+--                enq: WS -  contention
+--                enq: WT - contention
+--                enq: XB -  contention
 --                enq: XC - XDB Configuration
 --                enq: XD - ASM disk drop/add
 --                enq: XD - ASM disk OFFLINE
 --                enq: XD - ASM disk ONLINE
 --                enq: XH - contention
+--                enq: XK -  contention
 --                enq: XL - fault extent map
+--                enq: XM -  contention
 --                enq: XQ - purification
 --                enq: XQ - recovery
 --                enq: XQ - relocation
 --                enq: XR - database force logging
 --                enq: XR - quiesce database
 --                enq: XY - contention
+--                enq: YA -  contention
+--                enq: YB -  contention
+--                enq: YC -  contention
+--                enq: YD -  contention
+--                enq: YE -  contention
+--                enq: YF -  contention
+--                enq: YG -  contention
+--                enq: YH -  contention
+--                enq: YI -  contention
+--                enq: YJ -  contention
+--                enq: YK -  contention
+--                enq: YL -  contention
+--                enq: YM -  contention
+--                enq: YN -  contention
+--                enq: YO -  contention
+--                enq: YP -  contention
+--                enq: YQ -  contention
+--                enq: YR -  contention
+--                enq: YS -  contention
+--                enq: YT -  contention
+--                enq: YU -  contention
+--                enq: YV -  contention
+--                enq: YX -  contention
+--                enq: YY -  contention
+--                enq: YZ -  contention
 --                enq: ZA - add std audit table partition
+--                enq: ZB - contention
+--                enq: ZC - FS Seg contention
+--                enq: ZD - FS CU mod
 --                enq: ZF - add fga audit table partition
 --                enq: ZH - compression analysis
+--                enq: ZL - LogMiner foreign log metadata
+--                enq: ZP - Private Temporary Table
+--                enq: ZQ - quiesce
+--                enq: ZQ - register
+--                enq: ZR - ZDLRA check quiesce tasks
+--                enq: ZR - ZDLRA check servlet quiescence
+--                enq: ZR - ZDLRA invalidate plans
+--                enq: ZR - ZDLRA lock API
+--                enq: ZR - ZDLRA lock db
+--                enq: ZR - ZDLRA lock scheduler
+--                enq: ZR - ZDLRA lock storage loc
+--                enq: ZR - ZDLRA lock timer queue
+--                enq: ZR - ZDLRA protect plans
+--                enq: ZR - ZDLRA purge storage loc
+--                enq: ZR - ZDLRA quiesce servlets
+--                enq: ZR - ZDLRA quiesce tasks
+--                enq: ZR - ZDLRA run scheduler
+--                enq: ZR - ZDLRA serialize unregister db
+--                enq: ZR - ZDLRA spare enq 10
+--                enq: ZS - excl access to spill audit file
+--                enq: ZX - repopulation file write
 --                enq: ZZ - update hash tables
 --                events in waitclass Other
 --                extent map load/unlock
+--                extent map locked
+--                Failed Logon Delay
 --                FAL archive wait 1 sec for REOPEN minimum
+--                File Directory Use
 --                flashback free VI log
 --                flashback log switch
+--                force-cr-override flush
 --                free global transaction table entry
 --                free process state object
---                GCR CSS join retry
+--                GCR CSS group join
+--                GCR CSS group leave
+--                GCR CSS group lock
+--                GCR CSS group query
+--                GCR CSS group update
 --                GCR ctx lock acquisition
---                GCR lock acquisition
---                GCR member Data from CSS
 --                gcs ddet enter server mode
 --                gcs domain validation
 --                gcs drm freeze begin
@@ -744,11 +1342,12 @@ order by
 --                ges generic event
 --                ges global resource directory to be frozen
 --                ges inquiry response
+--                ges instance reconfig name entry query
+--                ges ipc enter server mode
 --                ges lmd and pmon to attach
 --                ges LMD suspend for testing event
 --                ges lmd sync during reconfig
 --                ges LMD to inherit communication channels
---                ges LMD to shutdown
 --                ges lmd/lmses to freeze in rcfg
 --                ges lmd/lmses to unfreeze in rcfg
 --                ges LMON for send queues
@@ -763,9 +1362,10 @@ order by
 --                ges resource cleanout during enqueue open
 --                ges resource cleanout during enqueue open-cvt
 --                ges resource directory to be unfrozen
---                ges retry query node
+--                ges resource enqueue open retry sleep
 --                ges reusing os pid
 --                ges RMS0 retry add redo log
+--                ges server process to shutdown
 --                ges user error
 --                ges wait for lmon to be ready
 --                ges yield cpu in reconfig
@@ -776,7 +1376,9 @@ order by
 --                ges2 LMON to wake up lms - mrcvr 3
 --                ges2 proc latch in rm latch get 1
 --                ges2 proc latch in rm latch get 2
+--                get branch/thread/sequence enqueue
 --                GIPC operation: dump
+--                GL: cross instance latch free
 --                global cache busy
 --                global enqueue expand wait
 --                global plug and play automatic resource creation
@@ -786,39 +1388,62 @@ order by
 --                GPnP Set Item
 --                GPnP Termination
 --                GV$: slave acquisition retry wait time
+--                IM ADG space pressure
+--                IM ADO scheduler retry
+--                IM CU busy
+--                IM FastStart deadlock retry
+--                IM populate completion
+--                Image redo gen delay
+--                IMCDT end of scans cleanup
+--                IMFS Flush defer writes
 --                imm op
 --                IMR CSS join retry
 --                IMR disk votes
+--                IMR hang simulation
 --                IMR membership resolution
 --                IMR mount phase II completion
 --                IMR net-check message ack
 --                IMR rr lock release
 --                IMR rr update
+--                IMR slave acknowledgement msg
+--                IMR slave process init
+--                IMR slave process shutdown
+--                IMXT Populate - drop HT
+--                In-Memory populate: over pga limit
 --                inactive session
 --                inactive transaction branch
 --                index block split
+--                influx scn
 --                instance state change
+--                internal test event (index merge)
+--                internal test event (index split branch)
+--                internal test event (index split leaf)
+--                ioctl to cell offload device
+--                IOS client reconnect to dif IOS
+--                IOS worker process exit
+--                IOS worker process startup
 --                IPC busy async request
 --                IPC send completion sync
 --                IPC wait for name service busy
 --                IPC waiting for OSD resources
+--                JAVA patching
 --                job scheduler coordinator slave wait
 --                jobq slave shutdown wait
 --                jobq slave TJ process wait
+--                KA: shared KGA not initialized
+--                kcbw: cache protect wait
 --                kcbzps
 --                kdblil wait before retrying ORA-54
---                kdic_do_merge
 --                kfcl: instance recovery
 --                kgltwait
+--                kill all read-only instances in cluster
 --                kjbdomalc allocate recovery domain - retry
 --                kjbdrmcvtq lmon drm quiesce: ping completion
 --                kjbopen wait for recovery domain attach
 --                KJC: Wait for msg sends to complete
---                kjctcisnd: Queue/Send client message
 --                kjctssqmg: quick message send wait
 --                kjudomatt wait for recovery domain attach
 --                kjudomdet wait for recovery domain detach
---                kjxgrtest
 --                kkdlgon
 --                kkdlhpon
 --                kkdlsipon
@@ -832,12 +1457,11 @@ order by
 --                kpodplck wait before retrying ORA-54
 --                ksbcic
 --                ksbsrv
---                ksdxexeother
---                ksdxexeotherwait
 --                ksim generic wait event
 --                kslwait unit test event 1
 --                kslwait unit test event 2
 --                kslwait unit test event 3
+--                KSV master wait
 --                ksv slave avail wait
 --                ksxr poll remote instances
 --                ksxr wait for mount shared
@@ -853,37 +1477,71 @@ order by
 --                latch activity
 --                latch free
 --                latch: active service list
+--                latch: AQ OPT Background Master Latch
+--                latch: AQ Sharded subscriber statistics latch
 --                latch: cache buffer handles
 --                latch: cache buffers lru chain
 --                latch: call allocation
 --                latch: change notification client cache latch
 --                latch: Change Notification Hash table latch
 --                latch: checkpoint queue latch
+--                latch: Column stats entry latch
 --                latch: enqueue hash chains
 --                latch: gc element
+--                latch: GCS logfile block
+--                latch: GCS logfile write queue
 --                latch: gcs resource hash
 --                latch: ges resource hash list
+--                latch: ILM access tracking extent
+--                latch: ILM activity tracking latch
+--                latch: IM area sb latch
+--                latch: IM area scb latch
+--                latch: IM emb latch
+--                latch: IM seg hdr latch
+--                latch: IMFS defer write list
+--                latch: java patching
+--                latch: kjci process context latch
+--                latch: kjci request sequence latch
+--                latch: kjoeq omni enqueue hash bucket latch
+--                latch: kjoer owner hash bucket
+--                latch: ksm sga alloc latch
+--                latch: ksolt lwth alloc
+--                latch: last service list
 --                latch: lob segment dispenser latch
 --                latch: lob segment hash table latch
 --                latch: lob segment query latch
 --                latch: messages
+--                latch: obj/range reuse redo processing
 --                latch: object queue header operation
 --                latch: parallel query alloc buffer
+--                latch: pdb enqueue hash chains
 --                latch: PX hash array latch
 --                latch: redo allocation
+--                latch: service drain list
 --                latch: session allocation
+--                latch: SGA Logging Bkt Latch
+--                latch: SGA Logging Log Latch
 --                latch: undo global data
 --                latch: virtual circuit queues
 --                latch: WCR: processes HT
 --                latch: WCR: sync
---                LGWR ORL/NoExp FAL archival
+--                LGWR all worker groups
+--                LGWR any worker group
+--                LGWR intra group IO completion
+--                LGWR intra group sync
 --                LGWR simulation latency wait
 --                LGWR wait for redo copy
+--                LGWR worker group ordering
 --                LGWR-LNS wait on channel
 --                library cache revalidation
 --                library cache shutdown
+--                lightweight thread operation
+--                lightweight thread task completion
 --                listen endpoint status
 --                listener registration dump
+--                LMA glob lock acquisition
+--                LMA KGA glob lock acquisition
+--                LMFC reconfig operation
 --                LMON global data update
 --                lms flush message acks
 --                LNS simulation latency wait
@@ -892,6 +1550,7 @@ order by
 --                lock escalate retry
 --                lock release pending
 --                log file switch (clearing log file)
+--                log file sync: PDB shutdown abort
 --                log switch/archive
 --                log write(even)
 --                log write(odd)
@@ -900,48 +1559,70 @@ order by
 --                Logical Standby dictionary build
 --                Logical Standby pin transaction
 --                Logical Standby Terminal Apply
+--                LogMiner builder: queue full
+--                LogMiner FSC: dictionary load completion
+--                LogMiner merger: redo slot
+--                LogMiner reader: memory
+--                LogMiner reader: redo slot
+--                LogMiner: queue
+--                LogMiner: session audit list
+--                LogMiner: txn
+--                Long operation CF pause
 --                master diskmon read
 --                master diskmon startup
 --                master exit
+--                Memory: Reg/Dereg
 --                MMON (Lite) shutdown
 --                MMON slave messages
+--                Monitor testing
+--                move audit tablespace delay
 --                MRP inactivation
---                MRP state inspection
---                MRP termination
+--                MRP stop
 --                MRP wait on archivelog archival
 --                MRP wait on archivelog arrival
 --                MRP wait on process restart
 --                MRP wait on process start
 --                MRP wait on startup clear
 --                name-service call wait
+--                Nest operation
 --                NFS read delegation outstanding
 --                no free buffers
 --                no free locks
+--                Nologging Standby Unit Test
+--                Nonlogged block fetch
 --                null event
+--                OFS interrupted req not found
 --                OJVM: Generic
---                OLAP Aggregate Client Deq
---                OLAP Aggregate Client Enq
---                OLAP Aggregate Master Deq
---                OLAP Aggregate Master Enq
---                OLAP Null PQ Reason
---                OLAP Parallel Temp Grew
---                OLAP Parallel Temp Grow Request
---                OLAP Parallel Temp Grow Wait
---                OLAP Parallel Type Deq
+--                opening cell offload device
 --                opishd
 --                optimizer stats update retry
+--                oracle thread bootstrap
+--                oradebug request completion
+--                oradebug request slot
+--                os thread creation
 --                OSD IPC library
 --                parallel recovery change buffer free
 --                parallel recovery coord send blocked
 --                parallel recovery coord wait for reply
+--                parallel recovery coord: all replies
+--                parallel recovery push change
 --                parallel recovery read buffer free
+--                parallel recovery redo cache buffer free
 --                parallel recovery slave wait for change
+--                PCFC: recovery domain valid
+--                PDB close/open on another instance
+--                PDB lock domain invalidation
+--                PDB relocate completion
 --                pending global transaction(s)
+--                PGA memory operation
+--                pmon cleanup
 --                pmon dblkr tst event
+--                pmon shutdown
 --                PMON to cleanup detached branches at shutdown
 --                PMON to cleanup pseudo-branches at svc stop time
---                prewarm transfer retry
+--                prefetch warmup block being transferred
 --                prior spawner clean up
+--                process allocation slot
 --                process diagnostic dump
 --                process shutdown
 --                process startup
@@ -949,6 +1630,7 @@ order by
 --                PX create server
 --                PX Deq Credit: free buffer
 --                PX Deq Credit: Session Stats
+--                PX Deq: Join ACK
 --                PX Deq: OLAP Update Close
 --                PX Deq: OLAP Update Execute
 --                PX Deq: OLAP Update Reply
@@ -963,6 +1645,11 @@ order by
 --                PX Deq: Test for credit
 --                PX Deq: Test for msg
 --                PX hash elem being inserted
+--                PX hash key vector cell
+--                PX hash key vector merge
+--                PX key vector create dgk init
+--                PX key vector flatten
+--                PX key vector use load
 --                PX Nsq: PQ descriptor query
 --                PX Nsq: PQ load info query
 --                PX qref latch
@@ -972,20 +1659,71 @@ order by
 --                PX slave connection
 --                PX slave release
 --                qerex_gdml
---                queue slave messages
+--                RAC reference partitioning descendants lock
+--                RAC referential constraint parent lock
+--                RAC: constraint DDL lock
+--                RAC: row cache lock nowait retry
 --                rdbms ipc message block
 --                rdbms ipc reply
+--                read/write snapshot completion
 --                readable standby redo apply remastering
+--                reap block level offload operations
+--                recovery active instance mapping setup
+--                recovery apply pending
 --                recovery area: computing applied logs
 --                recovery area: computing backed up files
 --                recovery area: computing dropped files
 --                recovery area: computing obsolete files
 --                recovery buffer pinned
+--                recovery cancel
+--                recovery checkpoint
+--                recovery coordinator apply  pending
+--                recovery coordinator marker apply
+--                recovery coordinator message
+--                recovery file header update for checkpoint
+--                recovery file header update for fuzziness
+--                recovery fuzzy update
 --                recovery instance recovery completion
+--                recovery marker apply
+--                recovery merge pending
+--                recovery message
+--                recovery metadata latch
+--                recovery move influx buffers
+--                recovery new thread enable
+--                recovery receive buffer free
+--                recovery remote file verification
+--                recovery send buffer free
+--                recovery shutdown
+--                recovery slaves to be informed
+--                recovery timestamp
+--                Recovery: scn growth limit
+--                redo log switch request completion
+--                Redo Transport Attach
+--                Redo Transport Close
+--                Redo Transport Detach
+--                Redo Transport MISC
+--                Redo Transport Network Throttle
+--                Redo Transport Open
+--                Redo Transport Ping
+--                Redo Transport Slave Shutdown
+--                Redo Transport Slave Startup
+--                Redo transport testing
+--                Redo Writer Remote Sync Complete
+--                Redo Writer Remote Sync Notify
 --                reliable message
+--                Remote SYNC Ping
+--                Remote Tool Request Free List
+--                Remote Tool Request Reply
+--                REPL Capture/Apply: database startup
+--                REPL Capture/Apply: miscellaneous
+--                REPL Capture/Apply: RAC inter-instance ack
 --                Replication Dequeue
 --                resmgr:internal state cleanup
+--                resmgr:plan change
 --                Resolution of in-doubt txns
+--                retry CFTXN during close
+--                Retry DB Audit Record Insertion Delay
+--                Revoke: get object
 --                RFS announce
 --                RFS attach
 --                RFS close
@@ -994,44 +1732,57 @@ order by
 --                RFS dispatch
 --                RFS ping
 --                RFS register
+--                RMA: latch
+--                RMA: RAC reconfig
+--                RMA: rlog allocate
+--                RMAN wallet access limit
 --                rollback operations active
 --                rollback operations block full
 --                rolling migration: cluster quiesce
+--                rolling migration: orphans detected
 --                row cache cleanup
+--                Row cache for Grant or Revoke
 --                row cache process
 --                RSGA: RAC reconfiguration
 --                RVWR wait for flashback copy
 --                scginq AST call
 --                secondary event
+--                secure protocol error delay
+--                Securefile Write Gather Cache Yield Process
 --                select wait
---                set director factor wait
+--                session allocation inc count
+--                SGA Allocator termination
 --                SGA: allocation forcing component growth
 --                SGA: sga_target resize
+--                Shadow lost write
 --                shutdown after switchover to standby
 --                slave exit
+--                SPA slave messages
 --                Space Manager: slave messages
 --                standby query scn advance
---                Streams AQ: emn coordinator waiting for slave to start
---                Streams AQ: qmn coordinator waiting for slave to start
+--                Streams AQ: index block pin/row lock
 --                Streams AQ: QueueTable kgl locks
 --                Streams AQ: waiting for busy instance for instance_name
---                Streams capture: waiting for database startup
---                Streams miscellaneous event
---                Streams: RAC waiting for inter instance ack
 --                SUPLOG PL wait for inflight pragma-d PL/SQL
+--                Supplemental logging roles
+--                Sync ASM discovery
 --                Sync ASM rebalance
+--                SYNC Remote Write
+--                tablespace key change
+--                target log write size
 --                test long ops
 --                TEST: action hang
 --                TEST: action sync
 --                timer in sksawat
 --                transaction
---                TSE master key rekey
 --                TSE SSO wallet reopen
 --                tsm with timeout
+--                txn cache read version
 --                txn to complete
 --                unbound tx
 --                undo segment recovery
 --                undo_retention publish retry
+--                unified memory allocation
 --                unspecified wait event
 --                wait active processes
 --                wait for a paralle reco to abort
@@ -1053,11 +1804,7 @@ order by
 --                wait for sync ack
 --                Wait for TT enqueue
 --                wait for verification ack
---                wait list latch activity
 --                wait list latch free
---                Wait on stby instance close
---                waiting to get CAS latch
---                waiting to get RM CAS latch
 --                WCR: capture file IO write
 --                WCR: RAC message context busy
 --                WCR: Sync context busy
@@ -1068,20 +1815,24 @@ order by
 --                LogMiner builder: memory
 --                LogMiner preparer: memory
 --                LogMiner reader: buffer
+--                REPL Capture/Apply: flow control
+--                REPL Capture/Apply: memory
+--                REPL Capture: subscribers to catch up
 --                Streams AQ: enqueue blocked due to flow control
 --                Streams AQ: enqueue blocked on low memory
---                Streams capture: waiting for subscribers to catch up
---                Streams: flow control
---                Streams: resolve low memory condition
--- Scheduler      enq: JX - cleanup of  queue
+-- Scheduler      acknowledge over PGA limit
+--                enq: JX - cleanup of  queue
 --                enq: JX - SQL statement queue
 --                PX Queuing: statement queue
+--                resmgr: I/O rate limit
+--                resmgr: redo throttle
 --                resmgr:become active
 --                resmgr:cpu quantum
 --                resmgr:large I/O queued
 --                resmgr:pq queued
---                resmgr:small I/O queued
 -- System I/O     Archiver slave I/O
+--                ASM async relocation I/O
+--                ASM sync relocation I/O
 --                cell manager closing cell
 --                cell manager discovering disks
 --                cell manager opening cell
@@ -1094,32 +1845,47 @@ order by
 --                db file async I/O submit
 --                db file parallel write
 --                DBWR slave I/O
+--                File Repopulation Write
 --                flashback log file read
 --                flashback log file write
 --                io done
+--                iowp io
 --                kfk: async disk IO
 --                LGWR slave I/O
 --                Log archive I/O
 --                log file parallel write
+--                log file pmem persist read
+--                log file pmem persist write
 --                log file sequential read
 --                log file single write
 --                Network file transfer
+--                PBR logfile block write
+--                PBR logfile IO
 --                recovery read
 --                RFS random i/o
 --                RFS sequential i/o
 --                RFS write
 --                RMAN backup & recovery I/O
 --                RMAN Disk slave I/O
+--                RMAN lost write reread
 --                RMAN Tape slave I/O
 --                Standby redo I/O
 -- User I/O       Archive Manager file transfer I/O
+--                ASM File Group Sync
 --                ASM Fixed Package I/O
+--                ASM IO for non-blocking poll
 --                ASM Staleness File I/O
+--                ASM sync cache disk read
 --                BFILE read
 --                buffer read retry
+--                cell external table smart scan
 --                cell list of blocks physical read
+--                cell list of blocks read request
 --                cell multiblock physical read
+--                cell multiblock read request
+--                cell physical read no I/O
 --                cell single block physical read
+--                cell single block read request
 --                cell smart file creation
 --                cell smart index scan
 --                cell smart table scan
@@ -1145,15 +1911,18 @@ order by
 --                Disk file Mirror Read
 --                Disk file Mirror/Media Repair Write
 --                Disk file operations I/O
+--                DNFS disp IO slave completion
 --                external table misc IO
 --                external table open
 --                external table read
 --                external table seek
 --                external table write
+--                File Copy
 --                flashback log file sync
 --                local write wait
 --                Log file init write
 --                Parameter File I/O
+--                Pluggable Database file copy
 --                read by other session
 --                securefile direct-read completion
 --                securefile direct-write completion
