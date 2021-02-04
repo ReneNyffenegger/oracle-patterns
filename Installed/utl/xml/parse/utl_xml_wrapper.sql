@@ -13,6 +13,9 @@ create or replace package utl_xml_wrapper as
        result         in out nocopy clob
     );
 
+ --
+ -- No idea how this function is supposed to be used:
+ --
     procedure parseExpr (
        currentUserid  in     number,
        schema         in     varchar2,
@@ -50,7 +53,7 @@ create or replace package body utl_xml_wrapper as
       tab            in     varchar2,
       sqltext        in     clob,
       arith          in     binary_integer,  -- non-0 = sqltext is an arithmetic expression 
-      lobloc         in out nocopy clob
+      lobloc         in out nocopy clob      --         otherwise it's a boolean expression
     ) is
       language c
       library  sys.utl_xml_lib
