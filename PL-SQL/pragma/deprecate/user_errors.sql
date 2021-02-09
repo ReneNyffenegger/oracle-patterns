@@ -3,4 +3,6 @@ select
    type,
    text
 from
-   user_errors where message_number = 6020;
+   user_errors
+where
+   message_number = 6020;
