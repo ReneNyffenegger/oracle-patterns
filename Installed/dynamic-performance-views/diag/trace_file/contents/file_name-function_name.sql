@@ -1,0 +1,224 @@
+select
+   count(*),
+   case when nvl(lag(file_name) over (order by file_name, function_name), 'n/a') <> file_name then file_name end,
+   function_name
+from
+   v$diag_trace_file_contents
+group by
+   file_name,
+   function_name
+order by
+  -- count(*) desc
+   file_name,
+   function_name
+;
+--  apa.c            apadrv
+--  dbgea.c          dbgea_dispatch_pack_int
+--                   dbgea_exec_
+--  dbger.c          dbgerRunActions
+--  dbgex.c          dbgexPhaseII
+--                   dbgexProcessError
+--  dbgrim.c         dbgrimbid_begin_incdump
+--  dbgrmbl.c        dbgrmblgmp_get_many_pages
+--                   dbgrmblgp_get_page
+--                   dbgrmblwp_write_page
+--  dbgrmdm.c        dbgrmdmdr_delete_record
+--                   dbgrmdmir_insert_record
+--                   dbgrmdmur_update_record
+--  dbgrme.c         dbgrme_bind
+--  dbgrmqm.c        dbgrmqmif_internal_fetch
+--                   dbgrmqmp_predicate_full
+--                   dbgrmqmqpk_query_pick_key
+--                   dbgrmqmsk_scan_key
+--  dbked.c          dbkedDefDump
+--                   dbkedSqlDmp
+--                   dbkedVktmDmp
+--  dbkt.c           dbktWriteTimestampWCdbInfo
+--  dbktb.c          dbktbDefaultBucketFree
+--  kests.c          kestsDumpMsg
+--  kgds.c           kgdsbsdmp
+--                   kgdsdst
+--  kgl.c            kglDumpAddField
+--                   kglDumpOpenField
+--  kjci.c           kjcipctxdmi
+--  kjzd.c           kjzd_masterloop
+--                   kjzdclstrc
+--                   kjzdcrsh
+--                   kjzddmp
+--                   kjzdlogdreq
+--                   kjzdmdrq
+--                   kjzdshn
+--                   kjzduptcctx
+--  kjzg.c           kjzgtrdump
+--  kke.c            kke1ro
+--                   kkebihsl
+--                   kkecdn
+--                   kkehsl_Int
+--                   kkejcd
+--  kkec.c           kkecComputeAPDop
+--  kkecst.c         kkeCostToTime
+--                   kkePrintIdxCostInfo
+--                   kkeSortCosts
+--                   kkecstDumpPredArrCost
+--                   kkecstDumpSingleLogCost
+--                   kkeidc
+--                   kkejnc
+--                   kkessc
+--                   kketac
+--  kkest.c          kkestGbyAdjmtFactor
+--                   kkestGetMCSel
+--                   kkestGetRelColGroup
+--                   kkestRCHistgrm
+--  kko.c            kkoCBRidEligible
+--                   kkoFroAddXplAnnotations
+--                   kkoQbcCheckOrExpansion
+--                   kkoipt
+--                   kkoiqb
+--                   kkooqb
+--                   kkoqbc
+--  kkoap.c          kkotap
+--  kkobm.c          kkobmp
+--  kkodp.c          kkodpComputeJoinInfpt
+--  kkojm.c          kkojnp
+--                   kkooic
+--  kkojo.c          kkoSaveJoinOrder
+--  kkoop.c          kkogcp
+--                   kkogenpr
+--  kkopje.c         kkopjedrv
+--  kkopm.c          kkopmDisallowed
+--                   kkopmPlanBaselineCheck1
+--  kkopq.c          kkoBloomFilter
+--                   kkoDMopt
+--                   kkopqCanUseReplication
+--                   kkopqComputeBloomNdv
+--                   kkopqGetGlobalManualDOP
+--                   kkopqInitDopComputation
+--                   kkopqIsDopComputedOrParallelHinted
+--                   kkopqIsSerialJoin
+--                   kkopqSetForceParallelProperties
+--                   kkopqSingleJoinBloomNdv
+--                   kkopqUseAffinity
+--  kkost.c          kkoaccsqf
+--  kkotrc.c         kkoDumpHeapSize
+--                   kkoDumpPredicate
+--                   kkoStateDump
+--                   kkoTrcBinds
+--                   kkoTrcPrologue
+--                   kkoTrcSystemStats
+--  kkqbj.c          kkqbjCheckValidity
+--  kkqcj.c          kkqcjdrv
+--  kkqct.c          kkqctChkCBQTvalid
+--                   kkqctCleanupHeap
+--                   kkqctccton
+--                   kkqctcvct
+--                   kkqctdrvCVM
+--                   kkqctdrvIT
+--                   kkqctdrvSU
+--                   kkqctdrvTD
+--  kkqe.c           kkqedrv
+--  kkqfpp.c         kkqfppDrvDescendents
+--                   kkqfppPreRewriteDescendants
+--                   kkqfppPsh
+--  kkqgae.c         kkqgaeElimGBvalid
+--                   kkqgaedrv
+--  kkqgbp.c         kkqgbpCheckValidity
+--                   kkqgbpCheckValidityDP
+--                   kkqgbpTravChkTran
+--  kkqje.c          kkqjeDriver
+--                   kkqjeHasConstraintJoinPred
+--  kkqjf.c          kkqjfChkBasicValidity
+--  kkqjpd.c         kkqjpdcbvnuv
+--                   kkqjpdctr
+--                   kkqjpdcvvpd
+--                   kkqjpddrv
+--  kkqm.c           kkqmcvpm
+--                   kkqmdrv
+--  kkqobe.c         kkqobedrv
+--  kkqoje.c         kkqojeCOIWhere
+--                   kkqojedrv
+--  kkqore.c         kkqoreCheckQBValidity
+--  kkqr.c           kkqrdrv
+--  kkqs.c           kkqdrv
+--  kkqsqe.c         kkqsqedrv
+--  kkqst.c          kkqstApproxTransDrv
+--                   kkqstIsReduceGrByValid
+--                   kkqstSQTIsValid
+--                   kkqstSQTdrv
+--                   kkqstcstdrv
+--  kkqstar.c        kkqstarChkValidity
+--  kkqte.c          kkqteCheckValidity
+--  kkqu.c           kkqucvusq
+--                   kkqudrv
+--                   kkquunsq
+--  kkqvm.c          kkqvmCheckValidSVM
+--                   kkqvmTrMrg
+--                   kkqvmValidCVM
+--                   kkqvmrojok
+--  kkqvt.c          kkqvtCheckGeneralValidity
+--  kks1.c           kksDumpParentCursor
+--  kkscs.c          kkscsDiagChildNodes
+--  kml.c            kmlini
+--  kra.c            kraalert
+--  ksd.c            ksdtrc_new
+--  ksdhng.c         ksdhng_chain_dump
+--                   ksdhng_chain_sig_dump
+--                   ksdhng_diag_proc_int
+--  kse.c            ksedst
+--  ksipc.c          ksipc_set_service_env
+--  ksm.c            ksmdmpg
+--  ksq.c            ksqdiddmp
+--                   ksqdmc
+--                   ksqdmp
+--  kwsbg.c          kwsbgshms
+--  kxfp.c           kxfpiqdmp
+--                   kxfpqddmp
+--  kxs.c            kxsDump1
+--                   kxsDumpCursor
+--                   kxsDumpCursors
+--                   kxsDumptoid
+--                   kxsbnddmp
+--                   kxsbndinf
+--                   kxsccobc
+--                   kxsdcbc
+--  kxst.c           kxstTraceBinds
+--                   kxstTraceClose
+--                   kxstTraceWait
+--                   kxstcol
+--                   kxstcol2
+--                   kxstper
+--                   kxstsql
+--  kzxu.c           kzxuDumpPrincipalState
+--  opiexe.c         opiexe
+--  opiprs.c         opiParse
+--                   opiSem
+--  opitca.c         opitca
+--  qkadrv.c         qkaComputePlanSignature
+--  qkajoi.c         qkajoi
+--  qkn.c            qknDumpRwo
+--  qkna.c           qknAttemptCBRid
+--  qksbg.c          qksbgCreateCursorEnv
+--                   qksbgCreateSessionEnv
+--                   qksbgDumpEnv
+--  qksce.c          qksceDumpEnv
+--  qksctx.c         qksctxDump
+--  qksht.c          qkshtDumpHints
+--  qksop.c          qksopDumpPredicate
+--  qksqb.c          qksqbDumpIntoStreamOrTrace
+--                   qksqbDumpRegistryGraph
+--                   qksqbDumpSig
+--                   qksqbDumpText
+--                   qksqbRegistryCompactToXML
+--  qkstrc.c         qkstrcInitialize
+--  qmtmrc.c         qmtmrc_sga_init
+--  qosd.c           qosdCurDSDirSetup
+--                   qosdDumpDSDir
+--                   qosdDumpDirCtxStmt
+--                   qosdDumpSgaFind
+--                   qosdGenFindId
+--                   qosdGetRelevantDir
+--                   qosdInitDirCtx
+--                   qosdInsObjToHt
+--                   qosdSetupDirCtx4QB
+--  xct.c            xctend
+--  xpl.c            xplDumpRws
+--                   xplDumpSqlTrace
