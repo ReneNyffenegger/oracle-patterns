@@ -9,5 +9,16 @@ insert into tq84_lnnvl values (   1,    1);
 insert into tq84_lnnvl values (   1,    2);
 
 select * from tq84_lnnvl where lnnvl(col1=col2);
+--
+--       COL1       COL2
+-- ---------- ----------
+-- 
+--                     1
+--          1          2
+
+select * from tq84_lnnvl where not lnnvl(col1=col2);
+--       COL1       COL2
+-- ---------- ----------
+--          1          1
 
 drop table tq84_lnnvl purge;
