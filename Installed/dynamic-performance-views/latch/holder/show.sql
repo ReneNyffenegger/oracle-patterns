@@ -9,6 +9,6 @@ select
    ses.osuser,
    lah.gets
 from
-  v$latchholder lah                         join
-  v$session     ses on lah.sid = ses.sid    join
-  v$process     prc on lah.pid = prc.pid;
+   v$latchholder lah                         join
+   v$session     ses on lah.sid = ses.sid    join
+   v$process     prc on lah.pid = prc.pid;
