@@ -1,19 +1,23 @@
 select
-   sess.sid,
-   sess.serial#,
--- sess.username,
--- sess.osuser,
--- sess.program,
--- sest.sid,
-   stat.name,
-   sest.value
+   ses.sid,
+   evt.event,
+   evt.total_waits,
+   round(evt.time_waited  / 100, 1)  time_waited_s,
+   evt.time_waited_micro,
+   evt.total_timeouts,
+   round(evt.average_wait / 100, 1)  avg_wait_s,
+   evt.max_wait,
+   evt.wait_class,
+   evt.wait_class#,
+   evt.con_id
+-- evt.event_id,
+-- evt.wait_class_id
 from
-   v$session  sess                                         join
-   v$sesstat  sest on sess.sid = sest.sid                  join
-   v$statname stat on sest.statistic# = stat.statistic#
+   v$session       ses     join
+   v$session_event evt on ses.sid = evt.sid
 where
-   sess.osuser  = 'rene'       and
-   sess.program = 'EXCEL.EXE'  and
-   sest.value   >  0
+   ses.username = 'RENE'       and
+   ses.osuser   = 'rene@tq84'
 order by
-   lower(name);
+   evt.time_waited desc
+;
