@@ -1,0 +1,222 @@
+set serveroutput on;
+set verify off;
+
+/*Write PL/SQL program for user entered empno then display name of the employee, his salary and job from emp table.*/
+
+declare
+v_ename    varchar2(20);
+v_sal      number(10);
+v_job      varchar2(10);
+begin
+SELECT ename, sal, job INTO v_ename, v_sal, v_job from emp
+where empno= &employeeno;
+dbms_output.put_line(v_ename||' '||v_sal||' '||v_job);
+end;
+/
+
+/*In PL/SQL when a variable contains “not null” (or) “constant” clause then we must 
+assign the value when we are declaring the variable in declare section of the PL/SQL block.*/
+
+declare
+a    number(10) not null default 50;
+b    constant  number(10) :=9;
+begin
+dbms_output.put_line(a||' '||b);
+end;
+/
+
+/*Write a PL/SQL program maximum salary from emp table and store it into PL/SQL variable and display max salary.*/
+
+declare
+v_sal  number(10);
+begin
+select max(sal) into v_sal from emp;
+dbms_output.put_line('maximum salary: '||v_sal);
+end;
+/
+
+
+/*display the greatest among given values*/
+
+declare
+a number(10);
+b number(10);
+c number(10);
+begin
+a:= 90;
+b:= 30;
+c:= greatest(a,b); --c:=max(a,b)[error: group function cannot used in PL/SQL expre]
+dbms_output.put_line(c);
+end;
+/
+
+/*In PL/SQL expressions we are not allowed to use “Group Functions”, “Decode conversion Function”. 
+But we are allowed to use Number Functions, Character Functions, Delete Functions, Date Conversion Functions in PL/SQL expressions.*/
+
+declare
+a varchar2(10);
+begin
+a:= upper('pankaj');
+dbms_output.put_line(a);
+end;
+/
+
+declare
+a   date;
+begin
+a:= next_day('17-sep-18','tue');
+dbms_output.put_line(a);
+end;
+/
+
+/*Column Level Attributes: In this methos we are defining attributes for individual columns.
+Column Level attributes are represented by using “%type”.
+Syntax: variablename tablename. Columnname %type;*/
+
+declare
+v_ename     emp.ename%type;
+v_sal       emp.sal %type;
+v_hiredate  emp.hiredate %type;
+begin
+select ename, sal, hiredate into v_ename, v_sal, v_hiredate
+from emp where empno= &no;
+dbms_output.put_line(v_ename||' '||v_sal||' '||v_hiredate);
+end;
+/
+
+/*Row Level Attributes: In this methods a single variable can represent all different data types in a row within a table. 
+This variable is also called as “Record Type Variable”.Row level attributes are represented by “%rowtype”. 
+Syntax: variablename tablename %rowtype;*/
+
+declare
+i    emp%rowtype;
+begin
+select ename, sal, hiredate into i.ename, i.sal, i.hiredate
+from emp where empno=&no;
+dbms_output.put_line(i.ename||' '||i.sal||' '||i.hiredate);
+end;
+/
+
+
+declare
+i    emp%rowtype;
+begin
+select * into i from emp
+where empno=&no;
+dbms_output.put_line(i.ename||' '||i.sal||' '||i.hiredate||' '||i.deptno);
+end;
+/
+
+
+/*BIND variable*/
+
+variable p varchar2(10);
+
+declare
+a   number(10):= 900;
+begin
+:p  := a/2;
+end;
+/
+
+print p;
+
+/*if then elsif*/
+
+declare
+v_deptno dept.deptno%type;
+begin
+select deptno into v_deptno from dept
+where deptno = &deptno;
+if v_deptno=10 then
+dbms_output.put_line('ten');
+elsif v_deptno=20 then
+dbms_output.put_line('twenty');
+elsif v_deptno=30 then
+dbms_output.put_line('thirty');
+else
+dbms_output.put_line('others');
+end if;
+end;
+/
+
+/*case statement*/
+
+select ename, deptno, job,
+(case deptno 
+when 10 then 'ten'
+when 20 then 't20'
+else 'sorry'
+end) departments
+from emp where deptno between 10 and 30; 
+
+
+declare
+begin
+for n in reverse 1..10
+loop
+dbms_output.put_line(n);
+end loop;
+end;
+/
+
+-------------------------------------------------
+/*Write a PL/SQL cursor program to display all employee name, salary from emp table using %notfound attribute?*/
+
+declare
+cursor c1 is select ename, sal from emp;
+v_ename varchar2(20);
+v_sal number(10);
+begin
+open c1;
+loop
+fetch c1 into v_ename, v_sal;
+exit when c1%notfound;
+dbms_output.put_line(v_ename||' => '||v_sal);
+end loop;
+close c1;
+end;
+/
+
+
+/*Write PL/SQL program to display first “5” highest salary employees from emp table using “%rowcount” attribute?*/
+
+declare
+cursor c1 is select ename, sal from emp;
+v_ename varchar2(20);
+v_sal   number(10);
+begin
+open c1;
+loop
+fetch c1 into v_ename, v_sal;
+dbms_output.put_line(v_ename||' => '||v_sal);
+exit when c1%rowcount >= 5;
+end loop;
+close c1;
+end;
+/
+
+/*Write PL/SQL program to display even number of records from emp table using “%rowcount” attributes?*/
+
+declare
+cursor c1 is select ename, sal from emp;
+v_ename varchar2(20);
+v_sal   number(10);
+begin
+open  c1;
+loop
+fetch c1 into v_ename, v_sal;
+end loop;
+if mod(c1%rowcount,2)=0 then
+dbms_output.put_line(v_ename||' '||v_sal);
+end if;
+end loop;
+close c1;
+end;
+/
+
+
+
+
+
+
