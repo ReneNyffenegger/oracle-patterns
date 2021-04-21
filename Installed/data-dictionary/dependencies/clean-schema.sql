@@ -22,7 +22,8 @@ begin
          from
             user_objects     obj
          where
-            obj.object_type not in ('INDEX', 'LOB', 'PACKAGE_BODY')
+              obj.object_type not in ('INDEX', 'LOB', 'PACKAGE_BODY') and
+         not (obj.object_type = 'SEQUENCE' and obj.generated = 'Y') -- Prevent ORA-32794: cannot drop a system-generated sequence
        minus
          select
             referenced_name       ,
