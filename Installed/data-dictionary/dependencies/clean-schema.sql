@@ -40,7 +40,13 @@ begin
       loop
           dbms_output.put_line('drop ' || r.object_type || ' ' || r.object_name || case when r.object_type = 'TABLE' then ' purge' end);
           objects_available := true;
-          execute immediate    'drop ' || r.object_type || ' ' || r.object_name || case when r.object_type = 'TABLE' then ' purge' end ;
+
+          begin
+             execute immediate    'drop ' || r.object_type || ' ' || r.object_name || case when r.object_type = 'TABLE' then ' purge' end ;
+          exception when others then
+             dbms_output.put_line(sqlerrm);
+          end;
+
       end loop; -- }
 
       exit when not objects_available;
