@@ -1,7 +1,8 @@
 select
    ses.sid,
    ses.serial#,
-   lpad(' ', pln.depth * 2) || pln.operation,
+   lpad(' ', pln.depth * 2) || pln.operation   pln_operation,
+   pln.options                                 pln_options,
    wra.operation_type,
    wra.policy,
    wra.estimated_optimal_size,
@@ -15,7 +16,6 @@ select
    wra.multipasses_executions,
    wra.active_time,
    wra.max_tempseg_size,
-   pln.options,
    pln.cost,
    pln.cpu_cost,
    pln.io_cost,
