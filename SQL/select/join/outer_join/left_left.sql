@@ -3,7 +3,7 @@ create table tq84_a (
   a2 varchar2(10)
 );
 
-insert into tq84_a values (1, 'foo' );
+insert into tq84_a values (1, 'foo');
 insert into tq84_a values (1, 'bar');
 insert into tq84_a values (1, 'baz');
 insert into tq84_a values (2, 'abc');
