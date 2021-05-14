@@ -1,5 +1,3 @@
-create directory TMP_DIR as 'c:\temp';
-
 declare
 
    f     utl_file.file_type;
@@ -25,5 +23,3 @@ begin
 
 end;
 /
-
-drop directory TMP_DIR;
