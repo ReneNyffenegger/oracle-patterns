@@ -1,4 +1,4 @@
-create table tq84_range_list (
+create table tq84_interval_list (
    num  number,
    txt  varchar2(3),
    val  number

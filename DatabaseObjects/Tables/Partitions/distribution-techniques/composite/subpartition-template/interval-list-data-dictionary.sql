@@ -1,4 +1,4 @@
-insert into tq84_range_list values ( 50, 'bar', 1.1);
+insert into tq84_interval_list values ( 50, 'bar', 1.1);
 
 column    partition_name format a30
 column subpartition_name format a30
@@ -12,9 +12,9 @@ from
   user_tab_partitions    tabpar join
   user_tab_subpartitions subpar on   tabpar.table_name = subpar.table_name
 where
-  tabpar.table_name = 'TQ84_RANGE_LIST';
+  tabpar.table_name = 'TQ84_INTERVAL_LIST';
 
-insert into tq84_range_list values (350, 'baz', 7.7);
+insert into tq84_interval_list values (350, 'baz', 7.7);
 
 select
    subpar.partition_name,
@@ -24,6 +24,6 @@ from
   user_tab_partitions    tabpar join
   user_tab_subpartitions subpar on   tabpar.table_name = subpar.table_name
 where
-  tabpar.table_name = 'TQ84_RANGE_LIST';
+  tabpar.table_name = 'TQ84_INTERVAL_LIST';
 
-drop table tq84_range_list;
+drop table tq84_interval_list;
