@@ -19,16 +19,20 @@ where
 -- sess.osuser  = 'rene'       and
 -- sess.program = 'EXCEL.EXE'  and
    sest.value   >  0           and
-   sess.sid     = 574          and
+   sess.sid     = 1371         and
    stat.name in (
-     'recursive calls',
-     'db block gets'  ,
-     'consistent gets',
-     'physical reads' ,
-     'redo size'      ,
-     'sorts (memory)' ,
-     'sorts (disk)'   ,
+     'consistent gets'      , -- Number of consistent block reads
+     'db block gets'        , -- Number of current block reads
+     'session logical reads', -- "db block gets" + "consistent gets"
+     'consistent changes'   , -- Number of times that rollback was applied to make a consistent read
+     'recursive calls'      ,
+     'physical reads'       ,
+     'redo size'            ,
+     'sorts (memory)'       ,
+     'sorts (disk)'         ,
+     'sorts (rows)'         ,
      'rows processed'
    )
 order by
    lower(name);
+
