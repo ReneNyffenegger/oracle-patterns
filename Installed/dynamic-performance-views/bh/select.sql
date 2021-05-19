@@ -1,13 +1,13 @@
 select
    bh.status                               bh_status,
    bh.dirty                                bh_dirty,
-      -- free – Not currently in use
-      -- xcur – Exclusive
-      -- scur – Shared current
-      -- cr   – Consistent read
-      -- read – Being read from disk
-      -- mrec – In media recovery mode
-      -- irec – In instance recovery mode
+      -- free   Not currently in use
+      -- xcur   Exclusive
+      -- scur   Shared current
+      -- cr     Consistent read
+      -- read   Being read from disk
+      -- mrec   In media recovery mode
+      -- irec   In instance recovery mode
    ----------------------------------------------------------------
 -- et.owner seg_owner, et.segment_name seg_name,
 -- bh.objd                                                                                bh_objd,
