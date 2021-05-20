@@ -1,5 +1,5 @@
 select
-   key,
+   key,           -- Use value of KEY to query records from v$sql_plan_monitor
    report_id,
    sql_id,
    refresh_count, first_refresh_time, last_refresh_time,
