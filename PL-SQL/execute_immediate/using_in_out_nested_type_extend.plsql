@@ -6,12 +6,12 @@ declare
    number_t tq84_number_t;
 begin
 
-   execute immediate 
+   execute immediate
    --
-   --    Note the space between `:1` and the space.
-   --    Otherwise, the
+   --    Note the space between `:1` and the «extend» keywoard.
+   --    Without this space, a
    --      PLS-00110: bind variable '1.EXTEND' not allowed in this context
-   --    error is raised.
+   --    error would be raised.
    --
      'begin :1 := tq84_number_t(); '      ||
      '  :1 .extend; :1(:1 .count) := 22;' ||
