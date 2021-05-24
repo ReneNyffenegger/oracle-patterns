@@ -7,10 +7,10 @@ from
                                 obj.object_name = idc.sequence_name and
                                 obj.owner       = idc.owner
 where
--- object_name not like 'X'                                      and
--- object_name     like 'Y'                                      and
-   obj.object_type not in ('INDEX', 'PACKAGE BODY', 'TYPE BODY') and
-   idc.sequence_name is  null                                    and -- exclude sequences of identity columns
+-- object_name not like 'X'               and
+-- object_name     like 'Y'               and
+   obj.object_type not in ('INDEX', 'PACKAGE BODY', 'TYPE BODY', 'LOB') and
+   idc.sequence_name is  null                                           and -- exclude sequences of identity columns
    obj.owner = user
 order by
    obj.created desc
