@@ -18,7 +18,7 @@ drop table tq84_A;
 -- refer to table tq84_A.
 --
 declare
-   table_name varchar2(30) := 'TQ84_A';
+   tab_name varchar2(30) := 'TQ84_A';
 begin
    for r in (
        select
@@ -28,7 +28,7 @@ begin
           user_constraints pk   join
           user_constraints fk on pk.constraint_name = fk.r_constraint_name
        where
-          pk.table_name      = 'TQ84_A' and
+          pk.table_name      =  tab_name and
           pk.constraint_type = 'P'
    ) loop
 
