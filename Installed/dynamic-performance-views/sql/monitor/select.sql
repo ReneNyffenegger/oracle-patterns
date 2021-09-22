@@ -60,7 +60,7 @@ select
    error_number,
    error_facility,
    error_message,
-   binds_xml,
+   binds_xml,                         -- Information about bind variables used in the statement
    other_xml,
    rm_last_action,
    rm_last_action_reason,
