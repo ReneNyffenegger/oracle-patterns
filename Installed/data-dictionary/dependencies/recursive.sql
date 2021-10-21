@@ -15,8 +15,8 @@ with cur(owner, name, type, lvl) as (
      nxt.referenced_type ,
      cur.lvl +1
   from
-     cur                   join
-     all_dependencies nxt on nxt.owner = cur.owner and
+     cur                                                    join
+     dba_dependencies nxt on nxt.owner = cur.owner and
                              nxt.name  = cur.name  and
                              nxt.type  = cur.type
 )
