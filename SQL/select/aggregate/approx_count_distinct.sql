@@ -1,5 +1,5 @@
 select
-  approx_count_distinct(owner) approx_cnt,
-  count(distinct(owner))       exact_cnt
+   approx_count_distinct(object_name) approx_cnt,
+   count(distinct(object_name))       exact_cnt
 from
-  dba_objects;
+   dba_objects;
