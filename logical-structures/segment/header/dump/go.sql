@@ -23,10 +23,10 @@ declare
 begin
 
    select header_file, header_block
-   into  file_id, block_id
-   from  dba_segments
-   where segment_name = 'TQ84_DUMP_SEGMENT_HEADER_TEST' and
-         owner        =  user;
+   into   file_id    , block_id
+   from   dba_segments
+   where  segment_name = 'TQ84_DUMP_SEGMENT_HEADER_TEST' and
+          owner        =  user;
 
    execute immediate 'alter system dump datafile ' || file_id || ' block ' || block_id;
 
