@@ -24,7 +24,9 @@ begin
    where
       rownum = 1;
 
-   dump_block_from_rowid(rowid_);
+   dump_block_from_rowid(rowid_, p_symbolic => true);
 
 end;
 /
+
+drop table tq84_dump_block_test;

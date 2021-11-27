@@ -1,4 +1,6 @@
-create or replace procedure dump_block_from_rowid(p_rowid rowid)
+create or replace procedure dump_block_from_rowid(
+    p_rowid     rowid,
+    p_symbolic  boolean := true)
 --
 -- Requires
 --    grant alter system to …
@@ -10,11 +12,23 @@ is
 
 begin
 
+   if not p_symbolic then -- create hexadecimal dump
+      execute immediate q'[
+        alter session set events '10289 trace name context forever, level 1'
+      ]';
+   end if;
+
    execute immediate '
      alter system dump datafile ' ||
        dbms_rowid.rowid_relative_fno(p_rowid) || '
      block ' ||
        dbms_rowid.rowid_block_number(p_rowid);
+
+   if not p_symbolic then -- create hexadecimal dump
+      execute immediate q'[
+        alter session set events '10289 trace name context off'
+      ]';
+   end if;
 
    select
       value
