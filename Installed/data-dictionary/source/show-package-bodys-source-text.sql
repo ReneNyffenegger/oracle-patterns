@@ -1,10 +1,11 @@
 select
-  text
+   text
 from
-  dba_source
+   dba_source
 where
-  name          = 'STANDARD'      and
-  type          = 'PACKAGE BODY'  and
-  origin_con_id = 0
+-- owner         =  user           and
+   name          = 'STANDARD'      and
+   type          = 'PACKAGE BODY'  and
+   origin_con_id = 0
 order by
-  line;
+   line;
