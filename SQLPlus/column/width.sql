@@ -12,6 +12,10 @@ column col_2   format  a30
 
 
 select * from tq84_column_width;
+--
+--   COL_1 COL_2
+-- ------- ------------------------------
+--    1.05 alkdjfaj ladjkj kjnvoak zoijuw
+--         jd zoijd gh\amd
 
 drop table tq84_column_width purge;
-
