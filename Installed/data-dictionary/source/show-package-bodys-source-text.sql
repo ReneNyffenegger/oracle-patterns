@@ -1,4 +1,5 @@
 select
+   line,
    text
 from
    dba_source
