@@ -51,11 +51,11 @@ order by
 -- Order objects that have system generated names last
 -- because they're typically less interesting
 --
-   generated,
+   obj. generated,
 --
    case when obj.object_type in (
      'CLUSTER', 'DIRECTORY', 'EDITION', 'INDEX', 'LOB', 'PACKAGE', 'PACKAGE BODY', 'QUEUE', 'SEQUENCE', 'SYNONYM', 'TABLE', 'TYPE', 'VIEW')
-    then 1 else 0 end,
+   then 1 else 0 end,
    obj_owner,
    obj_name
 ;
