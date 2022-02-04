@@ -1,4 +1,6 @@
-create or replace type tq84_odci as object (
+create or replace type tq84_odci
+   authid definer
+as object (
 
     rec_desc         anytype,
   
@@ -36,27 +38,27 @@ create or replace type tq84_odci as object (
  -- through rec_desc.
  --
     static function odciTableDescribe(
-        rec_desc       out anytype,
-        ------------------------------
-        r               in integer,
-        c               in integer
+        rec_desc       out nocopy anytype,
+        ---------------------------------
+        r               in        integer,
+        c               in        integer
     )
     return number,
   
     static function odciTablePrepare (
-         sctx           out tq84_odci,
-         tab_func_info  in  sys.ODCITabFuncInfo,
-         ----------------------------
-         r              in integer,
-         c              in integer
+         sctx           out nocopy tq84_odci,
+         tab_func_info  in         sys.ODCITabFuncInfo,
+         ------------------------------------
+         r              in         integer,
+         c              in         integer
     )
     return number,
 
     static function odciTableStart(
-         sctx           in out tq84_odci,
-         ----------------------------
-         r              in integer,
-         c              in integer
+         sctx           in out nocopy tq84_odci,
+         ---------------------------------------
+         r              in            integer,
+         c              in            integer
     )
     return number,
   
@@ -64,9 +66,9 @@ create or replace type tq84_odci as object (
  -- Fetch one (or more) records and create the associated data:
  --
     member function odciTableFetch   (
-       self             in out tq84_odci,
-       nofRowsExpected  in number,
-       record_out      out anyDataSet
+       self             in out nocopy tq84_odci,
+       nofRowsExpected  in            number,
+       record_out      out     nocopy anyDataSet
     )
     return number,
   
