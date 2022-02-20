@@ -8,10 +8,10 @@ select /*+ parallel */ count(*)
 select count(*) from v$pq_tqstat;
 
 select
-  count(*),
-  server_type,
-  dfo_number,
-  tq_id,
+  count(*)           cnt,
+  server_type,    -- Producer, Consumer, QC or ranger
+  dfo_number ,    -- The DFO tree
+  tq_id      ,    -- Table Queue
   instance
 from
   v$pq_tqstat
