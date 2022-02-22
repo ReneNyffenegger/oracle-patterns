@@ -1,11 +1,11 @@
 create table tq84_pq_tqstat (
-   grp  char(1) not null check (grp in ('A', 'B', 'C', 'D')),
+   grp  char(1) not null,
    num  number
 ) parallel 4;
 
 insert into tq84_pq_tqstat
 select
-   chr(ascii('A') + dbms_random.value(0, 4)),
+   chr(ascii('A') + dbms_random.value(0, 25)),
    dbms_random.value(1,100000)
 from
    dual connect by level <= 10000;
