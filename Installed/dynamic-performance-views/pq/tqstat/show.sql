@@ -1,36 +1,49 @@
-select * from v$pq_tqstat;
+create table tq84_pq_tqstat (
+   grp  char(1) not null check (grp in ('A', 'B', 'C', 'D')),
+   num  number
+) parallel 4;
 
--- Execute a parallel query to fill v$pq_stat:
-select /*+ parallel */ count(*)
-  from all_objects
- where substr(object_name, 5, 1) = 'B';
-
-select count(*) from v$pq_tqstat;
+insert into tq84_pq_tqstat
+select
+   chr(ascii('A') + dbms_random.value(0, 4)),
+   dbms_random.value(1,100000)
+from
+   dual connect by level <= 10000;
 
 select
-  count(*),
-  server_type,
-  dfo_number,
-  tq_id,
-  instance
+   grp,
+   sum(num),
+   count(*)
 from
-  v$pq_tqstat
+   tq84_pq_tqstat
 group by
-  server_type,
-  dfo_number,
-  tq_id,
-  instance
+   grp
 order by
-  server_type,
-  dfo_number,
-  tq_id;
+   grp
+;
 
 select
-  count(*),
-  process
+   pqt.dfo_number ,  -- Identification of DFO Tree
+   pqt.tq_id      ,  -- Table Queue
+   pqt.server_type,  -- Ranger, Producer or Consumer (with trailing spaces!)
+   pqt.process    ,  -- Pnnn or QC
+   pqt.num_rows   ,
+   pqt.bytes      ,
+   pqt.avg_latency,
+   pqt.waits      ,
+   pqt.timeouts   ,
+   pqt.instance   , 
+   pqt.con_id
 from
-  v$pq_tqstat
-group by
-  process
+   v$pq_tqstat pqt
 order by
-  process;
+   pqt.dfo_number,
+   pqt.tq_id,
+   decode(rtrim(pqt.server_type),
+     'Ranger'  ,  1,
+     'Producer',  2,
+     'Consumer',  3,
+                 99)
+;
+
+drop table tq84_pq_tqstat;
