@@ -23,5 +23,5 @@ from
 -- ses.osuser  = 'RENE'            and
 -- ses.program = 'sqldeveloper.exe'
 order by
-   ash.sample_id
+   ash.sample_id desc
 ;
