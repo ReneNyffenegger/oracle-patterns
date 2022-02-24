@@ -14,7 +14,7 @@ drop table tq84_A;
 
 --
 -- Brute force!
--- Remove all foreign key constriaints that
+-- Remove all foreign key constraints that
 -- refer to table tq84_A.
 --
 declare
