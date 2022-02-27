@@ -11,13 +11,15 @@ select
    spm.physical_write_bytes,
    spm.workarea_mem,
    spm.workarea_max_mem,
-   spm.plan_cost,
+   spm.plan_cost, spm.plan_cpu_cost, spm.plan_io_cost,
+   spm.plan_time,
    spm.plan_bytes,
-   spm.plan_time
--- spm.*
+   spm.plan_temp_space,
+   spm.*
 from
    v$sql_plan_monitor spm
-where
-   spm.key = 463856468142
+--where
+  -- spm.key = 463856468142
 order by
+   spm.sql_exec_start desc,
    spm.plan_line_id;
