@@ -3,6 +3,7 @@ with x as (
       whom,
       add_months(trunc(date_, 'mm'), 1) month_,
       sum (
+
         sum(case when period = 'start' then 1 else -1 end * value_)
       )
       over (
@@ -41,7 +42,9 @@ months as (
 select
    whoms.whom,
    months.month_,
-   nvl(               -- https://renenyffenegger.ch/notes/development/databases/Oracle/SQL/select/analytic/lag-lead/fill-missing-values-with-previous-value/index
+   nvl(
+-- Fill null-values with previous non-null value.
+--(https://renenyffenegger.ch/notes/development/databases/Oracle/SQL/select/analytic/lag-lead/fill-missing-values-with-previous-value)
       x.lent_value,
       lag(x.lent_value)
          ignore nulls

@@ -41,4 +41,32 @@ order by
    whom,
    month_
 ;
-
+--
+-- WHOM       MONTH_  LENT_VALUE
+-- ---------- ------- ----------
+-- Maria      2021 01
+-- Maria      2021 02          0
+-- Maria      2021 03          0
+-- Maria      2021 04          0
+-- Maria      2021 05          0
+-- Maria      2021 06          0
+-- Maria      2021 07         14
+-- Maria      2021 08         14
+-- Maria      2021 09         14
+-- Maria      2021 10          0
+-- Maria      2021 11          0
+-- Maria      2021 12          0
+-- Maria      2022 01          0
+-- Peter      2021 01
+-- Peter      2021 02          0
+-- Peter      2021 03          0
+-- Peter      2021 04          0
+-- Peter      2021 05          4
+-- Peter      2021 06         26
+-- Peter      2021 07         26
+-- Peter      2021 08         26
+-- Peter      2021 09         26
+-- Peter      2021 10         33
+-- Peter      2021 11         31
+-- Peter      2021 12          0
+-- Peter      2022 01          0
