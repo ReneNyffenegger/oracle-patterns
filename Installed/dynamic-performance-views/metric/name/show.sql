@@ -292,4 +292,3 @@ order by
 --                                                                  Scheduler Wait Time Per User Request                             Microseconds Per Request
 --                                                                  User Calls Per Second                                            User Calls Per Second
 --                                                                  User Requests Per Second                                         User Requests Per Second
- 
