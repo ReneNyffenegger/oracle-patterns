@@ -1,4 +1,4 @@
--- «Better» Aliases for generated pivot columns.
+-- Â«BetterÂ» Aliases for generated pivot columns.
 
 
 create table tq84_pivot_03 (
@@ -24,14 +24,14 @@ from tq84_pivot_03
 '));
 
 
-select 
-  slash_question, 
-  space_space, 
+select
+  slash_question,
+  space_space,
   new_line
-from 
+from
   tq84_pivot_03
 pivot (max(nm)  for tx in (
-  '/?' as slash_question, 
+  '/?' as slash_question,
   '  ' as space_space, '
 '      as new_line
   )

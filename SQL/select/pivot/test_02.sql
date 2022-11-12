@@ -26,14 +26,11 @@ select * from translate_dt_to_month
   pivot ( sum(value1) sum_1, sum(value2) sum_2 for month in ('07', '08', '09') )
   --
 order by txt;
-  
-
-
-
-
-
-
-
-
+--
+-- TXT        '07'_SUM_1 '07'_SUM_2 '08'_SUM_1 '08'_SUM_2 '09'_SUM_1 '09'_SUM_2
+-- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+-- Item 1                                   10          9         28         25
+-- Item 2             18         16          8          7
+-- Item 3                                    6          5
 
 drop table tq84_pivot;

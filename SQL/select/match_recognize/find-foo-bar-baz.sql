@@ -1,9 +1,3 @@
---
--- Find record with 'foo' followed
--- by record with 'bar' foolowed by
--- record with 'baz'.
---
-
 create table tq84_t (
   id      number,
   word    varchar2(10)
@@ -53,5 +47,10 @@ match_recognize (
 )
 order by
   start_id;
+--
+--   START_ID MATCH_COUNTER
+-- ---------- -------------
+--          9             1
+--         15             2
 
 drop table tq84_t purge;

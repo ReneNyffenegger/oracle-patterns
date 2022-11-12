@@ -1,6 +1,6 @@
 create table tq84_t (
-  id      number,
-  word    varchar2(10)
+   id      number,
+   word    varchar2(10)
 );
 
 
@@ -31,21 +31,24 @@ insert into tq84_t values (16, 'vwx');
 insert into tq84_t values (17, 'yz.');
 
 
-select *
-from
-  tq84_t
+select * from tq84_t
 match_recognize (
+
   order by
-    id
+     id
+
   measures
-    first(rec.id)  as start_id,
-    rec.id         as end_id,
-    match_number() as match_counter
+     first(rec.id)  as start_id,
+     rec.id         as end_id,
+     match_number() as match_counter
+
   pattern (
-    rec{3}
+     rec{3}
+
   )
+
   define   
-    rec as rec.word = first(rec.word)
+     rec as rec.word = first(rec.word)
 )
 order by
   start_id;

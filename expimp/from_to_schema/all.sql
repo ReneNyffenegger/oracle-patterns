@@ -1,15 +1,15 @@
-start create_schemas
+connect / as sysdba
 
-start create_table
+@ create_schemas
 
-host exp userid=rene tables=(u1.tq84_table_for_export)
+@ create_table
 
-host imp userid=rene fromuser=u1 touser=u2
+host exp userid=rene/rene tables=(u1.tq84_table_for_export)
+
+host imp userid=rene/rene fromuser=u1 touser=u2
 
 drop user u1 cascade;
 
-connect rene
-
-select * from u2.tq84_table_for_export;
+@select
 
 drop user u2 cascade;

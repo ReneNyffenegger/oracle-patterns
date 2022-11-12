@@ -62,6 +62,7 @@ with name as (
    select 'session_user'               space from dual union all
    select 'sessionid'                  space from dual union all
    select 'statementid'                space from dual union all
+   select 'system_data_visible'        space from dual union all
    select 'terminal'                   space from dual
 -- select 'unified_session_id'         space from dual
 )

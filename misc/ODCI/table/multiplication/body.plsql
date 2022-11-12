@@ -19,9 +19,9 @@ create or replace type body tq84_odci as
     end tq84_odci; -- }
 
     static function odciTableDescribe( -- {
-            rec_desc     out anytype,
-            r             in integer,
-            c             in integer
+            rec_desc     out nocopy anytype,
+            r             in        integer,
+            c             in        integer
     ) return number is
 
       colTypes anytype;
@@ -90,10 +90,10 @@ create or replace type body tq84_odci as
     end odciTableDescribe; -- }
 
     static function odciTablePrepare( -- {
-        sctx          out tq84_odci,
-        tab_func_info in  sys.odciTabFuncInfo,
-        r             in  integer,
-        c             in  integer
+        sctx          out nocopy tq84_odci,
+        tab_func_info in         sys.odciTabFuncInfo,
+        r             in         integer,
+        c             in         integer
     )
     return number
  --
@@ -129,15 +129,19 @@ create or replace type body tq84_odci as
         return odciconst.success;
     end odciTablePrepare; -- }
 
-    static function odciTableStart(sctx in out tq84_odci, r  in integer, c in integer) return number is -- {
+    static function odciTableStart(
+         sctx in out nocopy tq84_odci,
+         r    in            integer,
+         c    in            integer) return number is -- {
     begin
         return odciconst.success;
     end odciTableStart; -- }
 
     member function odciTableFetch( -- {
-       self            in out tq84_odci,
-       nofRowsExpected in number,
-       record_out     out anydataset)
+       self            in out nocopy tq84_odci,
+       nofRowsExpected in            number,
+       record_out      out    nocopy anydataset
+    )
     return number is
        len number := 10;
     begin

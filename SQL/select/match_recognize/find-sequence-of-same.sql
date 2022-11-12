@@ -1,6 +1,6 @@
 create table tq84_t (
-  id      number,
-  word    varchar2(10)
+   id      number,
+   word    varchar2(10)
 );
 
 insert into tq84_t values ( 1, 'ab'     );
@@ -25,22 +25,22 @@ insert into tq84_t values (19, 'cde'    );
 insert into tq84_t values (20, 'cde'    );
 
 select
-  count_same_words  cnt,
-  id_start,
-  word
+   count_same_words  cnt,
+   id_start,
+   word
 from
-  tq84_t
+   tq84_t
 match_recognize (
-  order by
-    id 
-  measures
-    a_word.word      as word,
-    first(a_word.id) as id_start,
---  match_number()   as match_counter,
-    count(*)         as count_same_words
+   order by
+     id 
+   measures
+     a_word.word      as word,
+     first(a_word.id) as id_start,
+--   match_number()   as match_counter,
+     count(*)         as count_same_words
   one row per match
   pattern (
-    a_word* another_word
+     a_word* another_word
   )
   define
     a_word           as a_word.word        = first(a_word.word),
@@ -48,5 +48,13 @@ match_recognize (
 )
 order by
   count_same_words desc;
+--
+--        CNT   ID_START WORD      
+-- ---------- ---------- ----------
+--          7         10 fghij     
+--          4          4 cde       
+--          3          1 ab        
+--          2         17 ab        
+--          2          8 cde     
 
 drop table tq84_t purge;

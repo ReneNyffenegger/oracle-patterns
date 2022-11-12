@@ -1,24 +1,54 @@
 select
---common   is_common_profile,
-  profile  profile_name,
-  max(case when resource_name = 'COMPOSITE_LIMIT'            then limit end) composite,
-  max(case when resource_name = 'CONNECT_TIME'               then limit end) connect_time,
-  max(case when resource_name = 'CPU_PER_CALL'               then limit end) cpu_per_call,
-  max(case when resource_name = 'CPU_PER_SESSION'            then limit end) cpu_per_session,
-  max(case when resource_name = 'IDLE_TIME'                  then limit end) idle_time,
-  max(case when resource_name = 'LOGICAL_READS_PER_CALL'     then limit end) logical_reads_per_call,
-  max(case when resource_name = 'LOGICAL_READS_PER_SESSION'  then limit end) logical_reads_per_session,
-  max(case when resource_name = 'PRIVATE_SGA'                then limit end) private_sga,
-  max(case when resource_name = 'SESSIONS_PER_USER'          then limit end) sessions_per_user,
-  max(case when resource_name = 'FAILED_LOGIN_ATTEMPTS'      then limit end) failed_login_attempts,
-  max(case when resource_name = 'PASSWORD_GRACE_TIME'        then limit end) password_grace_time,
-  max(case when resource_name = 'PASSWORD_LIFE_TIME'         then limit end) password_life_time,
-  max(case when resource_name = 'PASSWORD_LOCK_TIME'         then limit end) password_lock_time,
-  max(case when resource_name = 'PASSWORD_REUSE_MAX'         then limit end) password_reuse_max,
-  max(case when resource_name = 'PASSWORD_REUSE_TIME'        then limit end) password_reuse_time,
-  max(case when resource_name = 'PASSWORD_VERIFY_FUNCTION'   then limit end) password_verify_function
+   usr.username,
+   usr.profile,
+   prf.composite_limit,
+   prf.connect_time,
+   prf.cpu_per_call,
+   prf.cpu_per_session,
+   prf.idle_time,
+   prf.logical_reads_per_call,
+   prf.logical_reads_per_session,
+   prf.private_sga,
+   prf.sessions_per_user,
+   prf.failed_login_attempts,
+   prf.inactive_account_time,
+   prf.password_grace_time,
+   prf.password_life_time,
+   prf.password_lock_time,
+   prf.password_reuse_max,
+   prf.password_reuse_time,
+   prf.password_verify_function
 from
-  dba_profiles
-group by
---common,
-  profile;
+   dba_users    usr     left join
+--select * from
+   dba_profiles  pivot (
+      max(limit)  for
+      (
+        resource_type,
+        resource_name
+      ) in
+      (
+        ('KERNEL'  , 'COMPOSITE_LIMIT'          )  as COMPOSITE_LIMIT          ,
+        ('KERNEL'  , 'CONNECT_TIME'             )  as CONNECT_TIME             ,
+        ('KERNEL'  , 'CPU_PER_CALL'             )  as CPU_PER_CALL             ,
+        ('KERNEL'  , 'CPU_PER_SESSION'          )  as CPU_PER_SESSION          ,
+        ('KERNEL'  , 'IDLE_TIME'                )  as IDLE_TIME                ,
+        ('KERNEL'  , 'LOGICAL_READS_PER_CALL'   )  as LOGICAL_READS_PER_CALL   ,
+        ('KERNEL'  , 'LOGICAL_READS_PER_SESSION')  as LOGICAL_READS_PER_SESSION,
+        ('KERNEL'  , 'PRIVATE_SGA'              )  as PRIVATE_SGA              ,
+        ('KERNEL'  , 'SESSIONS_PER_USER'        )  as SESSIONS_PER_USER        ,
+
+        ('PASSWORD', 'FAILED_LOGIN_ATTEMPTS'    )  as FAILED_LOGIN_ATTEMPTS    ,
+        ('PASSWORD', 'INACTIVE_ACCOUNT_TIME'    )  as INACTIVE_ACCOUNT_TIME    ,
+        ('PASSWORD', 'PASSWORD_GRACE_TIME'      )  as PASSWORD_GRACE_TIME      ,
+        ('PASSWORD', 'PASSWORD_LIFE_TIME'       )  as PASSWORD_LIFE_TIME       ,
+        ('PASSWORD', 'PASSWORD_LOCK_TIME'       )  as PASSWORD_LOCK_TIME       ,
+        ('PASSWORD', 'PASSWORD_REUSE_MAX'       )  as PASSWORD_REUSE_MAX       ,
+        ('PASSWORD', 'PASSWORD_REUSE_TIME'      )  as PASSWORD_REUSE_TIME      ,
+        ('PASSWORD', 'PASSWORD_VERIFY_FUNCTION' )  as PASSWORD_VERIFY_FUNCTION
+      )
+  ) prf
+  on usr.profile = prf.profile
+order by
+   usr.username;
+
