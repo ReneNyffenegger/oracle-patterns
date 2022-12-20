@@ -42,7 +42,6 @@ begin
    dummy := dbms_sql.execute(cur);
 
    loop
-
          rows := dbms_sql.fetch_rows(cur);
 
          dbms_output.put_line('-- rows = ' || rows || ', num.count = ' || num.count);
@@ -71,11 +70,8 @@ begin
          end loop;
 
          exit when rows != array_size;
-
-
-
+         
          a := a+rows;
-
    end loop;
 
    dbms_sql.close_cursor (cur);

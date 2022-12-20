@@ -38,5 +38,3 @@ when not matched then
 select * from tq84_merge_dest;
 
 drop table tq84_merge_dest purge;
-
-
