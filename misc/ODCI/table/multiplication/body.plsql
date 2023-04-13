@@ -102,7 +102,7 @@ create or replace type body tq84_odci as
     is
      --
      -- Same type as was defined in odciTableDescribe.
-     -- Will be assigned belo from tab_func_info.retType
+     -- Will be assigned below from tab_func_info.retType
      --
         record_desc  anytype;
 
