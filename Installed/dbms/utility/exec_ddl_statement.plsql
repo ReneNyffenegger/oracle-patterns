@@ -1,9 +1,0 @@
---
--- dbms_utility.exec_ddl_statement can basically to the same thing as execute immediate,
--- yet, it also supports ddl via database links  (see also http://stackoverflow.com/a/6973293/180275)
---
---     begin
---       dbms_utility.exec_ddl_statement@remote_db('create table t1 (id number)');
---     end;
---     /
---
