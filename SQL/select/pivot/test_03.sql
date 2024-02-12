@@ -1,6 +1,3 @@
--- «Better» Aliases for generated pivot columns.
-
-
 create table tq84_pivot_03 (
   nm number,
   tx varchar2(2)
